@@ -9,4 +9,3 @@ ReactDOM.render(
     <App />
   </AppProvider>,
   document.getElementById('root'));
-  
