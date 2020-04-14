@@ -4,9 +4,8 @@ import PropTypes from 'prop-types';
 export const RecipesContext = createContext();
 
 export default function AppProvider({ children }) {
-const context = {}
-
-return (
+  const context = {};
+  return (
     <RecipesContext.Provider value={context}>
       {children}
     </RecipesContext.Provider>
