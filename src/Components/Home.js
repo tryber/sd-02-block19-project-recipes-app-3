@@ -41,7 +41,7 @@ const Home = () => {
       >
         Entrar
         </button>
-      {isRedirect && <Redirect to='/receitas/comidas' />}
+      {isRedirect && <Redirect to="/receitas/comidas" />}
     </div>
   );
 };
