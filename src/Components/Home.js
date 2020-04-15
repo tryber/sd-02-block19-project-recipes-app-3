@@ -14,25 +14,21 @@ const Home = () => {
   const [passwordValue, setPasswordValue] = useState('');
   const [isRedirect, setIsRedirect] = useState(false);
   return (
-    <div>
-      <h1>Login</h1>
-      <div>
-        <input
-          type="email"
-          placeholder="Email"
-          data-testid="email-input"
-          value={emailValue}
-          onChange={({ target }) => setEmailValue(target.value)}
-        />
-      </div>
+    <div><h1>Login</h1>
+      <div><input
+        type="email"
+        placeholder="Email"
+        data-testid="email-input"
+        value={emailValue}
+        onChange={({ target }) => setEmailValue(target.value)}
+      /></div>
       <div> <input
         type="password"
         placeholder="Senha"
         data-testid="password-input"
         value={passwordValue}
         onChange={({ target }) => setPasswordValue(target.value)}
-      />
-      </div>
+      /></div>
       <button
         type="button"
         data-testid="login-submit-btn"
