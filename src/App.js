@@ -15,7 +15,7 @@ function App() {
         <Route exact path="/explorar" component={Explorar} />
         <Route path="/explorar" component={ExplorarReceita} />
         <Route path="/perfil" component={Perfil} /> */}
-        <Route exact path="/" component={Footer} />
+        <Route exact path="/" component={Home} />
       </Switch>
     </BrowserRouter>
   );
