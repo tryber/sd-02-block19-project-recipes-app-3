@@ -6,4 +6,3 @@ export const apiRequest = (drinkOrMeal, requisition) => (
     .then(response => response.json()
       .then(response.ok ? Promise.resolve(JSON) : Promise.reject(JSON)))
 );
-
