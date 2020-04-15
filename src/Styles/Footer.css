@@ -1,0 +1,14 @@
+.Footer_all {
+  align-items: center;
+  background-color: rgb(196, 196, 196);
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-around;
+  padding: 1em;
+}
+
+.Footer_icon {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
