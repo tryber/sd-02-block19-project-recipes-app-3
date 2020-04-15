@@ -8,17 +8,26 @@ import '../Styles/Footer.css';
 const Footer = () => (
   <div className="Footer_all">
     <Link to="/bebidas" >
-      <div className="Footer_icon">
+      <div
+        data-testid="drinks-bottom-btn"
+        className="Footer_icon"
+      >
         <img src={Drinks} alt="Drinks redirect" />
       </div>
     </Link>
     <Link to="/explorar">
-      <div className="Footer_icon">
+      <div
+        data-testid="explore-bottom-btn"
+        className="Footer_icon"
+      >
         <img src={Explore} alt="Explore redirect" />
       </div>
     </Link>
     <Link to="/comidas">
-      <div className="Footer_icon">
+      <div
+        data-testid="food-bottom-btn"
+        className="Footer_icon"
+      >
         <img src={Meals} alt="Meals redirect" />
       </div>
     </Link>
