@@ -23,7 +23,7 @@ export default function AppProvider({ children }) {
   const context = {
     requestInitialPage,
     setDrinkOrMeal,
-    fetchError
+    fetchError,
   };
   return (
     <RecipesContext.Provider value={context}>
