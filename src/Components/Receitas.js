@@ -1,14 +1,18 @@
 import React, { useEffect, useState, useContext } from 'react';
-import AppProvider from '../Context/index';
-
+import RecipesContext from '../Context/';
 import Footer from '../Components/Footer';
+
 const Receitas = ({ history }) => {
-  const a = useContext(AppProvider)
+  const { setDrinkOrMeal, fetchError } = useContext(RecipesContext);
   useEffect(() => {
-    console.log(a)
-    // setDrinkOrMeal(history);
+    setDrinkOrMeal(history);
   }, [history.location.pathname])
-  return <Footer />;
+  return (
+    fetchError ||
+    <div>
+      <Footer />
+    </div>
+  )
 };
 
 export default Receitas;
