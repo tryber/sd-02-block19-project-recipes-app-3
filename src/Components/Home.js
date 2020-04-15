@@ -8,16 +8,14 @@ const onHandleSubmit = (emailValue) => {
   return true;
 };
 
+const regexEmail = new RegExp(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
 const Home = () => {
   const [emailValue, setEmailValue] = useState('');
   const [passwordValue, setPasswordValue] = useState('');
   const [isRedirect, setIsRedirect] = useState(false);
-  const regexEmail = new RegExp(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
   return (
     <div>
-      <div>
-        <h1>Login</h1>
-      </div>
+      <h1>Login</h1>
       <div>
         <input
           type="email"
@@ -27,25 +25,22 @@ const Home = () => {
           onChange={({ target }) => setEmailValue(target.value)}
         />
       </div>
-      <div>
-        <input
-          type="password"
-          placeholder="Senha"
-          data-testid="password-input"
-          value={passwordValue}
-          onChange={({ target }) => setPasswordValue(target.value)}
-        />
+      <div> <input
+        type="password"
+        placeholder="Senha"
+        data-testid="password-input"
+        value={passwordValue}
+        onChange={({ target }) => setPasswordValue(target.value)}
+      />
       </div>
-      <div>
-        <button
-          type="button"
-          data-testid="login-submit-btn"
-          disabled={!(passwordValue.length > 5 && regexEmail.test(emailValue))}
-          onClick={()=> setIsRedirect(onHandleSubmit(emailValue))}
-        >
-          Entrar
+      <button
+        type="button"
+        data-testid="login-submit-btn"
+        disabled={!(passwordValue.length > 5 && regexEmail.test(emailValue))}
+        onClick={() => setIsRedirect(onHandleSubmit(emailValue))}
+      >
+        Entrar
         </button>
-      </div>
       {isRedirect && <Redirect to='/receitas/comidas' />}
     </div>
   );
