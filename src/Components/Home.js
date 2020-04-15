@@ -1,21 +1,18 @@
 import React, { useState } from 'react';
-import { Redirect } from "react-router-dom";
+import { Redirect } from 'react-router-dom';
+
+const onHandleSubmit = (emailValue) => {
+  localStorage.setItem('meals-token', '1');
+  localStorage.setItem('cocktails-token', '1');
+  localStorage.setItem('user', JSON.stringify({ email: emailValue }));
+  return true;
+};
 
 const Home = () => {
   const [emailValue, setEmailValue] = useState('');
   const [passwordValue, setPasswordValue] = useState('');
   const [isRedirect, setIsRedirect] = useState(false);
   const regexEmail = new RegExp(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
-  const isValidEmail = regexEmail.test(emailValue);
-  const isValidPassword = passwordValue.length > 5;
-
-  const onHandleSubmit = () => {
-    localStorage.setItem('meals-token', '1');
-    localStorage.setItem('cocktails-token', '1');
-    localStorage.setItem('user', JSON.stringify({ email: emailValue }));
-    setIsRedirect(true);
-  }
-
   return (
     <div>
       <div>
@@ -43,15 +40,15 @@ const Home = () => {
         <button
           type="button"
           data-testid="login-submit-btn"
-          disabled={!(isValidPassword && isValidEmail)}
-          onClick={onHandleSubmit}
+          disabled={!(passwordValue.length > 5 && regexEmail.test(emailValue))}
+          onClick={()=> setIsRedirect(onHandleSubmit(emailValue))}
         >
           Entrar
         </button>
       </div>
-      {isRedirect &&<Redirect to='/receitas/comidas' />}
+      {isRedirect && <Redirect to='/receitas/comidas' />}
     </div>
   );
-}
+};
 
 export default Home;
