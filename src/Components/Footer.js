@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Drinks from '../images/Drinks.svg';
-import Explore from '../images/Explore.svg';
-import Meals from '../images/Meals.svg';
+import Drinks from '../Images/Drinks.svg';
+import Explore from '../Images/Explore.svg';
+import Meals from '../Images/Meals.svg';
 import '../Styles/Footer.css';
 
 const Footer = () => (
