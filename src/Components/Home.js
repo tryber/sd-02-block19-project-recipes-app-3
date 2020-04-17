@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom';
-import Header from './Header';
 
 const onHandleSubmit = (emailValue) => {
   localStorage.setItem('meals-token', '1');
@@ -37,8 +36,7 @@ const Home = () => {
         onClick={() => setIsRedirect(onHandleSubmit(emailValue))}
       >
         Entrar
-        <Header />
-        </button>
+      </button>
       {isRedirect && <Redirect to="/receitas/comidas" />}
     </div>
   );

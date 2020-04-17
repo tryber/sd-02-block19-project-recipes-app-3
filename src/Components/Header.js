@@ -16,10 +16,10 @@ export default function Header({ history }) {
       <Link to="/perfil">
         <img data-testid="profile-top-btn" src={profilePicBtn} alt="profile button" />
       </Link>
-      {/* <h2 data-testid="page-title">{/comidas/.test(history.location.pathname)
+      <h2 data-testid="page-title">{/comidas/.test(history.location.pathname)
         ? 'Comidas'
-        : 'Bebidas'} 
-      </h2>*/}
+        : 'Bebidas'}
+      </h2>
       <input
         type="image"
         data-testid="search-top-btn"
