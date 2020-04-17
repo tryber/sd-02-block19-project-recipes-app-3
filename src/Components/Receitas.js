@@ -1,6 +1,7 @@
 import React, { useEffect, useContext } from 'react';
-import RecipesContext from '../Context/';
+import { RecipesContext } from '../Context/';
 import Footer from '../Components/Footer';
+import Header from './Header';
 
 const Receitas = ({ history }) => {
   const { setDrinkOrMeal, fetchError, requestInitialPage } = useContext(RecipesContext);
@@ -11,6 +12,7 @@ const Receitas = ({ history }) => {
   return (
     fetchError ||
     <div>
+      <Header />
       {requestInitialPage.map((food, index) => {
         const local = food.idDrink ? 'Drink' : 'Meal';
         return (
