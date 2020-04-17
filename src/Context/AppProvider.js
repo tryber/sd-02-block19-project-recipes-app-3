@@ -6,6 +6,13 @@ import RecipesContext from './index';
 export default function AppProvider({ children }) {
   const [requestInitialPage, setRequestInitialPage] = useState([]);
   const [fetchError, setFetchError] = useState('');
+  const [storeCriteria, setStoreCriteria] = useState('');
+  const [href, setHref] = useState('');
+  const defineSearch = (input, searchCriteria) => {
+    if (input !== '' && searchCriteria !== '') {
+      setStoreCriteria(`${searchCriteria}${input.split(' ').join('_')}`);
+    }
+  };
 
   const successDrinkOrMeal = (results) => {
     const condition = results.meals || results.drinks;
@@ -16,6 +23,7 @@ export default function AppProvider({ children }) {
   };
   const setDrinkOrMeal = (history) => {
     const { location: { pathname } } = history;
+    setHref(pathname);
     return pathname.includes('comidas')
       ? apiRequest(meal, resultsRandom)
         .then(successDrinkOrMeal, failDrinkOrMeal)
@@ -26,6 +34,9 @@ export default function AppProvider({ children }) {
     requestInitialPage,
     setDrinkOrMeal,
     fetchError,
+    defineSearch,
+    storeCriteria,
+    href,
   };
   return (
     <RecipesContext.Provider value={context}>

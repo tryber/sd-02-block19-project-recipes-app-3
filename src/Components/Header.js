@@ -1,22 +1,22 @@
 import React, { useState, useContext } from 'react';
 import propTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { RecipesContext } from '../Context';
+import  RecipesContext  from '../Context';
 import profilePicBtn from '../Images/profilePicBtn.png';
 import searchTopBtn from '../Images/searchTopBtn.png';
 
-export default function Header({ history }) {
+export default function Header() {
   const [input, setInput] = useState('');
   const [searchCriteria, setSearchCriteria] = useState('');
   const [visibleSearch, setVisibleSearch] = useState(false);
-  const { defineSearch } = useContext(RecipesContext);
+  const { defineSearch, href } = useContext(RecipesContext);
   defineSearch(input, searchCriteria);
   return (
     <div className="header">
       <Link to="/perfil">
         <img data-testid="profile-top-btn" src={profilePicBtn} alt="profile button" />
       </Link>
-      <h2 data-testid="page-title">{/comidas/.test(history.location.pathname)
+      <h2 data-testid="page-title">{/comidas/.test(href)
         ? 'Comidas'
         : 'Bebidas'}
       </h2>
@@ -61,7 +61,3 @@ export default function Header({ history }) {
     </div>
   );
 }
-
-Header.propTypes = {
-  history: propTypes.string.isRequired,
-};

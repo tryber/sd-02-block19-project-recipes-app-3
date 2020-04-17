@@ -1,5 +1,5 @@
 import React, { useEffect, useContext } from 'react';
-import { RecipesContext } from '../Context/';
+import RecipesContext from '../Context';
 import Footer from '../Components/Footer';
 import Header from './Header';
 
