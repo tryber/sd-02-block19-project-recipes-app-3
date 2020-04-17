@@ -13,20 +13,19 @@ const Receitas = ({ history }) => {
     fetchError ||
     <div>
       {requestInitialPage.map((food, index) => {
-        const local = food.idDrink ? 'Drink' : 'Meal'
-        console.log(food[`id${local}`])
-        console.log(food[`str${local}`])
+        const local = food.idDrink ? 'Drink' : 'Meal';
         return (
-          index < 12 
-          ? <div key={`details ${food[`str${local}`]}`}>
-            <div>
-              <img src={food[`str${local}Thumb`]} />
+          index < 12
+            ? <div key={`details ${food[`str${local}`]}`}>
+              <div>
+                <img
+                  alt={`food ${food[`str${local}`]}`}
+                  src={food[`str${local}Thumb`]} />
+              </div>
+              <p>{food.strCategory}</p>
+              <p>{food[`str${local}`]}</p>
             </div>
-            <p>{food.strCategory}</p>
-            <p>{food[`str${local}`]}</p>
-            <p></p>
-          </div>
-          : null
+            : null
         )
       })}
       <Footer />
