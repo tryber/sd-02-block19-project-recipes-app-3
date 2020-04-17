@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useEffect, useContext } from 'react';
 import RecipesContext from '../Context/';
 import Footer from '../Components/Footer';
 
@@ -8,7 +8,6 @@ const Receitas = ({ history }) => {
   useEffect(() => {
     setDrinkOrMeal(history);
   }, [history.location.pathname]);
-  console.log(requestInitialPage);
   return (
     fetchError ||
     <div>
@@ -20,17 +19,18 @@ const Receitas = ({ history }) => {
               <div>
                 <img
                   alt={`food ${food[`str${local}`]}`}
-                  src={food[`str${local}Thumb`]} />
+                  src={food[`str${local}Thumb`]}
+                />
               </div>
               <p>{food.strCategory}</p>
               <p>{food[`str${local}`]}</p>
             </div>
             : null
-        )
+        );
       })}
       <Footer />
     </div>
-  )
+  );
 };
 
 export default Receitas;

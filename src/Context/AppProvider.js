@@ -10,17 +10,18 @@ export default function AppProvider({ children }) {
   const successDrinkOrMeal = (results) => {
     const condition = results.meals || results.drinks;
     setRequestInitialPage(condition);
-  }
+  };
   const failDrinkOrMeal = ({ message }) => {
     setFetchError(message);
-  }
+  };
   const setDrinkOrMeal = (history) => {
-    /comidas/.test(history.location.pathname)
+    const { location: { pathname } } = history
+    pathname.includes('comidas')
       ? apiRequest(meal, resultsRandom)
         .then(successDrinkOrMeal, failDrinkOrMeal)
       : apiRequest(cocktail, resultsRandom)
         .then(successDrinkOrMeal, failDrinkOrMeal)
-  }
+  };
   const context = {
     requestInitialPage,
     setDrinkOrMeal,
