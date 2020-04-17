@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom';
-import Header from './Header';
+// import Header from './Header';
 
 const onHandleSubmit = (emailValue) => {
   localStorage.setItem('meals-token', '1');

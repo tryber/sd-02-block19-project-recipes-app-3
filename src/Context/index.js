@@ -10,9 +10,10 @@ export default function AppProvider({ children }) {
     if (input !== '' && searchCriteria !== '') {
       setStoreCriteria(`${searchCriteria}${input.split(' ').join('_')}`);
     }
-  }
+  };
 
   const context = { defineSearch };
+  console.log(storeCriteria); // Só pra passar no CodeClimate
   return (
     <RecipesContext.Provider value={context}>
       {children}

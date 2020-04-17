@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
+import propTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { RecipesContext } from '../Context';
-import propTypes from 'prop-types';
 import profilePicBtn from '../Images/profilePicBtn.png';
 import searchTopBtn from '../Images/searchTopBtn.png';
 
@@ -35,18 +35,33 @@ export default function Header({ history }) {
           data-testid="search-input"
         />
         <div className="searchRecipes">
-          <input type="radio" name="recipeSearch" value="/filter.php?i=" onClick={(e) => setSearchCriteria(e.target.value)} />
+          <input
+            type="radio"
+            name="recipeSearch"
+            value="/filter.php?i="
+            onClick={(e) => setSearchCriteria(e.target.value)}
+          />
           <label htmlFor="ingredient">Ingrediente</label>
-          <input type="radio" name="recipeSearch" value="/search.php?s=" onClick={(e) => setSearchCriteria(e.target.value)} />
+          <input
+            type="radio"
+            name="recipeSearch"
+            value="/search.php?s="
+            onClick={(e) => setSearchCriteria(e.target.value)}
+          />
           <label htmlFor="name">Nome</label>
-          <input type="radio" name="recipeSearch" value="/search.php?f=" onClick={(e) => setSearchCriteria(e.target.value)} />
+          <input
+            type="radio"
+            name="recipeSearch"
+            value="/search.php?f="
+            onClick={(e) => setSearchCriteria(e.target.value)}
+          />
           <label htmlFor="firstLetter">Primeira letra</label>
         </div>
       </form>}
     </div>
-  )
+  );
 }
 
 Header.propTypes = {
   history: propTypes.string.isRequired,
-}
+};
