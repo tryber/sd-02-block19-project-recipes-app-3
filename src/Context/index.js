@@ -1,10 +1,18 @@
-import React, { createContext } from 'react';
+import React, { createContext, useState } from 'react';
 import PropTypes from 'prop-types';
 
 export const RecipesContext = createContext();
 
 export default function AppProvider({ children }) {
-  const context = {};
+  const [storeCriteria, setStoreCriteria] = useState('');
+
+  const defineSearch = (input, searchCriteria) => {
+    if (input !== '' && searchCriteria !== '') {
+      setStoreCriteria(`${searchCriteria}${input.split(' ').join('_')}`);
+    }
+  }
+
+  const context = { defineSearch };
   return (
     <RecipesContext.Provider value={context}>
       {children}
