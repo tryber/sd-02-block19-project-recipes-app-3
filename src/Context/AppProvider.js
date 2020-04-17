@@ -1,4 +1,4 @@
-import React, { useState, createContext } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { apiRequest, meal, cocktail, resultsRandom } from '../Services/APIs';
 import RecipesContext from './index';
@@ -15,12 +15,12 @@ export default function AppProvider({ children }) {
     setFetchError(message);
   };
   const setDrinkOrMeal = (history) => {
-    const { location: { pathname } } = history
-    pathname.includes('comidas')
+    const { location: { pathname } } = history;
+    return pathname.includes('comidas')
       ? apiRequest(meal, resultsRandom)
         .then(successDrinkOrMeal, failDrinkOrMeal)
       : apiRequest(cocktail, resultsRandom)
-        .then(successDrinkOrMeal, failDrinkOrMeal)
+        .then(successDrinkOrMeal, failDrinkOrMeal);
   };
   const context = {
     requestInitialPage,

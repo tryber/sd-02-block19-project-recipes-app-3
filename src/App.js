@@ -1,5 +1,5 @@
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
-import React, { useContext } from 'react';
+import React from 'react';
 import Home from './Pages/Home';
 import Receitas from './Components/Receitas';
 import './App.css';
