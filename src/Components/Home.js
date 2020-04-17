@@ -36,7 +36,7 @@ const Home = () => {
         onClick={() => setIsRedirect(onHandleSubmit(emailValue))}
       >
         Entrar
-        </button>
+      </button>
       {isRedirect && <Redirect to="/receitas/comidas" />}
     </div>
   );
