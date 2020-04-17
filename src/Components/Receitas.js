@@ -3,12 +3,12 @@ import RecipesContext from '../Context';
 import Footer from '../Components/Footer';
 import Header from './Header';
 
-const Receitas = ({ history }) => {
+const Receitas = ({ history: { location: { pathname } } }) => {
   const { setDrinkOrMeal, fetchError, requestInitialPage } = useContext(RecipesContext);
 
   useEffect(() => {
-    setDrinkOrMeal(history);
-  }, [history.location.pathname]);
+    setDrinkOrMeal(pathname);
+  }, [pathname]);
   return (
     fetchError ||
     <div>

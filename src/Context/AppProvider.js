@@ -21,8 +21,7 @@ export default function AppProvider({ children }) {
   const failDrinkOrMeal = ({ message }) => {
     setFetchError(message);
   };
-  const setDrinkOrMeal = (history) => {
-    const { location: { pathname } } = history;
+  const setDrinkOrMeal = (pathname) => {
     setHref(pathname);
     return pathname.includes('comidas')
       ? apiRequest(meal, resultsRandom)

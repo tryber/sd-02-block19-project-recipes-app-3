@@ -1,5 +1,4 @@
 import React, { useState, useContext } from 'react';
-import propTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import  RecipesContext  from '../Context';
 import profilePicBtn from '../Images/profilePicBtn.png';
