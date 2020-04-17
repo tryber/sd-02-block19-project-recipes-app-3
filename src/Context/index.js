@@ -12,8 +12,7 @@ export default function AppProvider({ children }) {
     }
   };
 
-  const context = { defineSearch };
-  console.log(storeCriteria); // Só pra passar no CodeClimate
+  const context = { defineSearch, storeCriteria };
   return (
     <RecipesContext.Provider value={context}>
       {children}
