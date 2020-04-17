@@ -1,8 +1,7 @@
 import React from 'react';
-import { MemoryRouter, Router } from 'react-router-dom';
-import { render, cleanup, fireEvent, wait } from '@testing-library/react';
+import { MemoryRouter } from 'react-router-dom';
+import { render, cleanup, fireEvent } from '@testing-library/react';
 import Home from '../Components/Home';
-import { createMemoryHistory } from 'history';
 
 afterEach(cleanup);
 
@@ -26,7 +25,7 @@ describe('Test Home page', () => {
     expect(passwordInput.value).toBe('');
     expect(loginButton.disabled).toBe(true);
   });
-  it('Test value change input and redirect', async () => {
+  it('Test value change input and redirect', () => {
     const { getByTestId } = render(
       <MemoryRouter>
         <Home />
