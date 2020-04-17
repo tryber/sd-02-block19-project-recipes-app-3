@@ -8,7 +8,8 @@ export default function AppProvider({ children }) {
   const [fetchError, setFetchError] = useState('');
 
   const successDrinkOrMeal = (results) => {
-    setRequestInitialPage(results)
+    const condition = results.meals || results.drinks;
+    setRequestInitialPage(condition);
   }
   const failDrinkOrMeal = ({ message }) => {
     setFetchError(message);
