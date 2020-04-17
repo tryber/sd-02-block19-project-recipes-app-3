@@ -6,19 +6,20 @@ import profilePicBtn from '../Images/profilePicBtn.png';
 import searchTopBtn from '../Images/searchTopBtn.png';
 
 export default function Header() {
-  const [input, setInput] = useState('');
   const [searchCriteria, setSearchCriteria] = useState('');
   const [visibleSearch, setVisibleSearch] = useState(false);
-  const { defineSearch, href } = useContext(RecipesContext);
-  defineSearch(input, searchCriteria);
+  const { defineSearch } = useContext(RecipesContext);
+  const { location: { href } } = window;
   return (
     <div className="header">
       <Link to="/perfil">
         <img data-testid="profile-top-btn" src={profilePicBtn} alt="profile button" />
       </Link>
-      <h2 data-testid="page-title">{/comidas/.test(href)
-        ? 'Comidas'
-        : 'Bebidas'}
+      <h2 data-testid="page-title">{
+        href.includes('comidas')
+          ? 'Comidas'
+          : 'Bebidas'
+      }
       </h2>
       <input
         type="image"
@@ -29,9 +30,8 @@ export default function Header() {
       />
       {visibleSearch && <form>
         <DebounceInput
-          value={input}
           debounceTimeout={600}
-          onChange={(e) => setInput(e.target.value)}
+          onChange={(e) => defineSearch(e.target.value, searchCriteria)}
           data-testid="search-input"
         />
         <div className="searchRecipes">

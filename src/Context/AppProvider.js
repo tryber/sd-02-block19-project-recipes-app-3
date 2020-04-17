@@ -1,33 +1,33 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { apiRequest, meal, cocktail, resultsRandom } from '../Services/APIs';
+import { apiRequest } from '../Services/APIs';
 import RecipesContext from './index';
 
 export default function AppProvider({ children }) {
   const [requestInitialPage, setRequestInitialPage] = useState([]);
   const [fetchError, setFetchError] = useState('');
   const [storeCriteria, setStoreCriteria] = useState('');
-  const [href, setHref] = useState('');
-  const defineSearch = (input, searchCriteria) => {
-    if (input !== '' && searchCriteria !== '') {
-      setStoreCriteria(`${searchCriteria}${input.split(' ').join('_')}`);
-    }
-  };
+  const [isFetching, setIsFetching] = useState(false);
 
   const successDrinkOrMeal = (results) => {
     const condition = results.meals || results.drinks;
     setRequestInitialPage(condition);
+    setIsFetching(false);
   };
   const failDrinkOrMeal = ({ message }) => {
     setFetchError(message);
+    setIsFetching(false);
   };
-  const setDrinkOrMeal = (pathname) => {
-    setHref(pathname);
-    return pathname.includes('comidas')
-      ? apiRequest(meal, resultsRandom)
-        .then(successDrinkOrMeal, failDrinkOrMeal)
-      : apiRequest(cocktail, resultsRandom)
-        .then(successDrinkOrMeal, failDrinkOrMeal);
+  const setDrinkOrMeal = (resultsRandom) => {
+    setIsFetching(true)
+    return apiRequest(resultsRandom)
+      .then(successDrinkOrMeal, failDrinkOrMeal);
+  };
+  const defineSearch = (input, searchCriteria) => {
+    console.log(`${searchCriteria}${input.split(' ').join('_')}`);
+    if (input !== '' && searchCriteria !== '') {
+      setDrinkOrMeal(`${searchCriteria}${input.split(' ').join('_')}`);
+    }
   };
   const context = {
     requestInitialPage,
@@ -35,7 +35,7 @@ export default function AppProvider({ children }) {
     fetchError,
     defineSearch,
     storeCriteria,
-    href,
+    isFetching,
   };
   return (
     <RecipesContext.Provider value={context}>
