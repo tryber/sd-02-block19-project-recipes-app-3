@@ -1,6 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
-import  RecipesContext  from '../Context';
+import { DebounceInput } from 'react-debounce-input';
+import RecipesContext from '../Context';
 import profilePicBtn from '../Images/profilePicBtn.png';
 import searchTopBtn from '../Images/searchTopBtn.png';
 
@@ -27,9 +28,9 @@ export default function Header() {
         onClick={() => setVisibleSearch(!visibleSearch)}
       />
       {visibleSearch && <form>
-        <input
-          type="text"
+        <DebounceInput
           value={input}
+          debounceTimeout={600}
           onChange={(e) => setInput(e.target.value)}
           data-testid="search-input"
         />
