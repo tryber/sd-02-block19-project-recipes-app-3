@@ -4,6 +4,7 @@ import { DebounceInput } from 'react-debounce-input';
 import RecipesContext from '../Context';
 import profilePicBtn from '../Images/profilePicBtn.png';
 import searchTopBtn from '../Images/searchTopBtn.png';
+import CategoryBar from './CategoryBar';
 
 export default function Header() {
   const [searchCriteria, setSearchCriteria] = useState('');
@@ -28,6 +29,7 @@ export default function Header() {
         alt="search top button"
         onClick={() => setVisibleSearch(!visibleSearch)}
       />
+      <CategoryBar visibleSearch={visibleSearch}/>
       {visibleSearch && <form>
         <DebounceInput
           debounceTimeout={600}

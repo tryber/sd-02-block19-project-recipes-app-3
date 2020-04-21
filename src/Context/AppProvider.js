@@ -36,6 +36,7 @@ export default function AppProvider({ children }) {
     defineSearch,
     storeCriteria,
     isFetching,
+    
   };
   return (
     <RecipesContext.Provider value={context}>
