@@ -26,7 +26,15 @@ const renderInputImage = (setVisibleSearch, visibleSearch) => (
     alt="search top button"
     onClick={() => setVisibleSearch(!visibleSearch)}
   />
-)
+);
+const returnDebounce = (searchCriteria, inputChange) => (
+  <DebounceInput
+    disabled={!searchCriteria}
+    debounceTimeout={600}
+    onChange={(e) => inputChange(e.target.value)}
+    data-testid="search-input"
+  />
+);
 export default function Header() {
   const [searchCriteria, setSearchCriteria] = useState('');
   const [input, setInput] = useState('');
@@ -46,12 +54,8 @@ export default function Header() {
     <div className="header"> {renderTitle()}
       {renderInputImage(setVisibleSearch, visibleSearch)}
       <CategoryBar /> {visibleSearch && <form>
-        <DebounceInput
-          disabled={!searchCriteria}
-          debounceTimeout={600}
-          onChange={(e) => inputChange(e.target.value)}
-          data-testid="search-input"
-        /> <div className="searchRecipes">
+        {returnDebounce(searchCriteria, inputChange)}
+        <div className="searchRecipes">
           {arrayRadio.map((ele, index) => (
             <div key={ele}> <input
               type="radio"
