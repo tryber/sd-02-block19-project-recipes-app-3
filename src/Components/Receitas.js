@@ -1,6 +1,6 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { useEffect, useContext } from 'react';
+import { Link } from 'react-router-dom';
 import { resultsRandom } from '../Services/APIs';
 import Footer from '../Components/Footer';
 import Header from './Header';
