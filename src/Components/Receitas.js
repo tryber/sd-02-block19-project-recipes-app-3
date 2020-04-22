@@ -1,5 +1,5 @@
-import { Link } from 'react-router-dom';
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { useEffect, useContext } from 'react';
 import { resultsRandom } from '../Services/APIs';
 import Footer from '../Components/Footer';
