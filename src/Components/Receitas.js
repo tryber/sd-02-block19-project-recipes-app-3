@@ -3,36 +3,46 @@ import { resultsRandom } from '../Services/APIs';
 import RecipesContext from '../Context';
 import Footer from '../Components/Footer';
 import Header from './Header';
+import { Link } from 'react-router-dom';
 
 const Receitas = () => {
-  const { setDrinkOrMeal, fetchError, requestInitialPage, isFetching } = useContext(RecipesContext);
+  const {
+    setDrinkOrMeal, fetchError, setFoodDetail, requestInitialPage, isFetching, setIsFetching, setRequestInitialPage, noResults
+  } = useContext(RecipesContext);
 
   useEffect(() => {
+    setRequestInitialPage([]);
+    setIsFetching(true);
     setDrinkOrMeal(resultsRandom);
   }, [window.location.href]);
-
+  if (requestInitialPage === undefined) return (<h1>Nenhum Resultado</h1>);
   return (
     !isFetching
       ? fetchError ||
       <div>
         <Header />
-        {requestInitialPage.map((food, index) => {
+        {!noResults ? requestInitialPage.map((food, index) => {
           const local = food.idDrink ? 'Drink' : 'Meal';
           return (
             index < 12
-              ? <div key={`details ${food[`str${local}`]}`}>
+              ? <Link
+                onClick={(() => setFoodDetail(food))}
+                to={(window.location.href.includes('comidas') ? `/receitas/comidas/${food.idMeal}` : `/bebidas/${food.idDrink}`)}
+                key={index}
+              >
                 <div>
                   <img
-                    alt={`food ${food[`str${local}`]}`}
+                    data-testid={`${index}-card-img`}
+                    alt={food[`str${local}`]}
                     src={food[`str${local}Thumb`]}
                   />
                 </div>
                 <p>{food.strCategory}</p>
-                <p>{food[`str${local}`]}</p>
-              </div>
+                <p data-testid={`${index}-card-name`} >{food[`str${local}`]}</p>
+              </Link>
               : null
           );
-        })}
+        }) : <p>Sem Resultados</p>}
         <Footer />
       </div>
       : <p>Loading</p>

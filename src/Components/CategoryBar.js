@@ -1,16 +1,34 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import RecipesContext from '../Context/';
 
-const CategoryBar = ({ visibleSearch }) => {
-  const { requestInitialPage } = useContext(RecipesContext);
-  return (
+const CategoryBar = () => {
+  const { visibleSearch, arrayCategory, requestCategory, setDrinkOrMeal, defineSearch
+  } = useContext(RecipesContext);
+  useEffect(() => {
+    const category = window.location.href.includes('comidas') ? '/categories.php' : '/list.php?c=list';
+    requestCategory(category);
+  }, [window.location.href]);
+
+  const clickCategory = (value) => {
+    setDrinkOrMeal(value);
+  }
+
+  return !visibleSearch && (
     <div>
+      <button onClick={()=> defineSearch('')} value='' type="button">All</button>
       {
-        requestInitialPage.map((food, index) => (
-          index < 5 && !visibleSearch
+        arrayCategory.map((food, index) => (
+          index < 5
             ?
-            <div>
-              <button type="button">{food.strCategory}</button>
+            <div key={index}>
+              <button
+                data-testid={`${food.strCategory}-category-filter`}
+                value={`/filter.php?c=${food.strCategory}`}
+                type="button"
+                onClick={(e) => clickCategory(e.target.value)}
+              >
+                {food.strCategory}
+              </button>
             </div>
             : null
         ))

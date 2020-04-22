@@ -8,9 +8,21 @@ import CategoryBar from './CategoryBar';
 
 export default function Header() {
   const [searchCriteria, setSearchCriteria] = useState('');
-  const [visibleSearch, setVisibleSearch] = useState(false);
-  const { defineSearch } = useContext(RecipesContext);
+  const [input, setInput] = useState('');
+  const { defineSearch, setVisibleSearch, visibleSearch, setRequestInitialPage } = useContext(RecipesContext);
   const { location: { href } } = window;
+
+  const inputChange = (iValue) => {
+    setInput(iValue)
+    setRequestInitialPage([]);
+    defineSearch(iValue, searchCriteria);
+  }
+  
+  const radioChange = (rValue) => {
+    setSearchCriteria(rValue);
+    if (input !== '') defineSearch(input, rValue);
+  }
+
   return (
     <div className="header">
       <Link to="/perfil">
@@ -29,11 +41,12 @@ export default function Header() {
         alt="search top button"
         onClick={() => setVisibleSearch(!visibleSearch)}
       />
-      <CategoryBar visibleSearch={visibleSearch}/>
+      <CategoryBar />
       {visibleSearch && <form>
         <DebounceInput
+          disabled={!searchCriteria}
           debounceTimeout={600}
-          onChange={(e) => defineSearch(e.target.value, searchCriteria)}
+          onChange={(e) => inputChange(e.target.value)}
           data-testid="search-input"
         />
         <div className="searchRecipes">
@@ -41,21 +54,21 @@ export default function Header() {
             type="radio"
             name="recipeSearch"
             value="/filter.php?i="
-            onClick={(e) => setSearchCriteria(e.target.value)}
+            onClick={(e) => radioChange(e.target.value)}
           />
           <label htmlFor="ingredient">Ingrediente</label>
           <input
             type="radio"
             name="recipeSearch"
             value="/search.php?s="
-            onClick={(e) => setSearchCriteria(e.target.value)}
+            onClick={(e) => radioChange(e.target.value)}
           />
           <label htmlFor="name">Nome</label>
           <input
             type="radio"
             name="recipeSearch"
             value="/search.php?f="
-            onClick={(e) => setSearchCriteria(e.target.value)}
+            onClick={(e) => radioChange(e.target.value)}
           />
           <label htmlFor="firstLetter">Primeira letra</label>
         </div>
