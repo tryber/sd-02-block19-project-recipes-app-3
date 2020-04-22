@@ -24,51 +24,37 @@ export default function Header() {
   const { defineSearch, setVisibleSearch, visibleSearch, setRequestInitialPage } = useContext(RecipesContext);
   const arrayRadio = ['Ingrediente', 'Nome', 'Primeira letra'];
   const arrayValueRadio = ['/filter.php?i=', '/search.php?s=', '/search.php?f='];
-
   const inputChange = (iValue) => {
     setInput(iValue)
     setRequestInitialPage([]);
     defineSearch(iValue, searchCriteria);
   }
-
   const radioChange = (rValue) => {
     setSearchCriteria(rValue);
     if (input !== '') defineSearch(input, rValue);
   }
-
   return (
-    <div className="header">
-      {renderTitle()}
-      <input
-        type="image"
-        data-testid="search-top-btn"
-        src={searchTopBtn}
-        alt="search top button"
-        onClick={() => setVisibleSearch(!visibleSearch)}
-      />
-      <CategoryBar />
-      {visibleSearch && <form>
-        <DebounceInput
-          disabled={!searchCriteria}
-          debounceTimeout={600}
-          onChange={(e) => inputChange(e.target.value)}
-          data-testid="search-input"
-        />
-        <div className="searchRecipes">
-          {arrayRadio.map((ele, index) => (
-            <div key={ele}>
-              <input
-                type="radio"
-                name="recipeSearch"
-                value={arrayValueRadio[index]}
-                onClick={(e) => radioChange(e.target.value)}
-                id={ele}
-              />
-              <label htmlFor={ele}>{ele}</label>
-            </div>
-          ))}
-        </div>
-      </form>}
-    </div>
+    <div className="header"> {renderTitle()} <input
+      type="image"
+      data-testid="search-top-btn"
+      src={searchTopBtn}
+      alt="search top button"
+      onClick={() => setVisibleSearch(!visibleSearch)}
+    /> <CategoryBar /> {visibleSearch && <form>
+      <DebounceInput
+        disabled={!searchCriteria}
+        debounceTimeout={600}
+        onChange={(e) => inputChange(e.target.value)}
+        data-testid="search-input"
+      /> <div className="searchRecipes">
+        {arrayRadio.map((ele, index) => (
+          <div key={ele}> <input
+            type="radio"
+            name="recipeSearch"
+            value={arrayValueRadio[index]}
+            onClick={(e) => radioChange(e.target.value)}
+            id={ele}
+          /><label htmlFor={ele}>{ele}</label></div>
+        ))}</div></form>}</div>
   );
 }
