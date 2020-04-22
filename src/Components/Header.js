@@ -1,6 +1,6 @@
-import { Link } from 'react-router-dom';
 import React, { useState, useContext } from 'react';
 import { DebounceInput } from 'react-debounce-input';
+import { Link } from 'react-router-dom';
 import RecipesContext from '../Context';
 import profilePicBtn from '../Images/profilePicBtn.png';
 import searchTopBtn from '../Images/searchTopBtn.png';
