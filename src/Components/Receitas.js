@@ -16,8 +16,7 @@ const Receitas = () => {
     setDrinkOrMeal(resultsRandom);
   }, [window.location.href]);
   if (requestInitialPage === undefined) return (<h1>Nenhum Resultado</h1>);
-  return (
-    !isFetching ? fetchError || <div><Header />
+  return ( !isFetching ? fetchError || <div><Header />
       {!noResults ? requestInitialPage.map((food, index) => {
         const local = food.idDrink ? 'Drink' : 'Meal';
         return (
@@ -37,8 +36,7 @@ const Receitas = () => {
             </Link> : null
         );
       }) : <p>Sem Resultados</p>} <Footer />
-    </div> : <p>Loading</p>
-  );
+    </div> : <p>Loading</p>);
 };
 
 export default Receitas;
