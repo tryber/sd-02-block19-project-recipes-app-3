@@ -12,8 +12,8 @@ export default function AppProvider({ children }) {
   const [arrayCategory, setArrayCategory] = useState([]);
   const [stopFetching, setStopFetching] = useState(false);
   const [noResults, setNoResults] = useState(false);
-  const [foodDetail,setFoodDetail]= useState({}); 
-  
+  const [foodDetail, setFoodDetail] = useState({});
+
   const setDrinkOrMeal = (paramRequest) => {
     setNoResults(false);
     apiRequest(paramRequest)
@@ -36,15 +36,13 @@ export default function AppProvider({ children }) {
     if (!condition) {
       setNoResults(true);
       return;
-    }
-    if (condition.length > 1) {
+    } if (condition.length > 1) {
       setRequestInitialPage([...condition]);
       setStopFetching(true);
+      return;
     }
-    if (condition.length === 1) {
-      setRequestInitialPage([...condition, ...requestInitialPage]);
-      setStopFetching(false);
-    }
+    setRequestInitialPage([...condition, ...requestInitialPage]);
+    setStopFetching(false);
   };
 
   const failDrinkOrMeal = ({ message }) => {
