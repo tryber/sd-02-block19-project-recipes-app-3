@@ -2,14 +2,12 @@ import React, { useState } from 'react';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import Share from '../Images/Share.svg';
 import Favorite from '../Images/Favorite.svg';
+import Favorited from '../Images/Favorited.svg';
 import '../Styles/FavoriteAndShare.css';
-
-const favoriteRecipe = () => {
-  console.log('ia')
-}
 
 const FavoriteAndShare = () => {
   const [copied, setCopied] = useState('');
+  const [favoritedRecipe, setFavoritedRecipe] = useState(false);
   const message = () => {
     setCopied('Copied!');
     setTimeout(() => {
@@ -28,9 +26,11 @@ const FavoriteAndShare = () => {
       </CopyToClipboard>
       <div
         className="FavShare_content"
-        onClick={() => favoriteRecipe()}
+        onClick={() => setFavoritedRecipe(!favoritedRecipe)}
       >
-        <img src={Favorite} alt="Favorite recipe" />
+        <img
+          src={favoritedRecipe ? Favorited : Favorite}
+          alt="Favorite recipe" />
       </div>
       <p>{copied}</p>
     </div>
