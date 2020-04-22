@@ -14,4 +14,4 @@ const FavoriteAndShare = () => (
   </div>
 );
 
-export default FavoriteAndShare;;
+export default FavoriteAndShare;
