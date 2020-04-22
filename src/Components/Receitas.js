@@ -1,9 +1,10 @@
-import React, { useEffect, useContext } from 'react';
-import { resultsRandom } from '../Services/APIs';
 import Footer from '../Components/Footer';
 import Header from './Header';
-import { Link } from 'react-router-dom';
 import RecipesContext from '../Context';
+import React from 'react';
+import { useEffect, useContext } from 'react';
+import { Link } from 'react-router-dom';
+import { resultsRandom } from '../Services/APIs';
 
 const Receitas = () => {
   const {
