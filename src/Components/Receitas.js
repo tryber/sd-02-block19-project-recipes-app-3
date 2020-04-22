@@ -1,13 +1,14 @@
 import React, { useEffect, useContext } from 'react';
 import { resultsRandom } from '../Services/APIs';
+import { Link } from 'react-router-dom';
 import RecipesContext from '../Context';
 import Footer from '../Components/Footer';
 import Header from './Header';
-import { Link } from 'react-router-dom';
 
 const Receitas = () => {
   const {
-    setDrinkOrMeal, fetchError, setFoodDetail, requestInitialPage, isFetching, setIsFetching, setRequestInitialPage, noResults
+    setDrinkOrMeal, fetchError, setFoodDetail, requestInitialPage,
+    isFetching, setIsFetching, setRequestInitialPage, noResults,
   } = useContext(RecipesContext);
 
   useEffect(() => {
@@ -24,13 +25,13 @@ const Receitas = () => {
           ? <Link
             onClick={(() => setFoodDetail(food))}
             to={(window.location.href.includes('comidas') ? `/receitas/comidas/${food.idMeal}` : `/bebidas/${food.idDrink}`)}
-            key={index}
+            key={food}
           ><div>
-              <img
-                data-testid={`${index}-card-img`}
-                alt={food[`str${local}`]}
-                src={food[`str${local}Thumb`]}
-              /></div>
+            <img
+              data-testid={`${index}-card-img`}
+              alt={food[`str${local}`]}
+              src={food[`str${local}Thumb`]}
+            /></div>
             <p>{food.strCategory}</p>
             <p data-testid={`${index}-card-name`} >{food[`str${local}`]}</p>
           </Link> : null

@@ -5,6 +5,7 @@ import RecipesContext from '../Context';
 import profilePicBtn from '../Images/profilePicBtn.png';
 import searchTopBtn from '../Images/searchTopBtn.png';
 import CategoryBar from './CategoryBar';
+
 const renderTitle = () => (
   <div>
     <Link to="/perfil">
@@ -42,14 +43,14 @@ export default function Header() {
   const arrayRadio = ['Ingrediente', 'Nome', 'Primeira letra'];
   const arrayValueRadio = ['/filter.php?i=', '/search.php?s=', '/search.php?f='];
   const inputChange = (iValue) => {
-    setInput(iValue)
+    setInput(iValue);
     setRequestInitialPage([]);
     defineSearch(iValue, searchCriteria);
-  }
+  };
   const radioChange = (rValue) => {
     setSearchCriteria(rValue);
     if (input !== '') defineSearch(input, rValue);
-  }
+  };
   return (
     <div className="header"> {renderTitle()}
       {renderInputImage(setVisibleSearch, visibleSearch)}
