@@ -18,7 +18,7 @@ const renderTitle = () => (
     </h2>
   </div>
 );
-const renderInput = (setVisibleSearch, visibleSearch) => (
+const renderInputImage = (setVisibleSearch, visibleSearch) => (
   <input
     type="image"
     data-testid="search-top-btn"
