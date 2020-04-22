@@ -1,0 +1,8 @@
+.FavShare_father {
+  display: flex;
+  flex-flow: row nowrap;
+}
+
+.FavShare_content {
+  padding: 1em;
+}
