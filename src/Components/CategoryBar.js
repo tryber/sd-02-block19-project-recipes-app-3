@@ -15,12 +15,11 @@ const CategoryBar = () => {
 
   return !visibleSearch && (
     <div>
-      <button onClick={()=> defineSearch('')} value='' type="button">All</button>
+      <button onClick={() => defineSearch('')} value='' type="button">All</button>
       {
         arrayCategory.map((food, index) => (
           index < 5
-            ?
-            <div key={index}>
+            ? <div key={index}>
               <button
                 data-testid={`${food.strCategory}-category-filter`}
                 value={`/filter.php?c=${food.strCategory}`}
@@ -29,8 +28,7 @@ const CategoryBar = () => {
               >
                 {food.strCategory}
               </button>
-            </div>
-            : null
+            </div> : null
         ))
       }
     </div>
