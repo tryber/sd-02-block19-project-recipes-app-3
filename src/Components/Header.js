@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { DebounceInput } from 'react-debounce-input';
-import { Link } from 'react-router-dom';
 import RecipesContext from '../Context';
+import { Link } from 'react-router-dom';
 import profilePicBtn from '../Images/profilePicBtn.png';
 import searchTopBtn from '../Images/searchTopBtn.png';
 import CategoryBar from './CategoryBar';
@@ -53,7 +53,7 @@ export default function Header() {
   };
   return (
     <div className="header"> {renderTitle()}
- {renderInputImage(setVisibleSearch, visibleSearch)}
+      {renderInputImage(setVisibleSearch, visibleSearch)}
       <CategoryBar /> {visibleSearch && <form>
         {returnDebounce(searchCriteria, inputChange)}
         <div className="searchRecipes">
