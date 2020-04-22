@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
+import { Link } from 'react-router-dom';
 import { DebounceInput } from 'react-debounce-input';
 import RecipesContext from '../Context';
-import { Link } from 'react-router-dom';
 import profilePicBtn from '../Images/profilePicBtn.png';
 import searchTopBtn from '../Images/searchTopBtn.png';
 import CategoryBar from './CategoryBar';
