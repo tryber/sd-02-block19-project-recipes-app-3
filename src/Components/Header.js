@@ -45,8 +45,7 @@ export default function Header() {
   const arrayValueRadio = ['/filter.php?i=', '/search.php?s=', '/search.php?f='];
   const inputChange = (iValue) => {
     setInput(iValue);
-    setRequestInitialPage([]);
-    defineSearch(iValue, searchCriteria);
+    setRequestInitialPage([]); defineSearch(iValue, searchCriteria);
   };
   const radioChange = (rValue) => {
     setSearchCriteria(rValue);
@@ -54,7 +53,7 @@ export default function Header() {
   };
   return (
     <div className="header"> {renderTitle()}
-      {renderInputImage(setVisibleSearch, visibleSearch)}
+ {renderInputImage(setVisibleSearch, visibleSearch)}
       <CategoryBar /> {visibleSearch && <form>
         {returnDebounce(searchCriteria, inputChange)}
         <div className="searchRecipes">
