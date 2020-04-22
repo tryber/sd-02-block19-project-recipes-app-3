@@ -18,6 +18,15 @@ const renderTitle = () => (
     </h2>
   </div>
 );
+const renderInput = (setVisibleSearch, visibleSearch) => (
+  <input
+    type="image"
+    data-testid="search-top-btn"
+    src={searchTopBtn}
+    alt="search top button"
+    onClick={() => setVisibleSearch(!visibleSearch)}
+  />
+)
 export default function Header() {
   const [searchCriteria, setSearchCriteria] = useState('');
   const [input, setInput] = useState('');
@@ -34,27 +43,23 @@ export default function Header() {
     if (input !== '') defineSearch(input, rValue);
   }
   return (
-    <div className="header"> {renderTitle()} <input
-      type="image"
-      data-testid="search-top-btn"
-      src={searchTopBtn}
-      alt="search top button"
-      onClick={() => setVisibleSearch(!visibleSearch)}
-    /> <CategoryBar /> {visibleSearch && <form>
-      <DebounceInput
-        disabled={!searchCriteria}
-        debounceTimeout={600}
-        onChange={(e) => inputChange(e.target.value)}
-        data-testid="search-input"
-      /> <div className="searchRecipes">
-        {arrayRadio.map((ele, index) => (
-          <div key={ele}> <input
-            type="radio"
-            name="recipeSearch"
-            value={arrayValueRadio[index]}
-            onClick={(e) => radioChange(e.target.value)}
-            id={ele}
-          /><label htmlFor={ele}>{ele}</label></div>
-        ))}</div></form>}</div>
+    <div className="header"> {renderTitle()}
+      {renderInputImage(setVisibleSearch, visibleSearch)}
+      <CategoryBar /> {visibleSearch && <form>
+        <DebounceInput
+          disabled={!searchCriteria}
+          debounceTimeout={600}
+          onChange={(e) => inputChange(e.target.value)}
+          data-testid="search-input"
+        /> <div className="searchRecipes">
+          {arrayRadio.map((ele, index) => (
+            <div key={ele}> <input
+              type="radio"
+              name="recipeSearch"
+              value={arrayValueRadio[index]}
+              onClick={(e) => radioChange(e.target.value)}
+              id={ele}
+            /><label htmlFor={ele}>{ele}</label></div>
+          ))}</div></form>}</div>
   );
 }
