@@ -36,8 +36,7 @@ const Receitas = () => {
             <p data-testid={`${index}-card-name`} >{food[`str${local}`]}</p>
           </Link> : null
       );
-    }) : <p>Sem Resultados</p>} <Footer />
-  </div> : <p>Loading</p>);
+    }) : <p>Sem Resultados</p>} <Footer /></div> : <p>Loading</p>);
 };
 
 export default Receitas;

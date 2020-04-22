@@ -1,5 +1,5 @@
-import React, { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
+import React, { useState, useContext } from 'react';
 import { DebounceInput } from 'react-debounce-input';
 import RecipesContext from '../Context';
 import profilePicBtn from '../Images/profilePicBtn.png';
@@ -39,7 +39,8 @@ const returnDebounce = (searchCriteria, inputChange) => (
 export default function Header() {
   const [searchCriteria, setSearchCriteria] = useState('');
   const [input, setInput] = useState('');
-  const { defineSearch, setVisibleSearch, visibleSearch, setRequestInitialPage } = useContext(RecipesContext);
+  const { defineSearch, setVisibleSearch, visibleSearch, setRequestInitialPage,
+   } = useContext(RecipesContext);
   const arrayRadio = ['Ingrediente', 'Nome', 'Primeira letra'];
   const arrayValueRadio = ['/filter.php?i=', '/search.php?s=', '/search.php?f='];
   const inputChange = (iValue) => {

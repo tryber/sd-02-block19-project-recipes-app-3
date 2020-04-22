@@ -42,7 +42,7 @@ export default function AppProvider({ children }) {
     if (stopFetching) return;
     if (requestInitialPage.length === 12) {
       setIsFetching(false);
-      setCopy([...requestInitialPage])
+      setCopy([...requestInitialPage]);
     }
     if (requestInitialPage.length < 12 && requestInitialPage.length > 0) {
       setDrinkOrMeal(resultsRandom);
