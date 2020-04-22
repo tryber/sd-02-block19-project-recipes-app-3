@@ -25,7 +25,7 @@ const Receitas = () => {
           ? <Link
             onClick={(() => setFoodDetail(food))}
             to={(window.location.href.includes('comidas') ? `/receitas/comidas/${food.idMeal}` : `/bebidas/${food.idDrink}`)}
-            key={food}
+            key={`${food.strCategory}${index}`}
           ><div>
             <img
               data-testid={`${index}-card-img`}

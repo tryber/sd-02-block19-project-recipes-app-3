@@ -19,7 +19,7 @@ const CategoryBar = () => {
       {
         arrayCategory.map((food, index) => (
           index < 5
-            ? <div key={food}>
+            ? <div key={food.strCategory}>
               <button
                 data-testid={`${food.strCategory}-category-filter`}
                 value={`/filter.php?c=${food.strCategory}`}
