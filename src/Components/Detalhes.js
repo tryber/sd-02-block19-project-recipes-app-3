@@ -1,6 +1,8 @@
 import React, { useContext } from 'react';
 import RecipesContext from '../Context';
 
+// teste
+
 const Detalhes = () => {
   const { foodDetail } = useContext(RecipesContext);
   console.log(foodDetail);
