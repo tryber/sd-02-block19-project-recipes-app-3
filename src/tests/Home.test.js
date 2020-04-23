@@ -1,7 +1,7 @@
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
 import { render, cleanup, fireEvent } from '@testing-library/react';
-import Home from '../Components/Home';
+import Home from '../Pages/Home';
 
 afterEach(cleanup);
 
