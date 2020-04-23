@@ -21,7 +21,7 @@ const renderCard = (setFoodDetail, food, index, local) => (
     <p>{food.strCategory}</p>
     <p data-testid={`${index}-card-name`} >{food[`str${local}`]}</p>
   </Link>
-)
+);
 
 const Receitas = () => {
   const {

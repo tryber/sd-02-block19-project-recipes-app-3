@@ -3,6 +3,21 @@ import PropTypes from 'prop-types';
 import { apiRequest, resultsRandom } from '../Services/APIs';
 import RecipesContext from './index';
 
+const verify = (
+  condition,
+  setnoresults,
+  requestinitialpage,
+  setrequestinitialpage,
+  setstopfetching
+) => {
+  if (condition) setnoresults(true)
+  if (condition.length > 1) {
+    setrequestinitialpage([...condition])
+    setstopfetching(true)
+  }
+  setrequestinitialpage([...condition, ...requestinitialpage])
+  setstopfetching(false)
+}
 export default function AppProvider({ children }) {
   const [requestInitialPage, setRequestInitialPage] = useState([]);
   const [copy, setCopy] = useState([]);
@@ -16,20 +31,16 @@ export default function AppProvider({ children }) {
 
 
   const successDrinkOrMeal = (results) => {
-    const condition = results.meals || results.drinks;
-    if (!condition) {
-      setNoResults(true);
-      return;
-    }
-    if (condition.length > 1) {
-      setRequestInitialPage([...condition]);
-      setStopFetching(true);
-    }
-    if (condition.length === 1) {
-      setRequestInitialPage([...condition, ...requestInitialPage]);
-      setStopFetching(false);
-    }
-  };
+    const condition = results.meals || results.drinks
+
+    verify(
+      condition,
+      setNoResults,
+      requestInitialPage,
+      setRequestInitialPage,
+      setStopFetching
+    )
+  }
 
   const failDrinkOrMeal = ({ message }) => {
     setFetchError(message);
