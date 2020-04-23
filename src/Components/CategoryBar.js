@@ -11,30 +11,29 @@ const CategoryBar = () => {
 
   const clickCategory = (value) => {
     setDrinkOrMeal(value);
-  }
+  };
 
   return !visibleSearch && (
     <div>
-      <button onClick={()=> defineSearch('')} value='' type="button">All</button>
+      <button onClick={() => defineSearch('')} value="" type="button">All</button>
       {
         arrayCategory.map((food, index) => (
           index < 5
-            ?
-            <div key={index}>
-              <button
-                data-testid={`${food.strCategory}-category-filter`}
-                value={`/filter.php?c=${food.strCategory}`}
-                type="button"
-                onClick={(e) => clickCategory(e.target.value)}
-              >
+            ? <div key={food.strCategory}>
+                <button
+                  data-testid={`${food.strCategory}-category-filter`}
+                  value={`/filter.php?c=${food.strCategory}`}
+                  type="button"
+                  onClick={(e) => clickCategory(e.target.value)}
+                >
                 {food.strCategory}
-              </button>
-            </div>
+                </button>
+              </div>
             : null
         ))
       }
     </div>
-  )
-}
+  );
+};
 
 export default CategoryBar;

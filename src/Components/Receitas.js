@@ -1,13 +1,14 @@
 import React, { useEffect, useContext } from 'react';
+import { Link } from 'react-router-dom';
 import { resultsRandom } from '../Services/APIs';
 import RecipesContext from '../Context';
 import Footer from '../Components/Footer';
 import Header from './Header';
-import { Link } from 'react-router-dom';
 
 const Receitas = () => {
   const {
-    setDrinkOrMeal, fetchError, setFoodDetail, requestInitialPage, isFetching, setIsFetching, setRequestInitialPage, noResults
+    setDrinkOrMeal, fetchError, setFoodDetail, requestInitialPage,
+    isFetching, setIsFetching, setRequestInitialPage, noResults,
   } = useContext(RecipesContext);
 
   useEffect(() => {
@@ -28,7 +29,7 @@ const Receitas = () => {
               ? <Link
                 onClick={(() => setFoodDetail(food))}
                 to={(window.location.href.includes('comidas') ? `/receitas/comidas/${food.idMeal}` : `/bebidas/${food.idDrink}`)}
-                key={index}
+                key={`${food.strCategory}${Math.random * 10000}`}
               >
                 <div>
                   <img

@@ -12,25 +12,14 @@ export default function AppProvider({ children }) {
   const [arrayCategory, setArrayCategory] = useState([]);
   const [stopFetching, setStopFetching] = useState(false);
   const [noResults, setNoResults] = useState(false);
-  const [foodDetail,setFoodDetail]= useState({}); 
-  
+  const [foodDetail, setFoodDetail] = useState({});
+
   const setDrinkOrMeal = (paramRequest) => {
     setNoResults(false);
     apiRequest(paramRequest)
       .then(successDrinkOrMeal, failDrinkOrMeal);
   };
-
-  useEffect(() => {
-    if (stopFetching) return;
-    if (requestInitialPage.length === 12) {
-      setIsFetching(false);
-      setCopy([...requestInitialPage])
-    }
-    if (requestInitialPage.length < 12 && requestInitialPage.length > 0) {
-      setDrinkOrMeal(resultsRandom)
-    }
-  }, [requestInitialPage]);
-
+  
   const successDrinkOrMeal = (results) => {
     const condition = results.meals || results.drinks;
     if (!condition) {
@@ -50,14 +39,25 @@ export default function AppProvider({ children }) {
   const failDrinkOrMeal = ({ message }) => {
     setFetchError(message);
   };
+  
+  useEffect(() => {
+    if (stopFetching) return;
+    if (requestInitialPage.length === 12) {
+      setIsFetching(false);
+      setCopy([...requestInitialPage]);
+    }
+    if (requestInitialPage.length < 12 && requestInitialPage.length > 0) {
+      setDrinkOrMeal(resultsRandom);
+    }
+  }, [requestInitialPage]);
 
-  const requestCategory = (requestParam) => {
-    return apiRequest(requestParam)
-      .then((results) => {
-        const { categories, drinks } = results;
-        setArrayCategory(categories || drinks)
-      });
-  }
+
+  const requestCategory = (requestParam) => (apiRequest(requestParam)
+    .then((results) => {
+      const { categories, drinks } = results;
+      setArrayCategory(categories || drinks);
+    })
+  );
 
   const defineSearch = (input, searchCriteria) => {
     if (input !== '' && searchCriteria !== '') {
@@ -81,7 +81,7 @@ export default function AppProvider({ children }) {
     setRequestInitialPage,
     noResults,
     setFoodDetail,
-    foodDetail
+    foodDetail,
   };
   return (
     <RecipesContext.Provider value={context}>
