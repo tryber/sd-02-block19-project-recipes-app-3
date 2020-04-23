@@ -14,12 +14,7 @@ export default function AppProvider({ children }) {
   const [noResults, setNoResults] = useState(false);
   const [foodDetail, setFoodDetail] = useState({});
 
-  const setDrinkOrMeal = (paramRequest) => {
-    setNoResults(false);
-    apiRequest(paramRequest)
-      .then(successDrinkOrMeal, failDrinkOrMeal);
-  };
-  
+
   const successDrinkOrMeal = (results) => {
     const condition = results.meals || results.drinks;
     if (!condition) {
@@ -38,6 +33,12 @@ export default function AppProvider({ children }) {
 
   const failDrinkOrMeal = ({ message }) => {
     setFetchError(message);
+  };
+  
+  const setDrinkOrMeal = (paramRequest) => {
+    setNoResults(false);
+    apiRequest(paramRequest)
+      .then(successDrinkOrMeal, failDrinkOrMeal);
   };
   
   useEffect(() => {
