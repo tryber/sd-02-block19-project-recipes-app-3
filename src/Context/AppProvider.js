@@ -34,13 +34,13 @@ export default function AppProvider({ children }) {
   const failDrinkOrMeal = ({ message }) => {
     setFetchError(message);
   };
-  
+
   const setDrinkOrMeal = (paramRequest) => {
     setNoResults(false);
     apiRequest(paramRequest)
       .then(successDrinkOrMeal, failDrinkOrMeal);
   };
-  
+
   useEffect(() => {
     if (stopFetching) return;
     if (requestInitialPage.length === 12) {

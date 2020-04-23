@@ -20,15 +20,15 @@ const CategoryBar = () => {
         arrayCategory.map((food, index) => (
           index < 5
           ? <div key={food.strCategory}>
-              <button
-                data-testid={`${food.strCategory}-category-filter`}
-                value={`/filter.php?c=${food.strCategory}`}
-                type="button"
-                onClick={(e) => clickCategory(e.target.value)}
-              >
-              {food.strCategory}
-              </button>
-            </div>
+            <button
+              data-testid={`${food.strCategory}-category-filter`}
+              value={`/filter.php?c=${food.strCategory}`}
+              type="button"
+              onClick={(e) => clickCategory(e.target.value)}
+            >
+            {food.strCategory}
+            </button>
+          </div>
             : null
         ))
       }
