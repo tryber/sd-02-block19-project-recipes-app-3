@@ -77,9 +77,7 @@ export default function Header() {
       <CategoryBar />
       {visibleSearch && <form>
         {renderDebounce(searchCriteria, inputChange)}
-        <div className="searchRecipes">
-          {renderRadio(radioChange)}
-        </div>
+        <div className="searchRecipes">{renderRadio(radioChange)}</div>
       </form>}
     </div>
   );
