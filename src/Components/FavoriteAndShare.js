@@ -3,28 +3,24 @@ import { CopyToClipboard } from 'react-copy-to-clipboard';
 import Share from '../Images/Share.svg';
 import Favorite from '../Images/Favorite.svg';
 import Favorited from '../Images/Favorited.svg';
-import RecipesContext from '../Context';
 import '../Styles/FavoriteAndShare.css';
 
 const heartClick = (isFavorite, setIsFavorite) => {
-  const { favoritedRecipes } = JSON.parse(localStorage.getItem('user'));
+  const localStorageUser = JSON.parse(localStorage.getItem('user'));
   setIsFavorite(!isFavorite);
-  return isFavorite
-    ? favoritedRecipes = [...favoritedRecipes, foodDetails]
-    : favoritedRecipes.slice(0, favoritedRecipes.indexOf(foodDetails))
-      .concat(favoritedRecipes.slice(favoritedRecipes.indexOf(foodDetails) + 1)
+  console.log(localStorageUser)
 }
 
 const FavoriteAndShare = () => {
   const [copied, setCopied] = useState('');
   const [isFavorite, setIsFavorite] = useState(false);
-  const { foodDetails } = useContext(RecipesContext);
   const message = () => {
     setCopied('Copied!');
     setTimeout(() => {
       setCopied('')
     }, 2000);
   }
+
   return (
     <div className="FavShare_father">
       <CopyToClipboard
@@ -37,7 +33,7 @@ const FavoriteAndShare = () => {
       </CopyToClipboard>
       <div
         className="FavShare_content"
-        onClick={() => heartClick(isFavorite, setIsFavorite, foodDetails)}
+        onClick={() => heartClick(isFavorite, setIsFavorite)}
       >
         <img
           src={isFavorite ? Favorited : Favorite}
