@@ -27,7 +27,9 @@ export default function AppProvider({ children }) {
   const [arrayCategory, setArrayCategory] = useState([]);
   const [stopFetching, setStopFetching] = useState(false);
   const [noResults, setNoResults] = useState(false);
-  const [foodDetail, setFoodDetail] = useState({});
+  const [foodDetail, setFoodDetail] = useState('');
+  const [foodObject, setFoodObject] = useState({});
+  const [foodObjectFail, setFoodObjectFail] = useState({});
 
   const successDrinkOrMeal = (results) => {
     const condition = results.meals || results.drinks;
@@ -50,6 +52,22 @@ export default function AppProvider({ children }) {
     apiRequest(paramRequest)
       .then(successDrinkOrMeal, failDrinkOrMeal);
   };
+//************************************* */
+
+  const successFoodRequest = (apiReturnFood) => {
+    setFoodObject(apiReturnFood);
+  }
+
+  const failFoodRequest = ({message}) => {
+    setFoodObjectFail(message);
+  }
+
+  const idSearch = (searchParam) => {
+    apiRequest(searchParam)
+      .then(successFoodRequest, failFoodRequest);
+  }
+
+//************************************* */
 
   useEffect(() => {
     if (stopFetching) return;
@@ -78,6 +96,7 @@ export default function AppProvider({ children }) {
     setNoResults(false);
     setRequestInitialPage([...copy]);
   };
+
   const context = {
     setIsFetching,
     requestInitialPage,
@@ -93,7 +112,11 @@ export default function AppProvider({ children }) {
     noResults,
     setFoodDetail,
     foodDetail,
+    idSearch,
+    foodObject,
+    foodObjectFail,
   };
+
   return (
     <RecipesContext.Provider value={context}>
       {children}
