@@ -20,13 +20,29 @@ const renderTitle = () => (
   </div>
 );
 
+const renderRadio = (radioChange) => {
+  const arrayRadio = ['Ingrediente', 'Nome', 'Primeira letra'];
+  const arrayValueRadio = ['/filter.php?i=', '/search.php?s=', '/search.php?f='];
+  return arrayRadio.map((ele, index) => (
+    <div key={ele}>
+      <input
+        type="radio"
+        name="recipeSearch"
+        value={arrayValueRadio[index]}
+        onClick={(e) => radioChange(e.target.value)}
+        id={ele}
+      />
+      <label htmlFor={ele}>{ele}</label>
+    </div>
+  ));
+};
+
 export default function Header() {
   const [searchCriteria, setSearchCriteria] = useState('');
   const [input, setInput] = useState('');
   const { defineSearch, setVisibleSearch, visibleSearch, setRequestInitialPage,
   } = useContext(RecipesContext);
-  const arrayRadio = ['Ingrediente', 'Nome', 'Primeira letra'];
-  const arrayValueRadio = ['/filter.php?i=', '/search.php?s=', '/search.php?f='];
+
 
   const inputChange = (iValue) => {
     setInput(iValue);
@@ -58,18 +74,7 @@ export default function Header() {
           data-testid="search-input"
         />
         <div className="searchRecipes">
-          {arrayRadio.map((ele, index) => (
-            <div key={ele}>
-              <input
-                type="radio"
-                name="recipeSearch"
-                value={arrayValueRadio[index]}
-                onClick={(e) => radioChange(e.target.value)}
-                id={ele}
-              />
-              <label htmlFor={ele}>{ele}</label>
-            </div>
-          ))}
+        {renderRadio(radioChange)}
         </div>
       </form>}
     </div>
