@@ -37,6 +37,15 @@ const renderRadio = (radioChange) => {
   ));
 };
 
+const renderDebounce = (searchCriteria, inputChange) => (
+  <DebounceInput
+    disabled={!searchCriteria}
+    debounceTimeout={600}
+    onChange={(e) => inputChange(e.target.value)}
+    data-testid="search-input"
+  />
+);
+
 export default function Header() {
   const [searchCriteria, setSearchCriteria] = useState('');
   const [input, setInput] = useState('');
@@ -67,14 +76,9 @@ export default function Header() {
       />
       <CategoryBar />
       {visibleSearch && <form>
-        <DebounceInput
-          disabled={!searchCriteria}
-          debounceTimeout={600}
-          onChange={(e) => inputChange(e.target.value)}
-          data-testid="search-input"
-        />
+        {renderDebounce(searchCriteria, inputChange)}
         <div className="searchRecipes">
-        {renderRadio(radioChange)}
+          {renderRadio(radioChange)}
         </div>
       </form>}
     </div>
