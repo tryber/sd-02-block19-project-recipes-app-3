@@ -15,8 +15,9 @@ const verify = (
     setstopfetching(true);
   }
   setrequestinitialpage([...condition, ...requestinitialpage]);
-  setstopfetching(false);
-}
+  return setstopfetching(false);
+};
+
 export default function AppProvider({ children }) {
   const [requestInitialPage, setRequestInitialPage] = useState([]);
   const [copy, setCopy] = useState([]);
@@ -28,7 +29,6 @@ export default function AppProvider({ children }) {
   const [noResults, setNoResults] = useState(false);
   const [foodDetail, setFoodDetail] = useState({});
 
-
   const successDrinkOrMeal = (results) => {
     const condition = results.meals || results.drinks;
 
@@ -39,7 +39,7 @@ export default function AppProvider({ children }) {
       setRequestInitialPage,
       setStopFetching,
     );
-  }
+  };
 
   const failDrinkOrMeal = ({ message }) => {
     setFetchError(message);
