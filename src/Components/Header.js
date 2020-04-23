@@ -13,6 +13,7 @@ export default function Header() {
    } = useContext(RecipesContext);
   const arrayRadio = ['Ingrediente', 'Nome', 'Primeira letra'];
   const arrayValueRadio = ['/filter.php?i=', '/search.php?s=', '/search.php?f='];
+  const { location: { href } } = window;
 
   const inputChange = (iValue) => {
     setInput(iValue)
@@ -31,7 +32,7 @@ export default function Header() {
         <img data-testid="profile-top-btn" src={profilePicBtn} alt="profile button" />
       </Link>
       <h2 data-testid="page-title">{
-        window.location.href.includes('comidas')
+        href.includes('comidas')
           ? 'Comidas'
           : 'Bebidas'
       }
