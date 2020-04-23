@@ -29,7 +29,7 @@ const Receitas = () => {
               ? <Link
                 onClick={(() => setFoodDetail(food))}
                 to={(window.location.href.includes('comidas') ? `/receitas/comidas/${food.idMeal}` : `/bebidas/${food.idDrink}`)}
-                key={`${food.strCategory}${Math.random * 10000}`}
+                key={`food${Math.random() * 10000000}`}
               >
                 <div>
                   <img
