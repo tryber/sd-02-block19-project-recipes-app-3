@@ -43,6 +43,7 @@ const renderDebounce = (searchCriteria, inputChange) => (
     debounceTimeout={600}
     onChange={(e) => inputChange(e.target.value)}
     data-testid="search-input"
+    maxLength={searchCriteria === '/search.php?f=' ? 1 : 30}
   />
 );
 
@@ -72,7 +73,7 @@ export default function Header() {
         data-testid="search-top-btn"
         src={searchTopBtn}
         alt="search top button"
-        onClick={() => setVisibleSearch(!visibleSearch)}
+        onClick={() => { setVisibleSearch(!visibleSearch); setSearchCriteria(null); setInput(''); }}
       />
       <CategoryBar />
       {visibleSearch && <form>

@@ -8,15 +8,14 @@ const verify = (
   setnoresults,
   requestinitialpage,
   setrequestinitialpage,
-  setstopfetching
+  setstopfetching,
 ) => {
-  if (condition) setnoresults(true)
+  if (!condition) return setnoresults(true);
   if (condition.length > 1) {
-    setrequestinitialpage([...condition])
-    setstopfetching(true)
+    setstopfetching(true);
   }
-  setrequestinitialpage([...condition, ...requestinitialpage])
-  setstopfetching(false)
+  setrequestinitialpage([...condition, ...requestinitialpage]);
+  setstopfetching(false);
 }
 export default function AppProvider({ children }) {
   const [requestInitialPage, setRequestInitialPage] = useState([]);
@@ -31,15 +30,15 @@ export default function AppProvider({ children }) {
 
 
   const successDrinkOrMeal = (results) => {
-    const condition = results.meals || results.drinks
+    const condition = results.meals || results.drinks;
 
     verify(
       condition,
       setNoResults,
       requestInitialPage,
       setRequestInitialPage,
-      setStopFetching
-    )
+      setStopFetching,
+    );
   }
 
   const failDrinkOrMeal = ({ message }) => {
