@@ -1,67 +1,85 @@
 import React, { useState, useContext } from 'react';
-import propTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { RecipesContext } from '../Context';
+import { DebounceInput } from 'react-debounce-input';
+import RecipesContext from '../Context';
 import profilePicBtn from '../Images/profilePicBtn.png';
 import searchTopBtn from '../Images/searchTopBtn.png';
+import CategoryBar from './CategoryBar';
 
-export default function Header({ history }) {
-  const [input, setInput] = useState('');
+const renderTitle = () => (
+  <div>
+    <Link to="/perfil">
+      <img data-testid="profile-top-btn" src={profilePicBtn} alt="profile button" />
+    </Link>
+    <h2 data-testid="page-title">{
+      window.location.href.includes('comidas')
+        ? 'Comidas'
+        : 'Bebidas'
+    }
+    </h2>
+  </div>
+);
+
+const renderRadio = (radioChange) => {
+  const arrayRadio = ['Ingrediente', 'Nome', 'Primeira letra'];
+  const arrayValueRadio = ['/filter.php?i=', '/search.php?s=', '/search.php?f='];
+  return arrayRadio.map((ele, index) => (
+    <div key={ele}>
+      <input
+        type="radio"
+        name="recipeSearch"
+        value={arrayValueRadio[index]}
+        onClick={(e) => radioChange(e.target.value)}
+        id={ele}
+      />
+      <label htmlFor={ele}>{ele}</label>
+    </div>
+  ));
+};
+
+const renderDebounce = (searchCriteria, inputChange) => (
+  <DebounceInput
+    disabled={!searchCriteria}
+    debounceTimeout={600}
+    onChange={(e) => inputChange(e.target.value)}
+    data-testid="search-input"
+    maxLength={searchCriteria === '/search.php?f=' ? 1 : 30}
+  />
+);
+
+export default function Header() {
   const [searchCriteria, setSearchCriteria] = useState('');
-  const [visibleSearch, setVisibleSearch] = useState(false);
-  const { defineSearch } = useContext(RecipesContext);
-  defineSearch(input, searchCriteria);
+  const [input, setInput] = useState('');
+  const { defineSearch, setVisibleSearch, visibleSearch, setRequestInitialPage,
+  } = useContext(RecipesContext);
+
+
+  const inputChange = (iValue) => {
+    setInput(iValue);
+    setRequestInitialPage([]);
+    defineSearch(iValue, searchCriteria);
+  };
+
+  const radioChange = (rValue) => {
+    setSearchCriteria(rValue);
+    if (input !== '') defineSearch(input, rValue);
+  };
+
   return (
     <div className="header">
-      <Link to="/perfil">
-        <img data-testid="profile-top-btn" src={profilePicBtn} alt="profile button" />
-      </Link>
-      <h2 data-testid="page-title">{/comidas/.test(history.location.pathname)
-        ? 'Comidas'
-        : 'Bebidas'}
-      </h2>
+      {renderTitle()}
       <input
         type="image"
         data-testid="search-top-btn"
         src={searchTopBtn}
         alt="search top button"
-        onClick={() => setVisibleSearch(!visibleSearch)}
+        onClick={() => { setVisibleSearch(!visibleSearch); setSearchCriteria(null); setInput(''); }}
       />
+      <CategoryBar />
       {visibleSearch && <form>
-        <input
-          type="text"
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-          data-testid="search-input"
-        />
-        <div className="searchRecipes">
-          <input
-            type="radio"
-            name="recipeSearch"
-            value="/filter.php?i="
-            onClick={(e) => setSearchCriteria(e.target.value)}
-          />
-          <label htmlFor="ingredient">Ingrediente</label>
-          <input
-            type="radio"
-            name="recipeSearch"
-            value="/search.php?s="
-            onClick={(e) => setSearchCriteria(e.target.value)}
-          />
-          <label htmlFor="name">Nome</label>
-          <input
-            type="radio"
-            name="recipeSearch"
-            value="/search.php?f="
-            onClick={(e) => setSearchCriteria(e.target.value)}
-          />
-          <label htmlFor="firstLetter">Primeira letra</label>
-        </div>
+        {renderDebounce(searchCriteria, inputChange)}
+        <div className="searchRecipes">{renderRadio(radioChange)}</div>
       </form>}
     </div>
   );
 }
-
-Header.propTypes = {
-  history: propTypes.string.isRequired,
-};
