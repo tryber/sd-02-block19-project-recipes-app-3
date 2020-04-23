@@ -26,7 +26,7 @@ const CategoryBar = () => {
               type="button"
               onClick={(e) => clickCategory(e.target.value)}
             >
-            {food.strCategory}
+              {food.strCategory}
             </button>
           </div>
             : null
