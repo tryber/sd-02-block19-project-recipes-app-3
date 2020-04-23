@@ -12,26 +12,8 @@ export default function AppProvider({ children }) {
   const [arrayCategory, setArrayCategory] = useState([]);
   const [stopFetching, setStopFetching] = useState(false);
   const [noResults, setNoResults] = useState(false);
-  const [foodDetail, setFoodDetail] = useState({});
-
-  const successDrinkOrMeal = (results) => {
-    const condition = results.meals || results.drinks;
-    if (!condition) {
-      setNoResults(true);
-      return;
-    } if (condition.length > 1) {
-      setRequestInitialPage([...condition]);
-      setStopFetching(true);
-      return;
-    }
-    setRequestInitialPage([...condition, ...requestInitialPage]);
-    setStopFetching(false);
-  };
-
-  const failDrinkOrMeal = ({ message }) => {
-    setFetchError(message);
-  };
-
+  const [foodDetail,setFoodDetail]= useState({}); 
+  
   const setDrinkOrMeal = (paramRequest) => {
     setNoResults(false);
     apiRequest(paramRequest)
@@ -42,21 +24,40 @@ export default function AppProvider({ children }) {
     if (stopFetching) return;
     if (requestInitialPage.length === 12) {
       setIsFetching(false);
-      setCopy([...requestInitialPage]);
+      setCopy([...requestInitialPage])
     }
     if (requestInitialPage.length < 12 && requestInitialPage.length > 0) {
-      setDrinkOrMeal(resultsRandom);
+      setDrinkOrMeal(resultsRandom)
     }
   }, [requestInitialPage]);
 
+  const successDrinkOrMeal = (results) => {
+    const condition = results.meals || results.drinks;
+    if (!condition) {
+      setNoResults(true);
+      return;
+    }
+    if (condition.length > 1) {
+      setRequestInitialPage([...condition]);
+      setStopFetching(true);
+    }
+    if (condition.length === 1) {
+      setRequestInitialPage([...condition, ...requestInitialPage]);
+      setStopFetching(false);
+    }
+  };
 
-  const requestCategory = (requestParam) => (
-    apiRequest(requestParam)
+  const failDrinkOrMeal = ({ message }) => {
+    setFetchError(message);
+  };
+
+  const requestCategory = (requestParam) => {
+    return apiRequest(requestParam)
       .then((results) => {
         const { categories, drinks } = results;
-        setArrayCategory(categories || drinks);
-      })
-  );
+        setArrayCategory(categories || drinks)
+      });
+  }
 
   const defineSearch = (input, searchCriteria) => {
     if (input !== '' && searchCriteria !== '') {
@@ -80,7 +81,7 @@ export default function AppProvider({ children }) {
     setRequestInitialPage,
     noResults,
     setFoodDetail,
-    foodDetail,
+    foodDetail
   };
   return (
     <RecipesContext.Provider value={context}>

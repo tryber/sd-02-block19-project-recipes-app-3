@@ -5,22 +5,32 @@ import RecipesContext from '../Context';
 import profilePicBtn from '../Images/profilePicBtn.png';
 import searchTopBtn from '../Images/searchTopBtn.png';
 import CategoryBar from './CategoryBar';
-
+const renderTitle = () => (
+  <div>
+    <Link to="/perfil">
+      <img data-testid="profile-top-btn" src={profilePicBtn} alt="profile button" />
+    </Link>
+    <h2 data-testid="page-title">{
+      window.location.href.includes('comidas')
+        ? 'Comidas'
+        : 'Bebidas'
+    }
+    </h2>
+  </div>
+);
 export default function Header() {
   const [searchCriteria, setSearchCriteria] = useState('');
   const [input, setInput] = useState('');
-  const { defineSearch, setVisibleSearch, visibleSearch, setRequestInitialPage,
-   } = useContext(RecipesContext);
+  const { defineSearch, setVisibleSearch, visibleSearch, setRequestInitialPage } = useContext(RecipesContext);
   const arrayRadio = ['Ingrediente', 'Nome', 'Primeira letra'];
   const arrayValueRadio = ['/filter.php?i=', '/search.php?s=', '/search.php?f='];
-  const { location: { href } } = window;
 
   const inputChange = (iValue) => {
     setInput(iValue)
     setRequestInitialPage([]);
     defineSearch(iValue, searchCriteria);
   }
-  
+
   const radioChange = (rValue) => {
     setSearchCriteria(rValue);
     if (input !== '') defineSearch(input, rValue);
@@ -28,15 +38,7 @@ export default function Header() {
 
   return (
     <div className="header">
-      <Link to="/perfil">
-        <img data-testid="profile-top-btn" src={profilePicBtn} alt="profile button" />
-      </Link>
-      <h2 data-testid="page-title">{
-        href.includes('comidas')
-          ? 'Comidas'
-          : 'Bebidas'
-      }
-      </h2>
+      {renderTitle()}
       <input
         type="image"
         data-testid="search-top-btn"
@@ -53,27 +55,18 @@ export default function Header() {
           data-testid="search-input"
         />
         <div className="searchRecipes">
-          <input
-            type="radio"
-            name="recipeSearch"
-            value="/filter.php?i="
-            onClick={(e) => radioChange(e.target.value)}
-          />
-          <label htmlFor="ingredient">Ingrediente</label>
-          <input
-            type="radio"
-            name="recipeSearch"
-            value="/search.php?s="
-            onClick={(e) => radioChange(e.target.value)}
-          />
-          <label htmlFor="name">Nome</label>
-          <input
-            type="radio"
-            name="recipeSearch"
-            value="/search.php?f="
-            onClick={(e) => radioChange(e.target.value)}
-          />
-          <label htmlFor="firstLetter">Primeira letra</label>
+          {arrayRadio.map((ele, index) => (
+            <div key={ele}>
+              <input
+                type="radio"
+                name="recipeSearch"
+                value={arrayValueRadio[index]}
+                onClick={(e) => radioChange(e.target.value)}
+                id={ele}
+              />
+              <label htmlFor={ele}>{ele}</label>
+            </div>
+          ))}
         </div>
       </form>}
     </div>
