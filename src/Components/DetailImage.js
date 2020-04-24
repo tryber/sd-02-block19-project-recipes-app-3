@@ -6,6 +6,7 @@ const DetailImage = () => {
   const { meals } = foodObject;
   const isMeal = window.location.href.includes('comidas')
     ? 'Meal' : 'Drink';
+    console.log(meals);
   return (
     <div>
       {meals
