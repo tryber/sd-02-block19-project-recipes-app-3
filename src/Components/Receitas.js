@@ -10,7 +10,7 @@ const renderCard = (setFoodDetail, food, index, local) => {
   return (
     <Link
       onClick={(() => setFoodDetail(food[`id${type}`]))}
-      to={(window.location.href.includes('comidas') ? `/receitas/comidas/${food.idMeal}` : `/bebidas/${food.idDrink}`)}
+      to={(window.location.href.includes('comidas') ? `/receitas/comidas/${food.idMeal}` : `/receitas/bebidas/${food.idDrink}`)}
       key={`food${Math.random() * 10000000}`}
     >
       <div>

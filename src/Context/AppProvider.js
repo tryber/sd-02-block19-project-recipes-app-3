@@ -12,10 +12,13 @@ const verify = (
 ) => {
   if (!condition) return setnoresults(true);
   if (condition.length > 1) {
+    setrequestinitialpage([...condition]);
     setstopfetching(true);
+    return;
+  } if (condition.length === 1) {
+    setrequestinitialpage([...condition, ...requestinitialpage]);
+    setstopfetching(false);
   }
-  setrequestinitialpage([...condition, ...requestinitialpage]);
-  return setstopfetching(false);
 };
 
 export default function AppProvider({ children }) {
@@ -52,13 +55,12 @@ export default function AppProvider({ children }) {
     apiRequest(paramRequest)
       .then(successDrinkOrMeal, failDrinkOrMeal);
   };
-//************************************* */
 
   const successFoodRequest = (apiReturnFood) => {
     setFoodObject(apiReturnFood);
   }
 
-  const failFoodRequest = ({message}) => {
+  const failFoodRequest = ({ message }) => {
     setFoodObjectFail(message);
   }
 
@@ -66,8 +68,6 @@ export default function AppProvider({ children }) {
     apiRequest(searchParam)
       .then(successFoodRequest, failFoodRequest);
   }
-
-//************************************* */
 
   useEffect(() => {
     if (stopFetching) return;

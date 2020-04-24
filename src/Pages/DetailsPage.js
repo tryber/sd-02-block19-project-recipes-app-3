@@ -1,12 +1,10 @@
 import React, { useContext, useEffect } from 'react';
+import DetailImage from '../Components/DetailImage';
 import RecipesContext from '../Context';
 
 const DetailsPage = () => {
   const { foodDetail, idSearch } = useContext(RecipesContext);
-  const isMeal = window.location.href.includes('comidas')
-    ? `/lookup.php?i=${foodDetail}`
-    : `/lookup.php?iid=${foodDetail}`;
-
+  const isMeal = `/lookup.php?i=${foodDetail}`;
   useEffect(() => {
     idSearch(isMeal)
   }, [])
@@ -14,11 +12,11 @@ const DetailsPage = () => {
   return (
     <div>
       <DetailImage />
-      <DetailsIngredients />
+      {/* <DetailsIngredients />
       <Instructions />
       <DetailsVideo />
       <Recommended />
-      <StartRecipe />
+      <StartRecipe /> */}
     </div>
   );
 };
