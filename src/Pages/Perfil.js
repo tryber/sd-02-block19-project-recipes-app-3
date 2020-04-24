@@ -34,7 +34,6 @@ const Perfil = () => (
     </Link>
     <Footer />
   </div>
-)
-
+);
 
 export default Perfil;
