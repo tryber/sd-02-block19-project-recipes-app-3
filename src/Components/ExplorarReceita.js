@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
-import RecipesContext from '../Context';
 import { Link, Redirect } from 'react-router-dom';
+import RecipesContext from '../Context';
 import Header from './Header';
 import Footer from './Footer';
 
@@ -11,16 +11,16 @@ const ExplorarReceita = () => {
     <div>
       <Header />
       <Link to={`${window.location.pathname}/ingredientes`}>
-        <button type="button">
+        <button data-testid="explore-by-ingredient" type="button">
           Por Ingredientes
         </button>
       </Link>
       {pageName !== 'Explorar - Bebidas' && <Link to="/explorar/comidas/area">
-        <button type="button">
+        <button data-testid="explore-by-area"  type="button">
           Por Local de Origem
         </button>
       </Link>}
-      <button onClick={requestRandom} type="button">
+      <button data-testid="explore-surprise" onClick={requestRandom} type="button">
         Me surpreenda!
       </button>
       {(idDrink || idMeal) && <Redirect to={`/receitas/${window.location.pathname.split('/')[2]}/${idDrink || idMeal}`} />}
