@@ -5,6 +5,7 @@ import Explore from '../Images/Explore.svg';
 import Meals from '../Images/Meals.svg';
 import '../Styles/Footer.css';
 import RecipesContext from '../Context';
+
 const renderbuttonExplore = (setPageName) => (
   <Link
     onClick={() => setPageName('Explorar')}
