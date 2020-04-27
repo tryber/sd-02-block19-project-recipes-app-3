@@ -1,6 +1,7 @@
 import React, { useContext, useEffect } from 'react';
 import DetailImage from '../Components/DetailImage';
 import DetailsIngredients from '../Components/DetailsIngredients';
+import Instructions from '../Components/Instructions';
 import RecipesContext from '../Context';
 
 const DetailsPage = () => {
@@ -17,8 +18,8 @@ const DetailsPage = () => {
         <div>
           <DetailImage />
           <DetailsIngredients />
-          {/* <Instructions />
-        <DetailsVideo />
+          <Instructions />
+        {/* <DetailsVideo />
         <Recommended />
         <StartRecipe /> */}
         </div>
