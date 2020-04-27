@@ -1,8 +1,7 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { Link } from 'react-router-dom';
 import Header from './Header';
 import Footer from './Footer';
-import { Link } from 'react-router-dom';
-import { useContext } from 'react';
 import RecipesContext from '../Context';
 
 

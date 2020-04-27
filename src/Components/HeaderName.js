@@ -6,6 +6,6 @@ const HeaderName = () => {
   return (
     <h2 data-testid="page-title">{pageName}</h2>
   );
-}
+};
 
 export default HeaderName;

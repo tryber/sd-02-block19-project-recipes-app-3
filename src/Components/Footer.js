@@ -5,7 +5,19 @@ import Explore from '../Images/Explore.svg';
 import Meals from '../Images/Meals.svg';
 import '../Styles/Footer.css';
 import RecipesContext from '../Context';
-
+const renderbuttonExplore = (setPageName) => (
+  <Link
+    onClick={() => setPageName('Explorar')}
+    to="/explorar"
+  >
+    <div
+      data-testid="explore-bottom-btn"
+      className="Footer_icon"
+    >
+      <img src={Explore} alt="Explore redirect" />
+    </div>
+  </Link>
+);
 
 const Footer = () => {
   const { setPageName } = useContext(RecipesContext);
@@ -22,17 +34,7 @@ const Footer = () => {
           <img src={Drinks} alt="Drinks redirect" />
         </div>
       </Link>
-      <Link
-        onClick={() => setPageName('Explorar')}
-        to="/explorar"
-      >
-        <div
-          data-testid="explore-bottom-btn"
-          className="Footer_icon"
-        >
-          <img src={Explore} alt="Explore redirect" />
-        </div>
-      </Link>
+      {renderbuttonExplore(setPageName)}
       <Link
         onClick={() => setPageName('Comidas')}
         to="/receitas/comidas"
@@ -45,7 +47,7 @@ const Footer = () => {
         </div>
       </Link>
     </div>
-  )
+  );
 };
 
 export default Footer;

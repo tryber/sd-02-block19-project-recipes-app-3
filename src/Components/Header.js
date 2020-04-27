@@ -42,24 +42,21 @@ const renderDebounce = (searchCriteria, inputChange) => (
   />
 );
 
+const disabledSearch = ['Explorar', 'Explorar - Comidas', 'Explorar - Bebidas'];
 export default function Header() {
   const [searchCriteria, setSearchCriteria] = useState('');
   const [input, setInput] = useState('');
   const { defineSearch, setVisibleSearch, visibleSearch, setRequestInitialPage, pageName,
   } = useContext(RecipesContext);
-  const disabledSearch = ['Explorar', 'Explorar - Comidas','Explorar - Bebidas'];
-
   const inputChange = (iValue) => {
     setInput(iValue);
     setRequestInitialPage([]);
     defineSearch(iValue, searchCriteria);
   };
-
   const radioChange = (rValue) => {
     setSearchCriteria(rValue);
     if (input !== '') defineSearch(input, rValue);
   };
-
   return (
     <div className="header">
       {renderTitle()}
