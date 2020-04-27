@@ -28,6 +28,6 @@ const DetailImage = () => {
         : null}
     </div>
   );
-}
+};
 
 export default DetailImage;

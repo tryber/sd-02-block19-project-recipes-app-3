@@ -15,31 +15,30 @@ const ingredientAndMeasure = (ingredientToShow, measureToShow, index) => (
 
 const DetailsIngredients = () => {
   const { foodObject } = useContext(RecipesContext);
-  const isFood = foodObject.meals[0] || foodObject.drinks[0];
+  const receive = foodObject.meals || foodObject.drinks;
+  const isFood = receive[0];
+  console.log(Object.keys(isFood));
   const isIngredient = Object.keys(isFood).filter((food) => (
     food.includes('Ingredient')
-    && isFood[food].split('').length >= 1
   ));
   const isMeasure = Object.keys(isFood).filter((food) => (
     food.includes('Measure')
-    && isFood[food].split('').length >= 1
   ));
   return (
     <div>
       {isIngredient
-        ?
-        <div>
+        && <div>
           {isIngredient.map((ingredient, index) => {
             const ingredientToShow = isFood[ingredient];
             const measureToShow = isFood[isMeasure[index]];
             return (
-              <div key={`${ingredient} and ${isMeasure[index]} to Recipe`}>
+              ingredientToShow
+              && <div key={`${ingredient} and ${isMeasure[index]} to Recipe`}>
                 {ingredientAndMeasure(ingredientToShow, measureToShow, index)}
               </div>
             );
           })}
         </div>
-        : null
       }
     </div>
   );
