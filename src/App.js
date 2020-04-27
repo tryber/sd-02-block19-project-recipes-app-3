@@ -3,6 +3,7 @@ import React from 'react';
 import Home from './Pages/Home';
 import Receitas from './Components/Receitas';
 import DetailsPage from './Pages/DetailsPage';
+
 import './App.css';
 
 function App() {

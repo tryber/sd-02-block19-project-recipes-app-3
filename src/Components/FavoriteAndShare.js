@@ -24,6 +24,7 @@ const FavoriteAndShare = () => {
   return (
     <div className="FavShare_father">
       <CopyToClipboard
+        data-testid="share-btn"
         text={window.location.href}
         onCopy={() => message()}
       >
@@ -32,6 +33,7 @@ const FavoriteAndShare = () => {
         </div>
       </CopyToClipboard>
       <div
+        data-testid="favorite-btn"
         className="FavShare_content"
         onClick={() => heartClick(isFavorite, setIsFavorite)}
       >
@@ -40,7 +42,7 @@ const FavoriteAndShare = () => {
           alt="Favorite recipe" />
       </div>
       <p>{copied}</p>
-    </div>
+    </div >
   );
 }
 

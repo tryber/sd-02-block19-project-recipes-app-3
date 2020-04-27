@@ -25,7 +25,7 @@ const DetailImage = () => {
           </div>
           <FavoriteAndShare />
         </div>
-        : <p>Loading...</p>}
+        : null}
     </div>
   );
 }
