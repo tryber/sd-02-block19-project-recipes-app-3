@@ -57,6 +57,7 @@ export default function AppProvider({ children }) {
   };
 
   const successFoodRequest = (apiReturnFood) => {
+    console.log(apiReturnFood);
     setFoodObject(apiReturnFood);
   }
 
