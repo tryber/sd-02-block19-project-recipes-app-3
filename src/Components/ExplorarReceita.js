@@ -16,7 +16,7 @@ const ExplorarReceita = () => {
         </button>
       </Link>
       {pageName !== 'Explorar - Bebidas' && <Link to="/explorar/comidas/area">
-        <button data-testid="explore-by-area"  type="button">
+        <button data-testid="explore-by-area" type="button">
           Por Local de Origem
         </button>
       </Link>}
