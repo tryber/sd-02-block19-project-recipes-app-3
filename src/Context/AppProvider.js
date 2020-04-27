@@ -28,6 +28,7 @@ export default function AppProvider({ children }) {
   const [stopFetching, setStopFetching] = useState(false);
   const [noResults, setNoResults] = useState(false);
   const [foodDetail, setFoodDetail] = useState({});
+  const [pageName, setPageName] = useState('Comidas');
 
   const successDrinkOrMeal = (results) => {
     const condition = results.meals || results.drinks;
@@ -93,6 +94,8 @@ export default function AppProvider({ children }) {
     noResults,
     setFoodDetail,
     foodDetail,
+    pageName,
+    setPageName,
   };
   return (
     <RecipesContext.Provider value={context}>

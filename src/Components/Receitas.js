@@ -4,6 +4,7 @@ import { resultsRandom } from '../Services/APIs';
 import RecipesContext from '../Context';
 import Footer from '../Components/Footer';
 import Header from './Header';
+import CategoryBar from './CategoryBar';
 
 const renderCard = (setFoodDetail, food, index, local) => (
   <Link
@@ -40,6 +41,7 @@ const Receitas = () => {
       ? fetchError ||
       <div>
         <Header />
+        <CategoryBar />
         {!noResults ? requestInitialPage.map((food, index) => {
           const local = food.idDrink ? 'Drink' : 'Meal';
           return (

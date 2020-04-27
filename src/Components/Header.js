@@ -4,19 +4,14 @@ import { DebounceInput } from 'react-debounce-input';
 import RecipesContext from '../Context';
 import profilePicBtn from '../Images/profilePicBtn.png';
 import searchTopBtn from '../Images/searchTopBtn.png';
-import CategoryBar from './CategoryBar';
+import HeaderName from './HeaderName';
 
 const renderTitle = () => (
   <div>
     <Link to="/perfil">
       <img data-testid="profile-top-btn" src={profilePicBtn} alt="profile button" />
     </Link>
-    <h2 data-testid="page-title">{
-      window.location.href.includes('comidas')
-        ? 'Comidas'
-        : 'Bebidas'
-    }
-    </h2>
+    <HeaderName />
   </div>
 );
 
@@ -50,9 +45,9 @@ const renderDebounce = (searchCriteria, inputChange) => (
 export default function Header() {
   const [searchCriteria, setSearchCriteria] = useState('');
   const [input, setInput] = useState('');
-  const { defineSearch, setVisibleSearch, visibleSearch, setRequestInitialPage,
+  const { defineSearch, setVisibleSearch, visibleSearch, setRequestInitialPage, pageName,
   } = useContext(RecipesContext);
-
+  const disabledSearch = ['Explorar', 'Explorar - Comidas','Explorar - Bebidas'];
 
   const inputChange = (iValue) => {
     setInput(iValue);
@@ -69,13 +64,13 @@ export default function Header() {
     <div className="header">
       {renderTitle()}
       <input
+        disabled={disabledSearch.includes(pageName)}
         type="image"
         data-testid="search-top-btn"
         src={searchTopBtn}
         alt="search top button"
         onClick={() => { setVisibleSearch(!visibleSearch); setSearchCriteria(null); setInput(''); }}
       />
-      <CategoryBar />
       {visibleSearch && <form>
         {renderDebounce(searchCriteria, inputChange)}
         <div className="searchRecipes">{renderRadio(radioChange)}</div>
