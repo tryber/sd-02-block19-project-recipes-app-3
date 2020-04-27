@@ -14,11 +14,12 @@ const verify = (
   if (condition.length > 1) {
     setrequestinitialpage([...condition]);
     setstopfetching(true);
-    return;
+    return '';
   } if (condition.length === 1) {
     setrequestinitialpage([...condition, ...requestinitialpage]);
     setstopfetching(false);
   }
+  return '';
 };
 
 export default function AppProvider({ children }) {
@@ -57,18 +58,17 @@ export default function AppProvider({ children }) {
   };
 
   const successFoodRequest = (apiReturnFood) => {
-    console.log(apiReturnFood);
     setFoodObject(apiReturnFood);
-  }
+  };
 
   const failFoodRequest = ({ message }) => {
     setFoodObjectFail(message);
-  }
+  };
 
   const idSearch = (searchParam) => {
     apiRequest(searchParam)
       .then(successFoodRequest, failFoodRequest);
-  }
+  };
 
   useEffect(() => {
     if (stopFetching) return;

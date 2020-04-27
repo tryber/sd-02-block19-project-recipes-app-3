@@ -6,9 +6,9 @@ import RecipesContext from '../Context';
 const DetailsPage = () => {
   const { foodDetail, foodObject, idSearch } = useContext(RecipesContext);
   const isMeal = `/lookup.php?i=${foodDetail}`;
-  const isFood = foodObject.meals || foodObject.drinks
+  const isFood = foodObject.meals || foodObject.drinks;
   useEffect(() => {
-    idSearch(isMeal)
+    idSearch(isMeal);
   }, [])
 
   return (

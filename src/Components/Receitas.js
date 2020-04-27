@@ -6,7 +6,7 @@ import Footer from '../Components/Footer';
 import Header from './Header';
 
 const renderCard = (setFoodDetail, food, index, local) => {
-  const type = food.idMeal ? 'Meal': 'Drink'
+  const type = food.idMeal ? 'Meal' : 'Drink';
   return (
     <Link
       onClick={(() => setFoodDetail(food[`id${type}`]))}
@@ -24,7 +24,7 @@ const renderCard = (setFoodDetail, food, index, local) => {
       <p data-testid={`${index}-card-name`} >{food[`str${local}`]}</p>
     </Link>
   );
-}
+};
 
 const Receitas = () => {
   const {

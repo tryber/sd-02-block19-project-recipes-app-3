@@ -1,9 +1,21 @@
 import React, { useContext } from 'react';
 import RecipesContext from '../Context/';
 
+const ingredientAndMeasure = (ingredientToShow, measureToShow, index) => (
+  <div>
+    <span data-testid={`${index}-ingredient-name`}>
+      {ingredientToShow}
+    </span>
+  -
+    <span data-testid={`${index}-ingredient-measure`}>
+      {measureToShow}
+    </span>
+  </div>
+);
+
 const DetailsIngredients = () => {
   const { foodObject } = useContext(RecipesContext);
-  const isFood = foodObject.meals[0] || foodObject.drinks[0]
+  const isFood = foodObject.meals[0] || foodObject.drinks[0];
   const isIngredient = Object.keys(isFood).filter((food) => (
     food.includes('Ingredient')
     && isFood[food].split('').length >= 1
@@ -19,16 +31,10 @@ const DetailsIngredients = () => {
         <div>
           {isIngredient.map((ingredient, index) => {
             const ingredientToShow = isFood[ingredient];
-            const measureToShow = isFood[isMeasure[index]]
+            const measureToShow = isFood[isMeasure[index]];
             return (
-              <div>
-                <span data-testid={`${index}-ingredient-name`}>
-                  {ingredientToShow}
-                </span>
-                -
-                <span data-testid={`${index}-ingredient-measure`}>
-                  {measureToShow}
-                </span>
+              <div key={`ingredient and measure ${index}`}>
+                {ingredientAndMeasure(ingredientToShow, measureToShow, index)}
               </div>
             )
           })}

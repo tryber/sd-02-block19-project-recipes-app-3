@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import Share from '../Images/Share.svg';
 import Favorite from '../Images/Favorite.svg';
@@ -20,7 +20,6 @@ const FavoriteAndShare = () => {
       setCopied('')
     }, 2000);
   }
-
   return (
     <div className="FavShare_father">
       <CopyToClipboard

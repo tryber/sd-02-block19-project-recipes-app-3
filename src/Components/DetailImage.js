@@ -3,12 +3,11 @@ import RecipesContext from '../Context';
 import FavoriteAndShare from './FavoriteAndShare';
 
 const DetailImage = () => {
-  const { foodObject, foodObjectFail } = useContext(RecipesContext);
-  const actualFood = foodObject.meals || foodObject.drinks
+  const { foodObject } = useContext(RecipesContext);
+  const actualFood = foodObject.meals || foodObject.drinks;
   const unity = actualFood ? actualFood[0] : null;
   const isMeal = window.location.href.includes('comidas')
     ? 'Meal' : 'Drink';
-
   return (
     <div>
       {unity
@@ -17,6 +16,7 @@ const DetailImage = () => {
             <img
               data-testid="recipe-photo"
               src={unity[`str${isMeal}Thumb`]}
+              alt="yummy recipe"
             />
           </div>
           <div>
