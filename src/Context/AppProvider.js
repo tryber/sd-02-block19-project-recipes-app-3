@@ -28,6 +28,7 @@ export default function AppProvider({ children }) {
   const [stopFetching, setStopFetching] = useState(false);
   const [noResults, setNoResults] = useState(false);
   const [foodDetail, setFoodDetail] = useState({});
+  const [pageName, setPageName] = useState('Comidas');
 
   const successDrinkOrMeal = (results) => {
     const condition = results.meals || results.drinks;
@@ -70,6 +71,13 @@ export default function AppProvider({ children }) {
     })
   );
 
+  const requestRandom = () => (
+    apiRequest('/random.php')
+      .then(({ drinks, meals }) => {
+        setFoodDetail(drinks || meals);
+      })
+  );
+
   const defineSearch = (input, searchCriteria) => {
     if (input !== '' && searchCriteria !== '') {
       setDrinkOrMeal(`${searchCriteria}${input.split(' ').join('_')}`);
@@ -93,6 +101,9 @@ export default function AppProvider({ children }) {
     noResults,
     setFoodDetail,
     foodDetail,
+    pageName,
+    setPageName,
+    requestRandom,
   };
   return (
     <RecipesContext.Provider value={context}>
