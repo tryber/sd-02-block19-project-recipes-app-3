@@ -8,8 +8,8 @@ import '../Styles/FavoriteAndShare.css';
 const heartClick = (isFavorite, setIsFavorite) => {
   const localStorageUser = JSON.parse(localStorage.getItem('user'));
   setIsFavorite(!isFavorite);
-  console.log(localStorageUser)
-}
+  console.log(localStorageUser);
+};
 
 const FavoriteAndShare = () => {
   const [copied, setCopied] = useState('');
@@ -17,9 +17,9 @@ const FavoriteAndShare = () => {
   const message = () => {
     setCopied('Copied!');
     setTimeout(() => {
-      setCopied('')
+      setCopied('');
     }, 2000);
-  }
+  };
   return (
     <div className="FavShare_father">
       <CopyToClipboard
@@ -38,7 +38,8 @@ const FavoriteAndShare = () => {
       >
         <img
           src={isFavorite ? Favorited : Favorite}
-          alt="Favorite recipe" />
+          alt="Favorite recipe"
+        />
       </div>
       <p>{copied}</p>
     </div >

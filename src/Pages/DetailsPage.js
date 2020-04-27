@@ -10,7 +10,7 @@ const DetailsPage = () => {
   const isFood = foodObject.meals || foodObject.drinks;
   useEffect(() => {
     idSearch(isMeal);
-  }, [])
+  }, []);
 
   return (
     <div>{
@@ -19,7 +19,7 @@ const DetailsPage = () => {
           <DetailImage />
           <DetailsIngredients />
           <Instructions />
-        {/* <DetailsVideo />
+          {/* <DetailsVideo />
         <Recommended />
         <StartRecipe /> */}
         </div>

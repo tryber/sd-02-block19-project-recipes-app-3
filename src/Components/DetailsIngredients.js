@@ -6,7 +6,7 @@ const ingredientAndMeasure = (ingredientToShow, measureToShow, index) => (
     <span data-testid={`${index}-ingredient-name`}>
       {ingredientToShow}
     </span>
-  -
+    <span> || </span>
     <span data-testid={`${index}-ingredient-measure`}>
       {measureToShow}
     </span>
@@ -27,21 +27,22 @@ const DetailsIngredients = () => {
   return (
     <div>
       {isIngredient
-        &&
+        ?
         <div>
           {isIngredient.map((ingredient, index) => {
             const ingredientToShow = isFood[ingredient];
             const measureToShow = isFood[isMeasure[index]];
             return (
-              <div key={`ingredient and measure ${index}`}>
+              <div key={`${ingredient} and ${isMeasure[index]} to Recipe`}>
                 {ingredientAndMeasure(ingredientToShow, measureToShow, index)}
               </div>
-            )
+            );
           })}
         </div>
+        : null
       }
     </div>
   );
-}
+};
 
 export default DetailsIngredients;
