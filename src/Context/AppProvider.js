@@ -74,9 +74,9 @@ export default function AppProvider({ children }) {
 
   const requestRandom = () => (
     apiRequest('/random.php')
-      .then(({ drinks = [{}], meals=[{}] }) => {
-        const { idDrink = '' } = drinks[0];
-        const { idMeal  = '' } = meals[0];
+      .then(({ drinks = [{}], meals = [{}] }) => {
+        const { idDrink } = drinks[0];
+        const { idMeal } = meals[0];
         setFoodDetail(idDrink || idMeal);
       })
   );
