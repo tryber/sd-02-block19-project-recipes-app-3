@@ -5,6 +5,7 @@ import RecipesContext from '../Context';
 import profilePicBtn from '../Images/profilePicBtn.png';
 import searchTopBtn from '../Images/searchTopBtn.png';
 import CategoryBar from './CategoryBar';
+import DropdownOrigem from './DropdownOrigem';
 
 const renderTitle = () => (
   <div>
@@ -50,7 +51,7 @@ const renderDebounce = (searchCriteria, inputChange) => (
 export default function Header() {
   const [searchCriteria, setSearchCriteria] = useState('');
   const [input, setInput] = useState('');
-  const { defineSearch, setVisibleSearch, visibleSearch, setRequestInitialPage,
+  const { defineSearch, setVisibleSearch, visibleSearch, setRequestInitialPage, pageName,
   } = useContext(RecipesContext);
 
 
@@ -75,11 +76,14 @@ export default function Header() {
         alt="search top button"
         onClick={() => { setVisibleSearch(!visibleSearch); setSearchCriteria(null); setInput(''); }}
       />
-      <CategoryBar />
-      {visibleSearch && <form>
+      {pageName === 'Explorar Origem' && window.location.href.includes('comidas')
+        ? <DropdownOrigem />
+        : <CategoryBar />
+      }
+      {visibleSearch && <div>
         {renderDebounce(searchCriteria, inputChange)}
         <div className="searchRecipes">{renderRadio(radioChange)}</div>
-      </form>}
+      </div>}
     </div>
   );
 }

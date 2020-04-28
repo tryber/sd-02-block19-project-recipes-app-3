@@ -28,6 +28,8 @@ export default function AppProvider({ children }) {
   const [stopFetching, setStopFetching] = useState(false);
   const [noResults, setNoResults] = useState(false);
   const [foodDetail, setFoodDetail] = useState({});
+  const [origin, setOrigin] = useState([]);
+  const [pageName, setPageName] = useState('Explorar Origem');
 
   const successDrinkOrMeal = (results) => {
     const condition = results.meals || results.drinks;
@@ -70,6 +72,12 @@ export default function AppProvider({ children }) {
     })
   );
 
+  const requestOrigin = (requestParam) => (apiRequest(requestParam)
+    .then(({meals}) => {
+      setOrigin([...meals])
+    })
+  );
+
   const defineSearch = (input, searchCriteria) => {
     if (input !== '' && searchCriteria !== '') {
       setDrinkOrMeal(`${searchCriteria}${input.split(' ').join('_')}`);
@@ -81,6 +89,7 @@ export default function AppProvider({ children }) {
   const context = {
     setIsFetching,
     requestInitialPage,
+    setRequestInitialPage,
     setDrinkOrMeal,
     fetchError,
     defineSearch,
@@ -89,10 +98,14 @@ export default function AppProvider({ children }) {
     setVisibleSearch,
     requestCategory,
     arrayCategory,
-    setRequestInitialPage,
     noResults,
     setFoodDetail,
     foodDetail,
+    requestOrigin,
+    origin,
+    pageName, 
+    setPageName,
+    copy,
   };
   return (
     <RecipesContext.Provider value={context}>

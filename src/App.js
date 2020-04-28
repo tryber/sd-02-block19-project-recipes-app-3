@@ -3,6 +3,7 @@ import React from 'react';
 import Home from './Pages/Home';
 import Receitas from './Components/Receitas';
 import Detalhes from './Components/Detalhes';
+import ExplorarOrigem from './Components/ExplorarOrigem';
 import './App.css';
 
 function App() {
@@ -11,6 +12,7 @@ function App() {
       <Switch>
         <Route path="/receitas/:comidabebida/:id" component={Detalhes} />
         <Route path="/receitas" component={Receitas} />
+        <Route path="/explorar/comidas/area" component={ExplorarOrigem} />
         {/* <Route path="/receitas-feitas" component={ReceitasFeitas} />
         <Route path="/receitas-favoritas" component={ReceitasFavoritas} />
         <Route exact path="/explorar" component={Explorar} />
