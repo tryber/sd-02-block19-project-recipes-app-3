@@ -3,27 +3,6 @@ import PropTypes from 'prop-types';
 import { apiRequest, resultsRandom } from '../Services/APIs';
 import RecipesContext from './index';
 
-const verify = (
-  condition,
-  setnoresults,
-  requestinitialpage,
-  setrequestinitialpage,
-  setstopfetching,
-  onlyOneReturn,
-  setOnlyOneReturn,
-) => {
-  if (!condition) return setnoresults(true);
-  if (onlyOneReturn) {
-    setstopfetching(true);
-    setrequestinitialpage([...condition]);
-    setOnlyOneReturn(false);
-    return;
-  }
-  console.log(requestinitialpage)
-  setrequestinitialpage([...condition, ...requestinitialpage]);
-  return setstopfetching(false);
-};
-
 export default function AppProvider({ children }) {
   const [requestInitialPage, setRequestInitialPage] = useState([]);
   const [onlyOneReturn, setOnlyOneReturn] = useState(false);
@@ -40,16 +19,8 @@ export default function AppProvider({ children }) {
 
   const successDrinkOrMeal = (results) => {
     const condition = results.meals || results.drinks;
-
-    verify(
-      condition,
-      setNoResults,
-      requestInitialPage,
-      setRequestInitialPage,
-      setStopFetching,
-      onlyOneReturn,
-      setOnlyOneReturn,
-    );
+    setRequestInitialPage([...condition, ...requestInitialPage]);
+    return setStopFetching(false);
   };
 
   const failDrinkOrMeal = ({ message }) => {
@@ -60,6 +31,20 @@ export default function AppProvider({ children }) {
     setNoResults(false);
     apiRequest(paramRequest)
       .then(successDrinkOrMeal, failDrinkOrMeal);
+  };
+
+  const successSearch = ({drinks, meals}) => {
+    if (!drinks && !meals) return setNoResults(true);
+      setStopFetching(true);
+      setRequestInitialPage([...drinks || meals]);
+      setOnlyOneReturn(false);
+      return;
+    }
+
+  const searchResults = (paramRequest) => {
+    setNoResults(false);
+    apiRequest(paramRequest)
+      .then(successSearch, failDrinkOrMeal);
   };
 
   useEffect(() => {
@@ -88,12 +73,12 @@ export default function AppProvider({ children }) {
   );
 
   const defineSearch = (input, searchCriteria) => {
-    console.log('input:', input, 'searchCriteria:', searchCriteria)
-    input === '' ? setRequestInitialPage([...copy]) : setRequestInitialPage([]);
     if (input !== '' && searchCriteria !== '') {
-      setDrinkOrMeal(`${searchCriteria}${input.split(' ').join('_')}`);
+      searchResults(`${searchCriteria}${input.split(' ').join('_')}`);
       return;
     }
+    setRequestInitialPage([...copy]);
+    setNoResults(false);
   };
   const context = {
     setIsFetching,
