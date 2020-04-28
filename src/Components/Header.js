@@ -51,13 +51,14 @@ const renderDebounce = (searchCriteria, inputChange) => (
 export default function Header() {
   const [searchCriteria, setSearchCriteria] = useState('');
   const [input, setInput] = useState('');
-  const { defineSearch, setVisibleSearch, visibleSearch, setRequestInitialPage, pageName,
+  const { defineSearch, setVisibleSearch, visibleSearch, setRequestInitialPage, pageName, setOnlyOneReturn,
   } = useContext(RecipesContext);
 
 
-  const inputChange = (iValue) => {
-    setInput(iValue);
+  const inputChange = async (iValue) => {
+    await setOnlyOneReturn(true);
     setRequestInitialPage([]);
+    setInput(iValue);
     defineSearch(iValue, searchCriteria);
   };
 

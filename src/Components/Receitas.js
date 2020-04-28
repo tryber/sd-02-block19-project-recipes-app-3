@@ -1,5 +1,5 @@
 import React, { useEffect, useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { resultsRandom } from '../Services/APIs';
 import RecipesContext from '../Context';
 import Footer from '../Components/Footer';
@@ -23,6 +23,15 @@ const renderCard = (setFoodDetail, food, index, local) => (
   </Link>
 );
 
+const redirectWindow = ({idDrink, idMeal}, setFoodDetail) => {
+  const recipe = idDrink || idMeal;
+  console.log('recipe:', recipe);
+  setFoodDetail(recipe)
+  return (
+    <Redirect to={`${window.location.pathname}/${recipe}`} />
+  );
+}
+
 const Receitas = () => {
   const {
     setDrinkOrMeal, fetchError, setFoodDetail, requestInitialPage,
@@ -35,11 +44,13 @@ const Receitas = () => {
     setDrinkOrMeal(resultsRandom);
   }, [window.location.href]);
   if (requestInitialPage === undefined) return (<h1>Nenhum Resultado</h1>);
+  console.log(requestInitialPage);
   return (
     !isFetching
       ? fetchError ||
       <div>
         <Header />
+        {requestInitialPage.length === 1 && redirectWindow(requestInitialPage[0], setFoodDetail)}
         {!noResults ? requestInitialPage.map((food, index) => {
           const local = food.idDrink ? 'Drink' : 'Meal';
           return (

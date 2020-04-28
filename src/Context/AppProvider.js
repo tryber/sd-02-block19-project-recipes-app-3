@@ -9,17 +9,24 @@ const verify = (
   requestinitialpage,
   setrequestinitialpage,
   setstopfetching,
+  onlyOneReturn,
+  setOnlyOneReturn,
 ) => {
   if (!condition) return setnoresults(true);
-  if (condition.length > 1) {
+  if (onlyOneReturn) {
     setstopfetching(true);
+    setrequestinitialpage([...condition]);
+    setOnlyOneReturn(false);
+    return;
   }
+  console.log(requestinitialpage)
   setrequestinitialpage([...condition, ...requestinitialpage]);
   return setstopfetching(false);
 };
 
 export default function AppProvider({ children }) {
   const [requestInitialPage, setRequestInitialPage] = useState([]);
+  const [onlyOneReturn, setOnlyOneReturn] = useState(false);
   const [copy, setCopy] = useState([]);
   const [visibleSearch, setVisibleSearch] = useState(false);
   const [fetchError, setFetchError] = useState('');
@@ -27,9 +34,9 @@ export default function AppProvider({ children }) {
   const [arrayCategory, setArrayCategory] = useState([]);
   const [stopFetching, setStopFetching] = useState(false);
   const [noResults, setNoResults] = useState(false);
-  const [foodDetail, setFoodDetail] = useState({});
+  const [foodDetail, setFoodDetail] = useState('');
   const [origin, setOrigin] = useState([]);
-  const [pageName, setPageName] = useState('Explorar Origem');
+  const [pageName, setPageName] = useState('Comidas');
 
   const successDrinkOrMeal = (results) => {
     const condition = results.meals || results.drinks;
@@ -40,6 +47,8 @@ export default function AppProvider({ children }) {
       requestInitialPage,
       setRequestInitialPage,
       setStopFetching,
+      onlyOneReturn,
+      setOnlyOneReturn,
     );
   };
 
@@ -79,12 +88,12 @@ export default function AppProvider({ children }) {
   );
 
   const defineSearch = (input, searchCriteria) => {
+    console.log('input:', input, 'searchCriteria:', searchCriteria)
+    input === '' ? setRequestInitialPage([...copy]) : setRequestInitialPage([]);
     if (input !== '' && searchCriteria !== '') {
       setDrinkOrMeal(`${searchCriteria}${input.split(' ').join('_')}`);
       return;
     }
-    setNoResults(false);
-    setRequestInitialPage([...copy]);
   };
   const context = {
     setIsFetching,
@@ -106,6 +115,7 @@ export default function AppProvider({ children }) {
     pageName, 
     setPageName,
     copy,
+    setOnlyOneReturn,
   };
   return (
     <RecipesContext.Provider value={context}>
