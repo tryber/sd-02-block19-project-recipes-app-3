@@ -6,7 +6,6 @@ import Footer from './Footer';
 
 const ExplorarReceita = () => {
   const { pageName, requestRandom, foodDetail, setPageName } = useContext(RecipesContext);
-  const { idDrink, idMeal } = foodDetail[0] || {};
   return (
     <div>
       <Header />
@@ -23,7 +22,7 @@ const ExplorarReceita = () => {
       <button data-testid="explore-surprise" onClick={requestRandom} type="button">
         Me surpreenda!
       </button>
-      {(idDrink || idMeal) && <Redirect to={`/receitas/${window.location.pathname.split('/')[2]}/${idDrink || idMeal}`} />}
+      {(foodDetail) && <Redirect to={`/receitas/${window.location.pathname.split('/')[2]}/${foodDetail}`} />}
       <Footer />
     </div>
   );

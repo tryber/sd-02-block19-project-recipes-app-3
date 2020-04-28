@@ -27,7 +27,7 @@ export default function AppProvider({ children }) {
   const [arrayCategory, setArrayCategory] = useState([]);
   const [stopFetching, setStopFetching] = useState(false);
   const [noResults, setNoResults] = useState(false);
-  const [foodDetail, setFoodDetail] = useState({});
+  const [foodDetail, setFoodDetail] = useState('');
   const [pageName, setPageName] = useState('Comidas');
 
   const successDrinkOrMeal = (results) => {
@@ -64,7 +64,8 @@ export default function AppProvider({ children }) {
   }, [requestInitialPage]);
 
 
-  const requestCategory = (requestParam) => (apiRequest(requestParam)
+  const requestCategory = (requestParam) => (
+    apiRequest(requestParam)
     .then((results) => {
       const { categories, drinks } = results;
       setArrayCategory(categories || drinks);
@@ -73,8 +74,10 @@ export default function AppProvider({ children }) {
 
   const requestRandom = () => (
     apiRequest('/random.php')
-      .then(({ drinks, meals }) => {
-        setFoodDetail(drinks || meals);
+      .then(({ drinks = [{}], meals = [{}] }) => {
+        const { idDrink } = drinks[0];
+        const { idMeal } = meals[0];
+        setFoodDetail(idDrink || idMeal);
       })
   );
 
