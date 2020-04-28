@@ -7,6 +7,7 @@ const Instructions = () => {
   const isFood = receive[0];
   return (
     <div>
+      <h4>Instructions</h4>
       <p data-testid="instructions">
         {`${isFood.strInstructions}`}
       </p>

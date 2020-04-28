@@ -17,7 +17,6 @@ const DetailsIngredients = () => {
   const { foodObject } = useContext(RecipesContext);
   const receive = foodObject.meals || foodObject.drinks;
   const isFood = receive[0];
-  console.log(Object.keys(isFood));
   const isIngredient = Object.keys(isFood).filter((food) => (
     food.includes('Ingredient')
   ));
@@ -28,6 +27,7 @@ const DetailsIngredients = () => {
     <div>
       {isIngredient
         && <div>
+          <h4>Ingredients</h4>
           {isIngredient.map((ingredient, index) => {
             const ingredientToShow = isFood[ingredient];
             const measureToShow = isFood[isMeasure[index]];

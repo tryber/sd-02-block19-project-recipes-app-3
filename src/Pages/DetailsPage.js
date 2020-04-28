@@ -4,6 +4,7 @@ import DetailsIngredients from '../Components/DetailsIngredients';
 import Instructions from '../Components/Instructions';
 import RecipesContext from '../Context';
 import DetailsVideo from '../Components/DetailsVideo';
+import Recommended from '../Components/Recommended';
 
 const DetailsPage = () => {
   const { foodDetail, foodObject, idSearch } = useContext(RecipesContext);
@@ -21,8 +22,8 @@ const DetailsPage = () => {
           <DetailsIngredients />
           <Instructions />
           <DetailsVideo />
-          {/* <Recommended />
-          <StartRecipe /> */}
+          <Recommended />
+          {/* <StartRecipe /> */}
         </div>
         : <p>Loading...</p>}
     </div>

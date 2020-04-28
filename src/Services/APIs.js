@@ -10,3 +10,12 @@ export const apiRequest = (requisition) => {
         .then(response.ok ? Promise.resolve(JSON) : Promise.reject(JSON)))
   );
 };
+
+export const apiReverse = (requisition) => {
+  const drinkOrMeal = window.location.href.includes('comidas') ? cocktail : meal;
+  return (
+    fetch(`https://www.${drinkOrMeal}.com/api/json/v1/1${requisition}`)
+      .then((response) => response.json()
+        .then(response.ok ? Promise.resolve(JSON) : Promise.reject(JSON)))
+  );
+}
