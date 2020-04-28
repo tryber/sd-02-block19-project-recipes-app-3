@@ -5,7 +5,7 @@ import RecipesContext from './index';
 
 export default function AppProvider({ children }) {
   const [requestInitialPage, setRequestInitialPage] = useState([]);
-  const [onlyOneReturn, setOnlyOneReturn] = useState(false);
+
   const [copy, setCopy] = useState([]);
   const [visibleSearch, setVisibleSearch] = useState(false);
   const [fetchError, setFetchError] = useState('');
@@ -37,7 +37,6 @@ export default function AppProvider({ children }) {
     if (!drinks && !meals) return setNoResults(true);
       setStopFetching(true);
       setRequestInitialPage([...drinks || meals]);
-      setOnlyOneReturn(false);
       return;
     }
 
@@ -100,7 +99,6 @@ export default function AppProvider({ children }) {
     pageName, 
     setPageName,
     copy,
-    setOnlyOneReturn,
   };
   return (
     <RecipesContext.Provider value={context}>
