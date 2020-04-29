@@ -35,6 +35,7 @@ export default function AppProvider({ children }) {
   const [foodObject, setFoodObject] = useState({});
   const [foodObjectFail, setFoodObjectFail] = useState({});
   const [isRecipeStarted, setIsRecipeStarted] = useState(false);
+  const [isChecked, setIsChecked] = useState([]);
 
   const successDrinkOrMeal = (results) => {
     const condition = results.meals || results.drinks;
@@ -118,7 +119,9 @@ export default function AppProvider({ children }) {
     foodObject,
     foodObjectFail,
     isRecipeStarted,
-    setIsRecipeStarted
+    setIsRecipeStarted,
+    isChecked,
+    setIsChecked,
   };
 
   return (
