@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { apiReverse, resultsRandom } from '../Services/APIs';
 import Carousel from 'react-multi-carousel';
+import RecipesContext from '../Context';
 import 'react-multi-carousel/lib/styles.css';
 import '../Styles/Recommended.css';
 
@@ -29,7 +30,6 @@ const responsive = {
 
 const carouselRecommended = (requests) => {
   const type = requests[0].idMeal ? 'Meal' : 'Drink';
-  console.log(window.navigator.userAgent);
   return (
     <Carousel
       infinite={true}
@@ -51,14 +51,14 @@ const carouselRecommended = (requests) => {
 }
 
 const Recommended = () => {
+  const { isRecipeStarted } = useContext(RecipesContext);
   const [randomRequests, setRandomRequests] = useState([]);
   const [failed, setFailed] = useState([]);
   const [isRequesting, setIsRequesting] = useState(true);
 
   const successRequest = (param) => {
-    const condition = param.meals[0] || param.drinks[0];
-    setRandomRequests([...randomRequests, condition]);
-    console.log(randomRequests)
+    const condition = param.meals || param.drinks;
+    setRandomRequests([...randomRequests, condition[0]]);
   }
 
   const failedRequest = ({ message }) => {
@@ -69,7 +69,7 @@ const Recommended = () => {
   useEffect(() => {
     if (randomRequests.length === 6) {
       setIsRequesting(false)
-      console.log(randomRequests);
+
     }
     if (randomRequests.length < 6) {
       apiReverse(resultsRandom)
@@ -78,7 +78,7 @@ const Recommended = () => {
   }, [randomRequests])
 
   return (
-    <div>
+    <div hidden={isRecipeStarted}>
       <h4>Recomendadas</h4>
       {!isRequesting
         ? <div>

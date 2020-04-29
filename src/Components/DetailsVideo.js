@@ -20,12 +20,12 @@ const isVideo = (condition, isMeal) => {
 }
 
 const DetailsVideo = () => {
-  const { foodObject } = useContext(RecipesContext);
+  const { foodObject, isRecipeStarted } = useContext(RecipesContext);
   const isMeal = window.location.href.includes('comidas') ? 'Youtube' : 'Video';
   const condition = foodObject.meals || foodObject.drinks;
 
   return (
-    <div>
+    <div hidden={isRecipeStarted}>
       <h4>Video</h4>
       {isVideo(condition, isMeal)}
     </div>
