@@ -2,33 +2,47 @@ import React, { useState, useEffect } from 'react';
 import { apiReverse, resultsRandom } from '../Services/APIs';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
+import '../Styles/Recommended.css';
 
 const responsive = {
   superLargeDesktop: {
     breakpoint: { max: 4000, min: 3000 },
-    items: 5
+    items: 5,
+    slidesToSlide: 3,
   },
   desktop: {
     breakpoint: { max: 3000, min: 1024 },
-    items: 4
+    items: 3,
+    slidesToSlide: 3,
   },
   tablet: {
     breakpoint: { max: 1024, min: 464 },
-    items: 2
+    items: 2,
+    slidesToSlide: 2,
   },
   mobile: {
     breakpoint: { max: 464, min: 0 },
-    items: 2
+    items: 1,
+    slidesToSlide: 1,
   }
 };
 
 const carouselRecommended = (requests) => {
   const type = requests[0].idMeal ? 'Meal' : 'Drink';
+  console.log(window.navigator.userAgent);
   return (
-    <Carousel responsive={responsive}>
+    <Carousel
+      infinite={true}
+      removeArrowOnDeviceType={["tablet", "mobile"]}
+      responsive={responsive}
+    >
       {requests.map((food, index) => (
         <div data-testid={`${index}-recomendation-card`}>
-          <img src={food[`str${type}Thumb`]} alt={food[`str${type}`]} />
+          <img
+            className="To_Carousel"
+            src={food[`str${type}Thumb`]}
+            alt={food[`str${type}`]}
+          />
           <p className="legend">{food[`str${type}`]}</p>
         </div>
       ))}
