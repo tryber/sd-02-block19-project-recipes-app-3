@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import { apiRequest, resultsRandom } from '../Services/APIs';
 import RecipesContext from './index';
 
+const local = window.location.pathname.split('/')[3];
+
 const verify = (
   condition,
   setnoresults,
@@ -31,7 +33,7 @@ export default function AppProvider({ children }) {
   const [arrayCategory, setArrayCategory] = useState([]);
   const [stopFetching, setStopFetching] = useState(false);
   const [noResults, setNoResults] = useState(false);
-  const [foodDetail, setFoodDetail] = useState('');
+  const [foodDetail, setFoodDetail] = useState(local);
   const [foodObject, setFoodObject] = useState({});
   const [foodObjectFail, setFoodObjectFail] = useState({});
   const [isRecipeStarted, setIsRecipeStarted] = useState(false);
@@ -71,6 +73,12 @@ export default function AppProvider({ children }) {
     apiRequest(searchParam)
       .then(successFoodRequest, failFoodRequest);
   };
+
+  useEffect(() => {
+    if (local !== undefined) {
+      setFoodDetail(local)
+    }
+  }, [window.location.href]);
 
   useEffect(() => {
     if (stopFetching) return;

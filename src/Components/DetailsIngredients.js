@@ -1,6 +1,8 @@
 import React, { useContext, useEffect } from 'react';
 import RecipesContext from '../Context/';
 
+const local = () => window.location.pathname.split('/')[3];
+
 const checkIndex = (isChecked, ingredient, setIsChecked) => (
   isChecked.includes(ingredient)
     ? setIsChecked(
@@ -53,17 +55,13 @@ const DetailsIngredients = () => {
   ));
 
   useEffect(() => {
-    if (isRecipeStarted) {
-      JSON.parse(localStorage.getItem(foodDetail))
-        && setIsChecked([...JSON.parse(localStorage.getItem(foodDetail))])
-    }
-  }, [])
+    JSON.parse(localStorage.getItem(foodDetail))
+      && setIsChecked([...JSON.parse(localStorage.getItem(foodDetail))])
+  }, []);
 
   useEffect(() => {
-    return (() => (
-      localStorage.setItem(foodDetail, JSON.stringify(isChecked))
-    ))
-  })
+    localStorage.setItem(foodDetail, JSON.stringify(isChecked))
+  }, [isChecked]);
 
   return (
     <div>

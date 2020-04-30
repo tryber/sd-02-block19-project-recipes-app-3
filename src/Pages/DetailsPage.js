@@ -9,13 +9,13 @@ import StartRecipe from '../Components/StartRecipe';
 
 const DetailsPage = () => {
   const { foodDetail, foodObject, idSearch } = useContext(RecipesContext);
-  const local = window.location.pathname.split('/')[3];
-  console.log(local);
-  const isMeal = `/lookup.php?i=${foodDetail}`;
   const isFood = foodObject.meals || foodObject.drinks;
+  const isMeal = `/lookup.php?i=${foodDetail}`
+
   useEffect(() => {
     idSearch(isMeal);
-  }, []);
+    console.log('vamove')
+  }, [window.location.href]);
 
   return (
     <div>{
