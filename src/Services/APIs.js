@@ -1,6 +1,6 @@
 export const cocktail = 'thecocktaildb';
 export const meal = 'themealdb';
-export const resultsRandom = '/random.php';
+export const resultsRdm = '/random.php';
 
 export const apiRequest = (requisition) => {
   const drinkOrMeal = window.location.href.includes('comidas') ? meal : cocktail;

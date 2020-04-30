@@ -1,17 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { apiRequest, resultsRandom } from '../Services/APIs';
+import { apiRequest, resultsRdm } from '../Services/APIs';
 import RecipesContext from './index';
-
-const requestInitialPageFunction = (requestInitialPage, setDrinkOrMeal, setIsFetching, setCopy) => {
-  if (requestInitialPage.length === 12) {
-    setIsFetching(false);
-    setCopy([...requestInitialPage]);
-  }
-  if (requestInitialPage.length < 12 && requestInitialPage.length > 0) {
-    setDrinkOrMeal(resultsRandom);
-  }
-};
 
 export default function AppProvider({ children }) {
   const [requestInitialPage, setRequestInitialPage] = useState([]);
@@ -38,8 +28,7 @@ export default function AppProvider({ children }) {
 
   const setDrinkOrMeal = (paramRequest) => {
     setNoResults(false);
-    apiRequest(paramRequest)
-      .then(successDrinkOrMeal, failDrinkOrMeal);
+    apiRequest(paramRequest).then(successDrinkOrMeal, failDrinkOrMeal);
   };
 
   const successSearch = ({ drinks, meals }) => {
@@ -50,13 +39,16 @@ export default function AppProvider({ children }) {
 
   const searchResults = (paramRequest) => {
     setNoResults(false);
-    apiRequest(paramRequest)
-      .then(successSearch, failDrinkOrMeal);
+    apiRequest(paramRequest).then(successSearch, failDrinkOrMeal);
   };
 
   useEffect(() => {
     if (stopFetching) return;
-    requestInitialPageFunction(requestInitialPage, setDrinkOrMeal, setIsFetching, setCopy);
+    if (requestInitialPage.length === 12) {
+      setIsFetching(false);
+      setCopy([...requestInitialPage]);
+    }
+    if (requestInitialPage.length < 12 && requestInitialPage.length > 0) { setDrinkOrMeal(resultsRdm); }
   }, [requestInitialPage]);
 
 

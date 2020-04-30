@@ -1,7 +1,6 @@
 import React, { useEffect, useContext } from 'react';
 import { Link, Redirect } from 'react-router-dom';
-import propTypes from 'prop-types';
-import { resultsRandom } from '../Services/APIs';
+import { resultsRdm } from '../Services/APIs';
 import RecipesContext from '../Context';
 import Footer from '../Components/Footer';
 import Header from './Header';
@@ -49,7 +48,7 @@ const Receitas = () => {
   useEffect(() => {
     setRequestInitialPage([]);
     setIsFetching(true);
-    setDrinkOrMeal(resultsRandom);
+    setDrinkOrMeal(resultsRdm);
   }, [window.location.href]);
   if (requestInitialPage === undefined) return (<h1>Nenhum Resultado</h1>);
 
