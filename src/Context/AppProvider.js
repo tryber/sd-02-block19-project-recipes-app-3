@@ -44,8 +44,7 @@ export default function AppProvider({ children }) {
       .then(successSearch, failDrinkOrMeal);
   };
 
-  useEffect(() => {
-    if (stopFetching) return;
+  const requestInitialPageFunction = (requestInitialPage) => {
     if (requestInitialPage.length === 12) {
       setIsFetching(false);
       setCopy([...requestInitialPage]);
@@ -53,6 +52,11 @@ export default function AppProvider({ children }) {
     if (requestInitialPage.length < 12 && requestInitialPage.length > 0) {
       setDrinkOrMeal(resultsRandom);
     }
+  };
+
+  useEffect(() => {
+    if (stopFetching) return;
+    requestInitialPageFunction(requestInitialPage);
   }, [requestInitialPage]);
 
 

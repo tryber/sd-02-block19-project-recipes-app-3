@@ -32,6 +32,14 @@ const redirectWindow = ({ idDrink, idMeal }, setFoodDetail) => {
   );
 };
 
+const results = (noResults, requestInitialPage, setFoodDetail) => (
+  !noResults ? requestInitialPage.map((food, index) => {
+    const local = food.idDrink ? 'Drink' : 'Meal';
+    return (
+      index < 12 && renderCard(setFoodDetail, food, index, local));
+  }) : <p>Sem Resultados</p>
+);
+
 const Receitas = () => {
   const {
     setDrinkOrMeal, fetchError, setFoodDetail, requestInitialPage,
@@ -45,21 +53,13 @@ const Receitas = () => {
   }, [window.location.href]);
   if (requestInitialPage === undefined) return (<h1>Nenhum Resultado</h1>);
 
-  const results = () => (
-    !noResults ? requestInitialPage.map((food, index) => {
-      const local = food.idDrink ? 'Drink' : 'Meal';
-      return (
-        index < 12 && renderCard(setFoodDetail, food, index, local));
-    }) : <p>Sem Resultados</p>
-  );
-  
   return (
     !isFetching
       ? fetchError ||
       <div>
         <Header />
         {requestInitialPage.length === 1 && redirectWindow(requestInitialPage[0], setFoodDetail)}
-        {results()}
+        {results(noResults, requestInitialPage, setFoodDetail)}
         <Footer />
       </div>
       : <p>Loading</p>
@@ -70,11 +70,6 @@ export default Receitas;
 
 Receitas.propTypes = {
   requestInitialPage: propTypes.arrayOf(propTypes.object).isRequired,
-  idDrink: propTypes.object,
-  idMeal: propTypes.object,
+  idDrink: propTypes.shape({ strArea: propTypes.string.isRequired }),
+  idMeal: propTypes.shape({ strArea: propTypes.string.isRequired }),
 };
-
-Receitas.defaultProps = {
-  idDrink: {},
-  idMeal: {},
-}
