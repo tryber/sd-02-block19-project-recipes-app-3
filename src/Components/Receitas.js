@@ -45,17 +45,21 @@ const Receitas = () => {
   }, [window.location.href]);
   if (requestInitialPage === undefined) return (<h1>Nenhum Resultado</h1>);
 
+  const results = () => (
+    !noResults ? requestInitialPage.map((food, index) => {
+      const local = food.idDrink ? 'Drink' : 'Meal';
+      return (
+        index < 12 && renderCard(setFoodDetail, food, index, local));
+    }) : <p>Sem Resultados</p>
+  );
+  
   return (
     !isFetching
       ? fetchError ||
       <div>
         <Header />
         {requestInitialPage.length === 1 && redirectWindow(requestInitialPage[0], setFoodDetail)}
-        {!noResults ? requestInitialPage.map((food, index) => {
-          const local = food.idDrink ? 'Drink' : 'Meal';
-          return (
-            index < 12 && renderCard(setFoodDetail, food, index, local));
-        }) : <p>Sem Resultados</p>}
+        {results()}
         <Footer />
       </div>
       : <p>Loading</p>
@@ -66,4 +70,11 @@ export default Receitas;
 
 Receitas.propTypes = {
   requestInitialPage: propTypes.arrayOf(propTypes.object).isRequired,
+  idDrink: propTypes.object,
+  idMeal: propTypes.object,
 };
+
+Receitas.defaultProps = {
+  idDrink: {},
+  idMeal: {},
+}
