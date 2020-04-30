@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { apiRequest, resultsRdm } from '../Services/APIs';
+import { apiRequest, resRdm } from '../Services/APIs';
 import RecipesContext from './index';
 
 export default function AppProvider({ children }) {
@@ -18,6 +18,7 @@ export default function AppProvider({ children }) {
 
   const successDrinkOrMeal = (results) => {
     const condition = results.meals || results.drinks;
+    console.log(condition);
     setRequestInitialPage([...condition, ...requestInitialPage]);
     return setStopFetching(false);
   };
@@ -48,7 +49,7 @@ export default function AppProvider({ children }) {
       setIsFetching(false);
       setCopy([...requestInitialPage]);
     }
-    if (requestInitialPage.length < 12 && requestInitialPage.length > 0) { setDrinkOrMeal(resultsRdm); }
+    if (requestInitialPage.length < 12 && requestInitialPage.length > 0) { setDrinkOrMeal(resRdm); }
   }, [requestInitialPage]);
 
 
