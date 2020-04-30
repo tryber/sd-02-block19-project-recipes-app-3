@@ -35,8 +35,8 @@ export default function AppProvider({ children }) {
   const successSearch = ({ drinks, meals }) => {
     if (!drinks && !meals) return setNoResults(true);
     setStopFetching(true);
-    setRequestInitialPage([...drinks || meals]);
-  }
+    return setRequestInitialPage([...drinks || meals]);
+  };
 
   const searchResults = (paramRequest) => {
     setNoResults(false);
@@ -101,7 +101,7 @@ export default function AppProvider({ children }) {
       {children}
     </RecipesContext.Provider>
   );
-};
+}
 
 AppProvider.propTypes = {
   children: PropTypes.node.isRequired,

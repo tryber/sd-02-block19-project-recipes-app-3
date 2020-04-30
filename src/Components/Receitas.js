@@ -26,7 +26,7 @@ const renderCard = (setFoodDetail, food, index, local) => (
 
 const redirectWindow = ({ idDrink, idMeal }, setFoodDetail) => {
   const recipe = idDrink || idMeal;
-  setFoodDetail(recipe)
+  setFoodDetail(recipe);
   return (
     <Redirect to={`${window.location.pathname}/${recipe}`} />
   );
@@ -65,11 +65,5 @@ const Receitas = () => {
 export default Receitas;
 
 Receitas.propTypes = {
-  idDrink: propTypes.number,
-  idMeal: propTypes.number,
-};
-
-Receitas.defaultProps = {
-  idDrink: '',
-  idMeal: '',
+  requestInitialPage: propTypes.arrayOf(propTypes.object).isRequired,
 };
