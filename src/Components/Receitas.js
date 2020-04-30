@@ -1,5 +1,6 @@
 import React, { useEffect, useContext } from 'react';
 import { Link, Redirect } from 'react-router-dom';
+import propTypes from 'prop-types';
 import { resultsRandom } from '../Services/APIs';
 import RecipesContext from '../Context';
 import Footer from '../Components/Footer';
@@ -29,7 +30,7 @@ const redirectWindow = ({ idDrink, idMeal }, setFoodDetail) => {
   return (
     <Redirect to={`${window.location.pathname}/${recipe}`} />
   );
-}
+};
 
 const Receitas = () => {
   const {
@@ -62,3 +63,13 @@ const Receitas = () => {
 };
 
 export default Receitas;
+
+Receitas.propTypes = {
+  idDrink: propTypes.number,
+  idMeal: propTypes.number,
+};
+
+Receitas.defaultProps = {
+  idDrink: '',
+  idMeal: '',
+};

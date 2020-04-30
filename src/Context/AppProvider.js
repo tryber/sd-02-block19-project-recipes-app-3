@@ -32,12 +32,11 @@ export default function AppProvider({ children }) {
       .then(successDrinkOrMeal, failDrinkOrMeal);
   };
 
-  const successSearch = ({drinks, meals}) => {
+  const successSearch = ({ drinks, meals }) => {
     if (!drinks && !meals) return setNoResults(true);
-      setStopFetching(true);
-      setRequestInitialPage([...drinks || meals]);
-      return;
-    }
+    setStopFetching(true);
+    setRequestInitialPage([...drinks || meals]);
+  }
 
   const searchResults = (paramRequest) => {
     setNoResults(false);
@@ -65,7 +64,7 @@ export default function AppProvider({ children }) {
   );
 
   const requestOrigin = (requestParam) => (apiRequest(requestParam)
-    .then(({meals}) => setOrigin([...meals]))
+    .then(({ meals }) => setOrigin([...meals]))
   );
 
   const defineSearch = (input, searchCriteria) => {
@@ -93,7 +92,7 @@ export default function AppProvider({ children }) {
     foodDetail,
     requestOrigin,
     origin,
-    pageName, 
+    pageName,
     setPageName,
     copy,
   };
@@ -102,7 +101,7 @@ export default function AppProvider({ children }) {
       {children}
     </RecipesContext.Provider>
   );
-}
+};
 
 AppProvider.propTypes = {
   children: PropTypes.node.isRequired,

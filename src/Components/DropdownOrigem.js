@@ -7,7 +7,7 @@ const DropdownOrigem = () => {
     visibleSearch,
     setDrinkOrMeal,
     copy,
-    setRequestInitialPage
+    setRequestInitialPage,
   } = useContext(RecipesContext);
   const selectedOrigin = (e) => (
     e === '' ? setRequestInitialPage([...copy]) : setDrinkOrMeal(e)
@@ -16,7 +16,10 @@ const DropdownOrigem = () => {
   return !visibleSearch &&
     (
       <div>
-        <select data-testid="explore-by-area-dropdown" onClick={(e) => selectedOrigin(e.target.value)}>
+        <select
+          data-testid="explore-by-area-dropdown"
+          onClick={(e) => selectedOrigin(e.target.value)}
+        >
           <option data-testid="Todas-option" value="">Todas</option>
           {origin
             .map(({ strArea }) =>
@@ -25,7 +28,7 @@ const DropdownOrigem = () => {
                 key={strArea}
                 value={`/filter.php?a=${strArea}`}
               >
-              {strArea}
+                {strArea}
               </option>)}
         </select>
       </div>
