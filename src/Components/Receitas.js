@@ -69,7 +69,11 @@ const Receitas = () => {
 export default Receitas;
 
 Receitas.propTypes = {
-  requestInitialPage: propTypes.arrayOf(propTypes.object).isRequired,
-  idDrink: propTypes.shape({ strArea: propTypes.string.isRequired }),
-  idMeal: propTypes.shape({ strArea: propTypes.string.isRequired }),
+  idDrink: propTypes.string,
+  idMeal: propTypes.string,
+};
+
+Receitas.defaultProps = {
+  idDrink: '',
+  idMeal: '',
 };
