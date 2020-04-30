@@ -5,7 +5,6 @@ import RecipesContext from './index';
 
 export default function AppProvider({ children }) {
   const [requestInitialPage, setRequestInitialPage] = useState([]);
-
   const [copy, setCopy] = useState([]);
   const [visibleSearch, setVisibleSearch] = useState(false);
   const [fetchError, setFetchError] = useState('');
@@ -66,9 +65,7 @@ export default function AppProvider({ children }) {
   );
 
   const requestOrigin = (requestParam) => (apiRequest(requestParam)
-    .then(({meals}) => {
-      setOrigin([...meals])
-    })
+    .then(({meals}) => setOrigin([...meals]))
   );
 
   const defineSearch = (input, searchCriteria) => {

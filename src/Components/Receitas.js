@@ -23,7 +23,7 @@ const renderCard = (setFoodDetail, food, index, local) => (
   </Link>
 );
 
-const redirectWindow = ({idDrink, idMeal}, setFoodDetail) => {
+const redirectWindow = ({ idDrink, idMeal }, setFoodDetail) => {
   const recipe = idDrink || idMeal;
   setFoodDetail(recipe)
   return (
@@ -43,7 +43,7 @@ const Receitas = () => {
     setDrinkOrMeal(resultsRandom);
   }, [window.location.href]);
   if (requestInitialPage === undefined) return (<h1>Nenhum Resultado</h1>);
-  
+
   return (
     !isFetching
       ? fetchError ||
@@ -53,10 +53,7 @@ const Receitas = () => {
         {!noResults ? requestInitialPage.map((food, index) => {
           const local = food.idDrink ? 'Drink' : 'Meal';
           return (
-            index < 12
-              ? renderCard(setFoodDetail, food, index, local)
-              : null
-          );
+            index < 12 && renderCard(setFoodDetail, food, index, local));
         }) : <p>Sem Resultados</p>}
         <Footer />
       </div>

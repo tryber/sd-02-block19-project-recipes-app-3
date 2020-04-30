@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { DebounceInput } from 'react-debounce-input';
 import RecipesContext from '../Context';
 import profilePicBtn from '../Images/profilePicBtn.png';
-import searchTopBtn from '../Images/searchTopBtn.png';
+import HeaderInput from './HeaderInput';
 import CategoryBar from './CategoryBar';
 import DropdownOrigem from './DropdownOrigem';
 
@@ -51,7 +51,7 @@ const renderDebounce = (searchCriteria, inputChange) => (
 export default function Header() {
   const [searchCriteria, setSearchCriteria] = useState('');
   const [input, setInput] = useState('');
-  const { defineSearch, setVisibleSearch, visibleSearch, setRequestInitialPage, pageName,
+  const { defineSearch, visibleSearch, setRequestInitialPage, pageName,
   } = useContext(RecipesContext);
 
 
@@ -69,19 +69,12 @@ export default function Header() {
   return (
     <div className="header">
       {renderTitle()}
-      <input
-        type="image"
-        data-testid="search-top-btn"
-        src={searchTopBtn}
-        alt="search top button"
-        onClick={() => { setVisibleSearch(!visibleSearch); setSearchCriteria(null); setInput(''); }}
-      />
+      {HeaderInput(setSearchCriteria, setInput)}
       {pageName === 'Explorar Origem' && window.location.href.includes('comidas')
         ? <DropdownOrigem />
         : <CategoryBar />
       }
-      {visibleSearch && <div>
-        {renderDebounce(searchCriteria, inputChange)}
+      {visibleSearch && <div> {renderDebounce(searchCriteria, inputChange)}
         <div className="searchRecipes">{renderRadio(radioChange)}</div>
       </div>}
     </div>

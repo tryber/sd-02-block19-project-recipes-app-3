@@ -5,7 +5,7 @@ import RecipesContext from '../Context';
 const ExplorarOrigem = () => {
   const { requestOrigin } = useContext(RecipesContext);
   useEffect(() => {
-  requestOrigin('/list.php?a=list')
+    requestOrigin('/list.php?a=list')
   }, []);
 
   return (
