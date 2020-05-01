@@ -26,7 +26,7 @@ const responsive = {
     breakpoint: { max: 464, min: 0 },
     items: 2,
     slidesToSlide: 1,
-  };
+  }
 };
 
 const carouselRecommended = (requests, setFoodDetail, setRandomRequests, setIsRequesting) => {
