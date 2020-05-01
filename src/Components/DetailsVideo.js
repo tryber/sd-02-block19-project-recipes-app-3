@@ -17,6 +17,7 @@ const isVideo = (condition, isMeal) => {
     );
   }
   if (!condition[0][`str${isMeal}`]) return <p>No Video</p>;
+  return '';
 };
 
 const DetailsVideo = () => {
