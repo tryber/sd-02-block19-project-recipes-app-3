@@ -6,7 +6,6 @@ const onHandleSubmit = (emailValue) => {
   localStorage.setItem('cocktails-token', '1');
   localStorage.setItem('user', JSON.stringify({
     email: emailValue,
-    favoritedRecipes: [],
   }));
   return true;
 };

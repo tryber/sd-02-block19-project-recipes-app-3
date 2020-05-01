@@ -1,22 +1,28 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { Redirect } from 'react-router-dom';
 import RecipesContext from '../Context';
 
 const inProgress = JSON.parse(localStorage.getItem('in-progress')) || [];
 
 const insertLocalStorage = (isRecipeStarted, setIsRecipeStarted, foodDetail, setIsFinish) => {
-  inProgress.includes(foodDetail)
-    ? localStorage.setItem('in-progress', JSON.stringify([...inProgress, foodDetail]))
-    : localStorage.setItem('in-progress', JSON.stringify([foodDetail]));
+  if (!inProgress.includes(foodDetail)) {
+    localStorage.setItem(foodDetail, JSON.stringify([]));
+    inProgress
+      ? localStorage.setItem('in-progress', JSON.stringify([...inProgress, foodDetail]))
+      : localStorage.setItem('in-progress', JSON.stringify([foodDetail]));
+  }
   setIsRecipeStarted(!isRecipeStarted);
   setIsFinish(true);
 };
 
-const redirectAndDone = (setIsRedirect, foodObject) => {
+const redirectAndDone = (setIsRedirect, foodObject, foodDetail) => {
+  localStorage.removeItem(foodDetail);
+  localStorage.setItem('in-progress', JSON.stringify(JSON.parse(localStorage.getItem('in-progress')).filter((item) => item !== foodDetail)))
   const doneRecipes = JSON.parse(localStorage.getItem('done-recipes'));
-  const mealsOrDrinks = foodObject.meals[0] || foodObject.drinks[0];
+  const mealsOrDrinks = foodObject.meals || foodObject.drinks;
+  const firstObjArray = mealsOrDrinks[0];
   const done = {
-    ...mealsOrDrinks,
+    ...firstObjArray,
     doneDate: new Date(),
   }
   doneRecipes
@@ -30,12 +36,15 @@ const StartRecipe = () => {
   const { isRecipeStarted, setIsRecipeStarted, foodDetail, foodObject } = useContext(RecipesContext);
   const [isFinish, setIsFinish] = useState(false);
   const [isRedirect, setIsRedirect] = useState(false);
-  const [isDisabled, setIsDisabled] = useState(false);
   const receive = foodObject.meals || foodObject.drinks;
   const isFood = receive[0];
   const isIngredient = Object.keys(isFood).filter((food) => (
     food.includes('Ingredient') && isFood[food]
   ));
+
+  useEffect(() => {
+    setIsFinish(false);
+  }, [window.location.href])
 
   const startOrEnd = inProgress.includes(foodDetail) ? 'Continuar Receita' : 'Iniciar Receita';
   if (isRedirect) return <Redirect to="/receitas-feitas" />
@@ -44,7 +53,7 @@ const StartRecipe = () => {
       <button
         disabled={isRecipeStarted && JSON.parse(localStorage.getItem(foodDetail)).length + 1 !== isIngredient.length}
         type='button'
-        onClick={() => !isFinish ? insertLocalStorage(isRecipeStarted, setIsRecipeStarted, foodDetail, setIsFinish) : redirectAndDone(setIsRedirect, foodObject)}
+        onClick={() => !isFinish ? insertLocalStorage(isRecipeStarted, setIsRecipeStarted, foodDetail, setIsFinish) : redirectAndDone(setIsRedirect, foodObject, foodDetail)}
       >
         {!isFinish ? startOrEnd : 'Finalizar Receita'}
       </button>

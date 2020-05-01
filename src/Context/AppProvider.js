@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { apiRequest, resultsRandom } from '../Services/APIs';
 import RecipesContext from './index';
 
-const local = window.location.pathname.split('/')[3];
 
 const verify = (
   condition,
@@ -25,6 +24,8 @@ const verify = (
 };
 
 export default function AppProvider({ children }) {
+  const local = window.location.pathname.split('/')[3];
+  
   const [requestInitialPage, setRequestInitialPage] = useState([]);
   const [copy, setCopy] = useState([]);
   const [visibleSearch, setVisibleSearch] = useState(false);
