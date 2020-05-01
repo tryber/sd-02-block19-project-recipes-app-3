@@ -19,6 +19,18 @@ const showCheckBox = (setIsChecked, isChecked, ingredient) => (
   />
 );
 
+const checkboxMark = (foodDetail, isChecked) => {
+  const inProgress = JSON.parse(localStorage.getItem('in-progress')) || [];
+  const includesFood = inProgress.includes(foodDetail);
+  if (includesFood) localStorage.setItem(foodDetail, JSON.stringify(isChecked));
+}
+
+const isCheckboxMark = (foodDetail, setIsChecked) => {
+  if (localStorage.getItem(foodDetail)) {
+    setIsChecked([...JSON.parse(localStorage.getItem(foodDetail))]);
+  }
+}
+
 const ingredientAndMeasure = (
   ingredientToShow,
   measureToShow,
@@ -56,19 +68,16 @@ const DetailsIngredients = () => {
     foodObject, isChecked, setIsChecked, isRecipeStarted, foodDetail,
   } = useContext(RecipesContext);
   const receive = foodObject.meals || foodObject.drinks;
-  const isIngredient = ingredientsList(receive[0]);
-  const isMeasure = measuresList(receive[0]);
-
-    useEffect(() => {
-      if (localStorage.getItem(foodDetail)) {
-        setIsChecked([...JSON.parse(localStorage.getItem(foodDetail))]);
-      }
-    }, []);
+  const isFood = receive[0];
+  const isIngredient = ingredientsList(isFood);
+  const isMeasure = measuresList(isFood);
 
   useEffect(() => {
-    const inProgress = JSON.parse(localStorage.getItem('in-progress')) || [];
-    const includesFood = inProgress.includes(foodDetail);
-    if (includesFood) localStorage.setItem(foodDetail, JSON.stringify(isChecked));
+    isCheckboxMark(foodDetail, setIsChecked);
+  }, []);
+
+  useEffect(() => {
+    checkboxMark(foodDetail, isChecked);
   }, [isChecked]);
 
   return (
