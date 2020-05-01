@@ -3,12 +3,26 @@ import { Link } from 'react-router-dom';
 import Drinks from '../Images/Drinks.svg';
 import Explore from '../Images/Explore.svg';
 import Meals from '../Images/Meals.svg';
-import '../Styles/Footer.css';
 import RecipesContext from '../Context';
+import '../Styles/Footer.css';
 
-const renderbuttonExplore = (setPageName) => (
+const DrinksToFooter = (setRequestInitialPage, setPageName) => (
   <Link
-    onClick={() => setPageName('Explorar')}
+    to="/receitas/bebidas"
+    onClick={() => { setRequestInitialPage([]); setPageName('Bebidas'); }}
+  >
+    <div
+      data-testid="drinks-bottom-btn"
+      className="Footer_icon"
+    >
+      <img src={Drinks} alt="Drinks redirect" />
+    </div>
+  </Link>
+);
+
+const ExploreToFooter = (setRequestInitialPage, setPageName) => (
+  <Link
+    onClick={() => { setRequestInitialPage([]); setPageName('Explorar'); }}
     to="/explorar"
   >
     <div
@@ -20,33 +34,27 @@ const renderbuttonExplore = (setPageName) => (
   </Link>
 );
 
+const MealsToFooter = (setRequestInitialPage, setPageName) => (
+  <Link
+    onClick={() => { setRequestInitialPage([]); setPageName('Comidas'); }}
+    to="/receitas/comidas"
+  >
+    <div
+      data-testid="food-bottom-btn"
+      className="Footer_icon"
+    >
+      <img src={Meals} alt="Meals redirect" />
+    </div>
+  </Link>
+);
+
 const Footer = () => {
-  const { setPageName } = useContext(RecipesContext);
+  const { setRequestInitialPage, setPageName } = useContext(RecipesContext);
   return (
     <div className="Footer_all">
-      <Link
-        onClick={() => setPageName('Bebidas')}
-        to="/receitas/bebidas"
-      >
-        <div
-          data-testid="drinks-bottom-btn"
-          className="Footer_icon"
-        >
-          <img src={Drinks} alt="Drinks redirect" />
-        </div>
-      </Link>
-      {renderbuttonExplore(setPageName)}
-      <Link
-        onClick={() => setPageName('Comidas')}
-        to="/receitas/comidas"
-      >
-        <div
-          data-testid="food-bottom-btn"
-          className="Footer_icon"
-        >
-          <img src={Meals} alt="Meals redirect" />
-        </div>
-      </Link>
+      {DrinksToFooter(setRequestInitialPage, setPageName)}
+      {ExploreToFooter(setRequestInitialPage, setPageName)}
+      {MealsToFooter(setRequestInitialPage, setPageName)}
     </div>
   );
 };
