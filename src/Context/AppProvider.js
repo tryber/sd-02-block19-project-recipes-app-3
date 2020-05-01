@@ -38,6 +38,8 @@ export default function AppProvider({ children }) {
   const [foodObjectFail, setFoodObjectFail] = useState({});
   const [isRecipeStarted, setIsRecipeStarted] = useState(false);
   const [isChecked, setIsChecked] = useState([]);
+  const [pageName, setPageName] = useState('Comidas');
+
 
   const successDrinkOrMeal = (results) => {
     const condition = results.meals || results.drinks;
@@ -123,6 +125,8 @@ export default function AppProvider({ children }) {
     noResults,
     setFoodDetail,
     foodDetail,
+    pageName,
+    setPageName,
     idSearch,
     foodObject,
     foodObjectFail,

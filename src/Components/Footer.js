@@ -6,10 +6,10 @@ import Meals from '../Images/Meals.svg';
 import RecipesContext from '../Context';
 import '../Styles/Footer.css';
 
-const DrinksToFooter = (setRequestInitialPage) => (
+const DrinksToFooter = (setRequestInitialPage, setPageName) => (
   <Link
     to="/receitas/bebidas"
-    onClick={() => setRequestInitialPage([])}
+    onClick={() => { setRequestInitialPage([]); setPageName('Bebidas'); }}
   >
     <div
       data-testid="drinks-bottom-btn"
@@ -20,9 +20,9 @@ const DrinksToFooter = (setRequestInitialPage) => (
   </Link>
 );
 
-const ExploreToFooter = (setRequestInitialPage) => (
+const ExploreToFooter = (setRequestInitialPage, setPageName) => (
   <Link
-    onClick={() => setRequestInitialPage([])}
+    onClick={() => { setRequestInitialPage([]); setPageName('Explorar'); }}
     to="/explorar"
   >
     <div
@@ -34,9 +34,9 @@ const ExploreToFooter = (setRequestInitialPage) => (
   </Link>
 );
 
-const MealsToFooter = (setRequestInitialPage) => (
+const MealsToFooter = (setRequestInitialPage, setPageName) => (
   <Link
-    onClick={() => setRequestInitialPage([])}
+    onClick={() => { setRequestInitialPage([]); setPageName('Comidas'); }}
     to="/receitas/comidas"
   >
     <div
@@ -49,12 +49,12 @@ const MealsToFooter = (setRequestInitialPage) => (
 );
 
 const Footer = () => {
-  const { setRequestInitialPage } = useContext(RecipesContext);
+  const { setRequestInitialPage, setPageName } = useContext(RecipesContext);
   return (
     <div className="Footer_all">
-      {DrinksToFooter(setRequestInitialPage)}
-      {ExploreToFooter(setRequestInitialPage)}
-      {MealsToFooter(setRequestInitialPage)}
+      {DrinksToFooter(setRequestInitialPage, setPageName)}
+      {ExploreToFooter(setRequestInitialPage, setPageName)}
+      {MealsToFooter(setRequestInitialPage, setPageName)}
     </div>
   );
 };
