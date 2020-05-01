@@ -3,7 +3,7 @@ import RecipesContext from '../Context';
 
 const Instructions = () => {
   const { foodObject } = useContext(RecipesContext);
-  const receive = foodObject.meals || foodObject.drinks
+  const receive = foodObject.meals || foodObject.drinks;
   const isFood = receive[0];
   return (
     <div>

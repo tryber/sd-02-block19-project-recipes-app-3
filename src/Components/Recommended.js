@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { apiReverse, resultsRandom } from '../Services/APIs';
 import { Link } from 'react-router-dom';
 import Carousel from 'react-multi-carousel';
-import RecipesContext from '../Context';
+import { apiReverse, resultsRandom } from '../Services/APIs';
 import 'react-multi-carousel/lib/styles.css';
+import RecipesContext from '../Context';
 import '../Styles/Recommended.css';
 
 const responsive = {
@@ -37,17 +37,18 @@ const carouselRecommended = (requests, setFoodDetail, setRandomRequests, setIsRe
   return (
     <Carousel
       infinite={true}
-      removeArrowOnDeviceType={["tablet", "mobile"]}
+      removeArrowOnDeviceType={['tablet', 'mobile']}
       responsive={responsive}
     >
       {requests.map((food, index) => (
         <Link
           onClick={(() => {
-            setFoodDetail(food[`id${type}`])
+            setFoodDetail(food[`id${type}`]);
             setRandomRequests([]);
             setIsRequesting(true);
           })}
-          to={`${toDetailsPage}/${food[`id${type}`]}`}>
+          to={`${toDetailsPage}/${food[`id${type}`]}`}
+        >
           <div data-testid={`${index}-recomendation-card`}>
             <img
               className="To_Carousel"
@@ -60,7 +61,7 @@ const carouselRecommended = (requests, setFoodDetail, setRandomRequests, setIsRe
       ))}
     </Carousel>
   );
-}
+};
 
 const Recommended = () => {
   const { isRecipeStarted, setFoodDetail } = useContext(RecipesContext);
@@ -71,23 +72,22 @@ const Recommended = () => {
   const successRequest = (param) => {
     const condition = param.meals || param.drinks;
     setRandomRequests([...randomRequests, condition[0]]);
-  }
+  };
 
   const failedRequest = ({ message }) => {
     setFailed(message);
     alert(failed);
-  }
+  };
 
   useEffect(() => {
     if (randomRequests.length === 6) {
-      setIsRequesting(false)
+      setIsRequesting(false);
     }
     if (randomRequests.length < 6) {
       apiReverse(resultsRandom)
-        .then(successRequest, failedRequest)
+        .then(successRequest, failedRequest);
     }
-    console.log(window.location.href)
-  }, [randomRequests, window.location.href])
+  }, [randomRequests, window.location.href]);
 
   return (
     <div hidden={isRecipeStarted}>
@@ -99,6 +99,6 @@ const Recommended = () => {
         : <p>Loading...</p>}
     </div>
   );
-}
+};
 
 export default Recommended;

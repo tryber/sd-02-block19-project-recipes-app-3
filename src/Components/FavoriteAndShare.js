@@ -28,8 +28,6 @@ const heartClick = (isFavorite, setIsFavorite, foodObject, foodDetail) => {
   setIsFavorite(!isFavorite);
 };
 
-
-
 const FavoriteAndShare = () => {
   const { foodDetail, foodObject } = useContext(RecipesContext);
   const [copied, setCopied] = useState('');
@@ -47,7 +45,7 @@ const FavoriteAndShare = () => {
         idMeal === foodDetail || idDrink === foodDetail
       )))
       : setIsFavorite(false);
-  }, [])
+  }, []);
 
   return (
     <div className="FavShare_father">
@@ -73,6 +71,6 @@ const FavoriteAndShare = () => {
       <p>{copied}</p>
     </div >
   );
-}
+};
 
 export default FavoriteAndShare;

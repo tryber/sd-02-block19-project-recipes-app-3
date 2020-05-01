@@ -1,6 +1,6 @@
-import React, { useContext } from "react";
-import RecipesContext from '../Context';
+import React, { useContext } from 'react';
 import Youtube from 'react-youtube';
+import RecipesContext from '../Context';
 
 const isVideo = (condition, isMeal) => {
   if (condition[0][`str${isMeal}`]) {
@@ -16,8 +16,8 @@ const isVideo = (condition, isMeal) => {
       </div>
     );
   }
-  if (!condition[0][`str${isMeal}`]) return <p>No Video</p>
-}
+  if (!condition[0][`str${isMeal}`]) return <p>No Video</p>;
+};
 
 const DetailsVideo = () => {
   const { foodObject, isRecipeStarted } = useContext(RecipesContext);
@@ -30,6 +30,6 @@ const DetailsVideo = () => {
       {isVideo(condition, isMeal)}
     </div>
   );
-}
+};
 
 export default DetailsVideo;

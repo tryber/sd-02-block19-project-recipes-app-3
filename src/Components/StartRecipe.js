@@ -17,14 +17,14 @@ const insertLocalStorage = (isRecipeStarted, setIsRecipeStarted, foodDetail, set
 
 const redirectAndDone = (setIsRedirect, foodObject, foodDetail) => {
   localStorage.removeItem(foodDetail);
-  localStorage.setItem('in-progress', JSON.stringify(JSON.parse(localStorage.getItem('in-progress')).filter((item) => item !== foodDetail)))
+  localStorage.setItem('in-progress', JSON.stringify(JSON.parse(localStorage.getItem('in-progress')).filter((item) => item !== foodDetail)));
   const doneRecipes = JSON.parse(localStorage.getItem('done-recipes'));
   const mealsOrDrinks = foodObject.meals || foodObject.drinks;
   const firstObjArray = mealsOrDrinks[0];
   const done = {
     ...firstObjArray,
     doneDate: new Date(),
-  }
+  };
   doneRecipes
     ? localStorage.setItem('done-recipes', JSON.stringify([...doneRecipes, done]))
     : localStorage.setItem('done-recipes', JSON.stringify([done]));
@@ -33,7 +33,12 @@ const redirectAndDone = (setIsRedirect, foodObject, foodDetail) => {
 };
 
 const StartRecipe = () => {
-  const { isRecipeStarted, setIsRecipeStarted, foodDetail, foodObject } = useContext(RecipesContext);
+  const {
+    isRecipeStarted,
+    setIsRecipeStarted,
+    foodDetail,
+    foodObject
+  } = useContext(RecipesContext);
   const [isFinish, setIsFinish] = useState(false);
   const [isRedirect, setIsRedirect] = useState(false);
   const receive = foodObject.meals || foodObject.drinks;
@@ -44,21 +49,26 @@ const StartRecipe = () => {
 
   useEffect(() => {
     setIsFinish(false);
-  }, [window.location.href])
+  }, [window.location.href]);
 
   const startOrEnd = inProgress.includes(foodDetail) ? 'Continuar Receita' : 'Iniciar Receita';
-  if (isRedirect) return <Redirect to="/receitas-feitas" />
+  if (isRedirect) return <Redirect to="/receitas-feitas" />;
   return (
     <div>
       <button
-        disabled={isRecipeStarted && JSON.parse(localStorage.getItem(foodDetail)).length + 1 !== isIngredient.length}
-        type='button'
-        onClick={() => !isFinish ? insertLocalStorage(isRecipeStarted, setIsRecipeStarted, foodDetail, setIsFinish) : redirectAndDone(setIsRedirect, foodObject, foodDetail)}
+        disabled={isRecipeStarted
+          && JSON.parse(localStorage.getItem(foodDetail)).length + 1 !== isIngredient.length
+        }
+        type="button"
+        onClick={() => (!isFinish
+          ? insertLocalStorage(isRecipeStarted, setIsRecipeStarted, foodDetail, setIsFinish)
+          : redirectAndDone(setIsRedirect, foodObject, foodDetail)
+        )}
       >
         {!isFinish ? startOrEnd : 'Finalizar Receita'}
       </button>
     </div >
-  )
-}
+  );
+};
 
 export default StartRecipe;

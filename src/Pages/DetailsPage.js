@@ -10,11 +10,10 @@ import StartRecipe from '../Components/StartRecipe';
 const DetailsPage = () => {
   const { foodDetail, foodObject, idSearch } = useContext(RecipesContext);
   const isFood = foodObject.meals || foodObject.drinks;
-  const isMeal = `/lookup.php?i=${foodDetail}`
+  const isMeal = `/lookup.php?i=${foodDetail}`;
 
   useEffect(() => {
     idSearch(isMeal);
-    console.log('vamove')
   }, [window.location.href]);
 
   return (

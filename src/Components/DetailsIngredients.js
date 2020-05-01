@@ -6,20 +6,18 @@ const checkIndex = (isChecked, ingredient, setIsChecked) => (
     ? setIsChecked(
       [...isChecked].filter((bool) => (
         bool !== ingredient
-      ))
+      )),
     )
     : setIsChecked([...isChecked, ingredient])
 );
 
-const showCheckBox = (setIsChecked, isChecked, ingredient) => {
-  return (
-    <input
-      type="checkbox"
-      checked={isChecked.includes(ingredient)}
-      onChange={() => checkIndex(isChecked, ingredient, setIsChecked)}
-    />
-  );
-}
+const showCheckBox = (setIsChecked, isChecked, ingredient) => (
+  <input
+    type="checkbox"
+    checked={isChecked.includes(ingredient)}
+    onChange={() => checkIndex(isChecked, ingredient, setIsChecked)}
+  />
+);
 
 const ingredientAndMeasure = (
   ingredientToShow,
@@ -42,7 +40,13 @@ const ingredientAndMeasure = (
   );
 
 const DetailsIngredients = () => {
-  const { foodObject, isChecked, setIsChecked, isRecipeStarted, foodDetail } = useContext(RecipesContext);
+  const {
+    foodObject,
+    isChecked,
+    setIsChecked,
+    isRecipeStarted,
+    foodDetail
+  } = useContext(RecipesContext);
   const receive = foodObject.meals || foodObject.drinks;
   const isFood = receive[0];
   const isIngredient = Object.keys(isFood).filter((food) => (
@@ -54,13 +58,13 @@ const DetailsIngredients = () => {
 
   useEffect(() => {
     JSON.parse(localStorage.getItem(foodDetail))
-      && setIsChecked([...JSON.parse(localStorage.getItem(foodDetail))])
+      && setIsChecked([...JSON.parse(localStorage.getItem(foodDetail))]);
   }, []);
 
   useEffect(() => {
     const inProgress = JSON.parse(localStorage.getItem('in-progress')) || [];
     inProgress.includes(foodDetail)
-      && localStorage.setItem(foodDetail, JSON.stringify(isChecked))
+      && localStorage.setItem(foodDetail, JSON.stringify(isChecked));
   }, [isChecked]);
 
   return (
@@ -74,7 +78,14 @@ const DetailsIngredients = () => {
             return (
               ingredientToShow
               && <div key={`${ingredient} and ${isMeasure[index]} to Recipe`}>
-                {ingredientAndMeasure(ingredientToShow, measureToShow, index, setIsChecked, isChecked, isRecipeStarted)}
+                {ingredientAndMeasure(
+                  ingredientToShow,
+                  measureToShow,
+                  index,
+                  setIsChecked,
+                  isChecked,
+                  isRecipeStarted
+                )}
               </div>
             );
           })}

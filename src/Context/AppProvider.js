@@ -25,7 +25,6 @@ const verify = (
 
 export default function AppProvider({ children }) {
   const local = window.location.pathname.split('/')[3];
-  
   const [requestInitialPage, setRequestInitialPage] = useState([]);
   const [copy, setCopy] = useState([]);
   const [visibleSearch, setVisibleSearch] = useState(false);
@@ -77,7 +76,7 @@ export default function AppProvider({ children }) {
 
   useEffect(() => {
     if (local !== undefined) {
-      setFoodDetail(local)
+      setFoodDetail(local);
     }
   }, [window.location.href]);
 
