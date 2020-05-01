@@ -4,22 +4,25 @@ import { resultsRandom } from '../Services/APIs';
 import RecipesContext from '../Context';
 import Footer from '../Components/Footer';
 import Header from './Header';
+import "../Styles/Cards.css"
 
 const renderCard = (setFoodDetail, food, index, local) => (
   <Link
     onClick={(() => setFoodDetail(food))}
+    className="recipe-container"
     to={(window.location.href.includes('comidas') ? `/receitas/comidas/${food.idMeal}` : `/bebidas/${food.idDrink}`)}
     key={`food${Math.random() * 10000000}`}
   >
-    <div>
-      <img
-        data-testid={`${index}-card-img`}
-        alt={food[`str${local}`]}
-        src={food[`str${local}Thumb`]}
-      />
+    <img
+      data-testid={`${index}-card-img`}
+      className="recipe-image"
+      alt={food[`str${local}`]}
+      src={food[`str${local}Thumb`]}
+    />
+    <div className="CatName-Wrapper">
+      <p className="recipe-category">{food.strCategory}</p>
+      <p className="recipe-name" data-testid={`${index}-card-name`} >{food[`str${local}`]}</p>
     </div>
-    <p>{food.strCategory}</p>
-    <p data-testid={`${index}-card-name`} >{food[`str${local}`]}</p>
   </Link>
 );
 
