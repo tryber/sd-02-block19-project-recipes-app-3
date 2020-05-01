@@ -27,17 +27,17 @@ const ingredientAndMeasure = (
   isChecked,
   isRecipeStarted,
 ) => (
-    <div>
-      {isRecipeStarted && showCheckBox(setIsChecked, isChecked, `${ingredientToShow} || ${measureToShow}`)}
-      <span data-testid={`${index}-ingredient-name`}>
-        {ingredientToShow}
-      </span>
-      <span> || </span>
-      <span data-testid={`${index}-ingredient-measure`}>
-        {measureToShow}
-      </span>
-    </div>
-  );
+  <div>
+    {isRecipeStarted && showCheckBox(setIsChecked, isChecked, `${ingredientToShow} || ${measureToShow}`)}
+    <span data-testid={`${index}-ingredient-name`}>
+      {ingredientToShow}
+    </span>
+    <span> || </span>
+    <span data-testid={`${index}-ingredient-measure`}>
+      {measureToShow}
+    </span>
+  </div>
+);
 
 const DetailsIngredients = () => {
   const {
@@ -45,7 +45,7 @@ const DetailsIngredients = () => {
     isChecked,
     setIsChecked,
     isRecipeStarted,
-    foodDetail
+    foodDetail,
   } = useContext(RecipesContext);
   const receive = foodObject.meals || foodObject.drinks;
   const isFood = receive[0];
@@ -84,7 +84,7 @@ const DetailsIngredients = () => {
                   index,
                   setIsChecked,
                   isChecked,
-                  isRecipeStarted
+                  isRecipeStarted,
                 )}
               </div>
             );

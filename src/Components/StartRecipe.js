@@ -37,7 +37,7 @@ const StartRecipe = () => {
     isRecipeStarted,
     setIsRecipeStarted,
     foodDetail,
-    foodObject
+    foodObject,
   } = useContext(RecipesContext);
   const [isFinish, setIsFinish] = useState(false);
   const [isRedirect, setIsRedirect] = useState(false);

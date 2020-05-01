@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import Carousel from 'react-multi-carousel';
-import { apiReverse, resultsRandom } from '../Services/APIs';
 import 'react-multi-carousel/lib/styles.css';
+import { apiReverse, resultsRandom } from '../Services/APIs';
 import RecipesContext from '../Context';
 import '../Styles/Recommended.css';
 
@@ -26,7 +26,7 @@ const responsive = {
     breakpoint: { max: 464, min: 0 },
     items: 2,
     slidesToSlide: 1,
-  }
+  };
 };
 
 const carouselRecommended = (requests, setFoodDetail, setRandomRequests, setIsRequesting) => {
