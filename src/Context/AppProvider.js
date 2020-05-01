@@ -18,20 +18,20 @@ const verifyRequest = (
 
 export default function AppProvider({ children }) {
   const local = window.location.pathname.split('/')[3];
-  const [requestInitialPage, setRequestInitialPage] = useState([]);
-  const [copy, setCopy] = useState([]);
-  const [visibleSearch, setVisibleSearch] = useState(false);
-  const [fetchError, setFetchError] = useState('');
-  const [isFetching, setIsFetching] = useState(false);
-  const [arrayCategory, setArrayCategory] = useState([]);
-  const [stopFetching, setStopFetching] = useState(false);
-  const [noResults, setNoResults] = useState(false);
-  const [foodDetail, setFoodDetail] = useState(local);
-  const [foodObject, setFoodObject] = useState({});
-  const [isRecipeStarted, setIsRecipeStarted] = useState(false);
-  const [isChecked, setIsChecked] = useState([]);
-  const [pageName, setPageName] = useState('Comidas');
-  const [origin, setOrigin] = useState([]);
+  // const [requestInitialPage, setRequestInitialPage] = useState([]);
+  // const [copy, setCopy] = useState([]);
+  // const [visibleSearch, setVisibleSearch] = useState(false);
+  // const [fetchError, setFetchError] = useState('');
+  // const [isFetching, setIsFetching] = useState(false);
+  // const [arrayCategory, setArrayCategory] = useState([]);
+  // const [stopFetching, setStopFetching] = useState(false);
+  // const [noResults, setNoResults] = useState(false);
+  // const [foodDetail, setFoodDetail] = useState(local);
+  // const [foodObject, setFoodObject] = useState({});
+  // const [isRecipeStarted, setIsRecipeStarted] = useState(false);
+  // const [isChecked, setIsChecked] = useState([]);
+  // const [pageName, setPageName] = useState('Comidas');
+  // const [origin, setOrigin] = useState([]);
 
   const successDrinkOrMeal = (results) => {
     const condition = results.meals || results.drinks;
