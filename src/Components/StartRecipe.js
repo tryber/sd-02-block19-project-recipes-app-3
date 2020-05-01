@@ -32,7 +32,6 @@ const redirectAndDone = (setIsRedirect, foodObject, foodDetail) => {
   return setIsRedirect(true);
 };
 
-
 const StartRecipe = () => {
   const {
     isRecipeStarted, setIsRecipeStarted, foodDetail, foodObject,
