@@ -27,17 +27,17 @@ const ingredientAndMeasure = (
   isChecked,
   isRecipeStarted,
 ) => (
-    <div>
-      {isRecipeStarted && showCheckBox(setIsChecked, isChecked, `${ingredientToShow} || ${measureToShow}`)}
-      <span data-testid={`${index}-ingredient-name`}>
-        {ingredientToShow}
-      </span>
-      <span> || </span>
-      <span data-testid={`${index}-ingredient-measure`}>
-        {measureToShow}
-      </span>
-    </div>
-  );
+  <div>
+    {isRecipeStarted && showCheckBox(setIsChecked, isChecked, `${ingredientToShow} || ${measureToShow}`)}
+    <span data-testid={`${index}-ingredient-name`}>
+      {ingredientToShow}
+    </span>
+    <span> || </span>
+    <span data-testid={`${index}-ingredient-measure`}>
+      {measureToShow}
+    </span>
+  </div>
+);
 
 const DetailsIngredients = () => {
   const {
@@ -57,7 +57,9 @@ const DetailsIngredients = () => {
   ));
 
   useEffect(() => {
-    if (localStorage.getItem(foodDetail)) setIsChecked([...JSON.parse(localStorage.getItem(foodDetail))]);
+    if (localStorage.getItem(foodDetail)) {
+      setIsChecked([...JSON.parse(localStorage.getItem(foodDetail))]);
+    }
   }, []);
 
   useEffect(() => {

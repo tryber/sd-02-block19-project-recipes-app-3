@@ -45,7 +45,7 @@ const FavoriteAndShare = () => {
         .find(({ idMeal, idDrink }) => (
           idMeal === foodDetail || idDrink === foodDetail
         ))
-      : false
+      : false,
     );
   }, []);
 
