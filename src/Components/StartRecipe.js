@@ -32,12 +32,10 @@ const redirectAndDone = (setIsRedirect, foodObject, foodDetail) => {
   return setIsRedirect(true);
 };
 
+
 const StartRecipe = () => {
   const {
-    isRecipeStarted,
-    setIsRecipeStarted,
-    foodDetail,
-    foodObject,
+    isRecipeStarted, setIsRecipeStarted, foodDetail, foodObject,
   } = useContext(RecipesContext);
   const [isFinish, setIsFinish] = useState(false);
   const [isRedirect, setIsRedirect] = useState(false);
@@ -52,8 +50,7 @@ const StartRecipe = () => {
   }, [window.location.href]);
 
   const startOrEnd = inProgress.includes(foodDetail) ? 'Continuar Receita' : 'Iniciar Receita';
-  if (isRedirect) return <Redirect to="/receitas-feitas" />;
-  return (
+  return isRedirect ? <Redirect to="/receitas-feitas" /> : (
     <div>
       <button
         disabled={isRecipeStarted

@@ -92,8 +92,7 @@ const Recommended = () => {
       {!isRequesting
         ? <div>
           {carouselRecommended(randomRequests, setFoodDetail, setRandomRequests, setIsRequesting)}
-        </div>
-        : <p>Loading...</p>}
+        </div> : <p>Loading...</p>}
     </div>
   );
 };
