@@ -38,6 +38,25 @@ const heartClick = (isFavorite, setIsFavorite, foodObject, foodDetail) => {
   setIsFavorite(!isFavorite);
 };
 
+const copyComponent = (message, Share) => (
+  <CopyToClipboard
+    data-testid="share-btn"
+    text={window.location.href}
+    onCopy={() => message()}
+  >
+    <div className="FavShare_content">
+      <img src={Share} alt="Share your recipe" />
+    </div>
+  </CopyToClipboard>
+);
+
+const favoriteIcon = (isFavorite) => (
+  <img
+    src={isFavorite ? Favorited : Favorite}
+    alt="Favorite recipe"
+  />
+);
+
 const FavoriteAndShare = () => {
   const { foodDetail, foodObject } = useContext(RecipesContext);
   const [copied, setCopied] = useState('');
@@ -61,24 +80,13 @@ const FavoriteAndShare = () => {
 
   return (
     <div className="FavShare_father">
-      <CopyToClipboard
-        data-testid="share-btn"
-        text={window.location.href}
-        onCopy={() => message()}
-      >
-        <div className="FavShare_content">
-          <img src={Share} alt="Share your recipe" />
-        </div>
-      </CopyToClipboard>
+      {copyComponent(message, Share)}
       <button
         data-testid="favorite-btn"
         className="FavShare_content"
         onClick={() => heartClick(isFavorite, setIsFavorite, foodObject, foodDetail)}
       >
-        <img
-          src={isFavorite ? Favorited : Favorite}
-          alt="Favorite recipe"
-        />
+        {favoriteIcon(isFavorite)}
       </button>
       <p>{copied}</p>
     </div >
