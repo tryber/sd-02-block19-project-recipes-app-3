@@ -32,8 +32,7 @@ const responsive = {
 const carouselRecommended = (requests, setFoodDetail, setRandomRequests, setIsRequesting) => {
   const type = requests[0].idMeal ? 'Meal' : 'Drink';
   const toDetailsPage = window.location.pathname.includes('comidas')
-    ? '/receitas/bebidas'
-    : '/receitas/comidas';
+    ? '/receitas/bebidas' : '/receitas/comidas';
   return (
     <Carousel
       infinite
