@@ -25,7 +25,8 @@ const categorySearch = (
   }
   setRequestInitialPage([...copy]);
   setNoResults(false);
-}
+};
+
 export default function AppProvider({ children }) {
   const local = window.location.pathname.split('/')[3];
   const [requestInitialPage, setRequestInitialPage] = useState([]);
@@ -118,7 +119,7 @@ export default function AppProvider({ children }) {
 
   const defineSearch = (input, searchCriteria) => {
     categorySearch(
-      input, searchCriteria, copy, setRequestInitialPage, setNoResults, searchResults
+      input, searchCriteria, copy, setRequestInitialPage, setNoResults, searchResults,
     );
   };
 
