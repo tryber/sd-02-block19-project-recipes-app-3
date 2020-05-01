@@ -6,13 +6,8 @@ import Favorited from '../Images/Favorited.svg';
 import RecipesContext from '../Context';
 import '../Styles/FavoriteAndShare.css';
 
-const heartClick = (isFavorite, setIsFavorite, foodObject, foodDetail) => {
-  const mealOrDrink = foodObject.meals || foodObject.drinks;
-  const firstObject = mealOrDrink[0];
-  const haveFavorited = JSON.parse(localStorage.getItem('favorite-recipes'))
-    && JSON.parse(localStorage.getItem('favorite-recipes')).find(({ idMeal, idDrink }) => (
-      idMeal === foodDetail || idDrink === foodDetail
-    ));
+
+const trueFavorited = (haveFavorited, foodDetail) => {
   if (haveFavorited) {
     const removeFavorited = JSON.parse(localStorage.getItem('favorite-recipes'))
       .filter(({ idMeal, idDrink }) => (
@@ -20,11 +15,25 @@ const heartClick = (isFavorite, setIsFavorite, foodObject, foodDetail) => {
       ));
     localStorage.setItem('favorite-recipes', JSON.stringify(removeFavorited));
   }
+}
+
+const falseFavorited = (haveFavorited, firstObject) => {
   if (!haveFavorited) {
     JSON.parse(localStorage.getItem('favorite-recipes'))
       ? localStorage.setItem('favorite-recipes', JSON.stringify([...JSON.parse(localStorage.getItem('favorite-recipes')), firstObject]))
       : localStorage.setItem('favorite-recipes', JSON.stringify([firstObject]));
   }
+}
+
+const heartClick = (isFavorite, setIsFavorite, foodObject, foodDetail) => {
+  const mealOrDrink = foodObject.meals || foodObject.drinks;
+  const firstObject = mealOrDrink[0];
+  const haveFavorited = JSON.parse(localStorage.getItem('favorite-recipes'))
+    && JSON.parse(localStorage.getItem('favorite-recipes')).find(({ idMeal, idDrink }) => (
+      idMeal === foodDetail || idDrink === foodDetail
+    ));
+  trueFavorited(haveFavorited, foodDetail);
+  falseFavorited(haveFavorited, firstObject);
   setIsFavorite(!isFavorite);
 };
 
