@@ -7,9 +7,9 @@ const inProgress = JSON.parse(localStorage.getItem('in-progress')) || [];
 const insertLocalStorage = (isRecipeStarted, setIsRecipeStarted, foodDetail, setIsFinish) => {
   if (!inProgress.includes(foodDetail)) {
     localStorage.setItem(foodDetail, JSON.stringify([]));
-    inProgress
-      ? localStorage.setItem('in-progress', JSON.stringify([...inProgress, foodDetail]))
-      : localStorage.setItem('in-progress', JSON.stringify([foodDetail]));
+    localStorage.setItem('in-progress', inProgress ? JSON.stringify([...inProgress, foodDetail])
+      : JSON.stringify([foodDetail])
+    )
   }
   setIsRecipeStarted(!isRecipeStarted);
   setIsFinish(true);
@@ -25,10 +25,10 @@ const redirectAndDone = (setIsRedirect, foodObject, foodDetail) => {
     ...firstObjArray,
     doneDate: new Date(),
   };
-  doneRecipes
-    ? localStorage.setItem('done-recipes', JSON.stringify([...doneRecipes, done]))
-    : localStorage.setItem('done-recipes', JSON.stringify([done]));
-
+  localStorage.setItem('done-recipes', doneRecipes
+    ? JSON.stringify([...doneRecipes, done])
+    : JSON.stringify([done])
+  );
   return setIsRedirect(true);
 };
 

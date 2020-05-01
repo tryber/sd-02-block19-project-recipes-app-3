@@ -70,7 +70,7 @@ const FavoriteAndShare = () => {
           <img src={Share} alt="Share your recipe" />
         </div>
       </CopyToClipboard>
-      <div
+      <button
         data-testid="favorite-btn"
         className="FavShare_content"
         onClick={() => heartClick(isFavorite, setIsFavorite, foodObject, foodDetail)}
@@ -79,7 +79,7 @@ const FavoriteAndShare = () => {
           src={isFavorite ? Favorited : Favorite}
           alt="Favorite recipe"
         />
-      </div>
+      </button>
       <p>{copied}</p>
     </div >
   );
