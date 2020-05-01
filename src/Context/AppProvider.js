@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { apiRequest, resultsRandom } from '../Services/APIs';
 import RecipesContext from './index';
 
+
 const verify = (
   condition,
   setnoresults,
@@ -12,13 +13,18 @@ const verify = (
 ) => {
   if (!condition) return setnoresults(true);
   if (condition.length > 1) {
+    setrequestinitialpage([...condition]);
     setstopfetching(true);
+    return '';
+  } if (condition.length === 1) {
+    setrequestinitialpage([...condition, ...requestinitialpage]);
+    setstopfetching(false);
   }
-  setrequestinitialpage([...condition, ...requestinitialpage]);
-  return setstopfetching(false);
+  return '';
 };
 
 export default function AppProvider({ children }) {
+  const local = window.location.pathname.split('/')[3];
   const [requestInitialPage, setRequestInitialPage] = useState([]);
   const [copy, setCopy] = useState([]);
   const [visibleSearch, setVisibleSearch] = useState(false);
@@ -27,7 +33,11 @@ export default function AppProvider({ children }) {
   const [arrayCategory, setArrayCategory] = useState([]);
   const [stopFetching, setStopFetching] = useState(false);
   const [noResults, setNoResults] = useState(false);
-  const [foodDetail, setFoodDetail] = useState({});
+  const [foodDetail, setFoodDetail] = useState(local);
+  const [foodObject, setFoodObject] = useState({});
+  const [foodObjectFail, setFoodObjectFail] = useState({});
+  const [isRecipeStarted, setIsRecipeStarted] = useState(false);
+  const [isChecked, setIsChecked] = useState([]);
 
   const successDrinkOrMeal = (results) => {
     const condition = results.meals || results.drinks;
@@ -50,6 +60,25 @@ export default function AppProvider({ children }) {
     apiRequest(paramRequest)
       .then(successDrinkOrMeal, failDrinkOrMeal);
   };
+
+  const successFoodRequest = (apiReturnFood) => {
+    setFoodObject(apiReturnFood);
+  };
+
+  const failFoodRequest = ({ message }) => {
+    setFoodObjectFail(message);
+  };
+
+  const idSearch = (searchParam) => {
+    apiRequest(searchParam)
+      .then(successFoodRequest, failFoodRequest);
+  };
+
+  useEffect(() => {
+    if (local !== undefined) {
+      setFoodDetail(local);
+    }
+  }, [window.location.href]);
 
   useEffect(() => {
     if (stopFetching) return;
@@ -78,6 +107,7 @@ export default function AppProvider({ children }) {
     setNoResults(false);
     setRequestInitialPage([...copy]);
   };
+
   const context = {
     setIsFetching,
     requestInitialPage,
@@ -93,7 +123,15 @@ export default function AppProvider({ children }) {
     noResults,
     setFoodDetail,
     foodDetail,
+    idSearch,
+    foodObject,
+    foodObjectFail,
+    isRecipeStarted,
+    setIsRecipeStarted,
+    isChecked,
+    setIsChecked,
   };
+
   return (
     <RecipesContext.Provider value={context}>
       {children}
