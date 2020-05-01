@@ -94,11 +94,21 @@ export default function AppProvider({ children }) {
   }, [requestInitialPage]);
 
 
-  const requestCategory = (requestParam) => (apiRequest(requestParam)
+  const requestCategory = (requestParam) => (
+    apiRequest(requestParam)
     .then((results) => {
       const { categories, drinks } = results;
       setArrayCategory(categories || drinks);
     })
+  );
+
+  const requestRandom = () => (
+    apiRequest('/random.php')
+      .then(({ drinks = [{}], meals = [{}] }) => {
+        const { idDrink } = drinks[0];
+        const { idMeal } = meals[0];
+        setFoodDetail(idDrink || idMeal);
+      })
   );
 
   const defineSearch = (input, searchCriteria) => {
@@ -134,6 +144,7 @@ export default function AppProvider({ children }) {
     setIsRecipeStarted,
     isChecked,
     setIsChecked,
+    requestRandom,
   };
 
   return (

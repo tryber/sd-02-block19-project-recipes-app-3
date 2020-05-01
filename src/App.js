@@ -7,8 +7,7 @@ import Perfil from './Pages/Perfil';
 import DetailsPage from './Pages/DetailsPage';
 import ReceitasFeitas from './Components/ReceitasFeitas';
 import ReceitasFavoritas from './Components/ReceitasFavoritas';
-
-
+import ExplorarReceita from './Components/ExplorarReceita';
 import './App.css';
 
 function App() {
@@ -20,6 +19,7 @@ function App() {
         <Route path="/receitas-feitas" component={ReceitasFeitas} />
         <Route path="/receitas-favoritas" component={ReceitasFavoritas} />
         <Route exact path="/explorar" component={Explorar} />
+        <Route path="/explorar" component={ExplorarReceita} />
         {/* <Route path="/explorar" component={ExplorarReceita} /> */}
         <Route path="/perfil" component={Perfil} />
         <Route exact path="/" component={Home} />
