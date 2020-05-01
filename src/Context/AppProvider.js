@@ -3,6 +3,19 @@ import PropTypes from 'prop-types';
 import { apiRequest, resRdm } from '../Services/APIs';
 import RecipesContext from './index';
 
+
+const verifyRequest = (
+  stopFetching, requestInitialPage, setIsFetching,
+  setCopy, setDrinkOrMeal,
+) => {
+  if (stopFetching) return;
+  if (requestInitialPage.length === 12) {
+    setIsFetching(false);
+    setCopy([...requestInitialPage]);
+  }
+  if (requestInitialPage.length < 12 && requestInitialPage.length > 0) { setDrinkOrMeal(resRdm); }
+}
+
 export default function AppProvider({ children }) {
   const local = window.location.pathname.split('/')[3];
   const [requestInitialPage, setRequestInitialPage] = useState([]);
@@ -67,12 +80,10 @@ export default function AppProvider({ children }) {
   }, [window.location.href]);
 
   useEffect(() => {
-    if (stopFetching) return;
-    if (requestInitialPage.length === 12) {
-      setIsFetching(false);
-      setCopy([...requestInitialPage]);
-    }
-    if (requestInitialPage.length < 12 && requestInitialPage.length > 0) { setDrinkOrMeal(resRdm); }
+    verifyRequest(
+      stopFetching, requestInitialPage, setIsFetching,
+      setCopy, setDrinkOrMeal,
+    );
   }, [requestInitialPage]);
 
 
@@ -87,7 +98,7 @@ export default function AppProvider({ children }) {
 
   const requestOrigin = (requestParam) => (
     apiRequest(requestParam)
-    .then(({ meals }) => { setOrigin([...meals]); setStopFetching(false); })
+      .then(({ meals }) => { setOrigin([...meals]); setStopFetching(false); })
   );
 
   const requestRandom = () => (

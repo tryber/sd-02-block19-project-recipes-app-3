@@ -10,7 +10,7 @@ const DropdownOrigem = () => {
     setRequestInitialPage,
   } = useContext(RecipesContext);
   const selectedOrigin = (e) => {
-    if(e === '') setRequestInitialPage([...copy]);
+    if (e === '') setRequestInitialPage([...copy]);
     else searchResults(e);
   };
 
