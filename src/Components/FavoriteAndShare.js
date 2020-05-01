@@ -40,11 +40,13 @@ const FavoriteAndShare = () => {
   };
 
   useEffect(() => {
-    JSON.parse(localStorage.getItem('favorite-recipes'))
-      ? setIsFavorite(JSON.parse(localStorage.getItem('favorite-recipes')).find(({ idMeal, idDrink }) => (
-        idMeal === foodDetail || idDrink === foodDetail
-      )))
-      : setIsFavorite(false);
+    setIsFavorite(localStorage.getItem('favorite-recipes')
+      ? JSON.parse(localStorage.getItem('favorite-recipes'))
+        .find(({ idMeal, idDrink }) => (
+          idMeal === foodDetail || idDrink === foodDetail
+        ))
+      : false
+    );
   }, []);
 
   return (

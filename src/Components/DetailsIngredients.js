@@ -57,8 +57,7 @@ const DetailsIngredients = () => {
   ));
 
   useEffect(() => {
-    localStorage.getItem(foodDetail)
-      && setIsChecked([...JSON.parse(localStorage.getItem(foodDetail))]);
+    if (localStorage.getItem(foodDetail)) setIsChecked([...JSON.parse(localStorage.getItem(foodDetail))]);
   }, []);
 
   useEffect(() => {
