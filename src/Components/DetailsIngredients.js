@@ -41,11 +41,7 @@ const ingredientAndMeasure = (
 
 const DetailsIngredients = () => {
   const {
-    foodObject,
-    isChecked,
-    setIsChecked,
-    isRecipeStarted,
-    foodDetail,
+    foodObject, isChecked, setIsChecked, isRecipeStarted, foodDetail,
   } = useContext(RecipesContext);
   const receive = foodObject.meals || foodObject.drinks;
   const isFood = receive[0];

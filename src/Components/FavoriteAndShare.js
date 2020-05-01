@@ -38,7 +38,7 @@ const heartClick = (isFavorite, setIsFavorite, foodObject, foodDetail) => {
   setIsFavorite(!isFavorite);
 };
 
-const copyComponent = (message, Share) => (
+const copyComponent = (message) => (
   <CopyToClipboard
     data-testid="share-btn"
     text={window.location.href}
@@ -73,14 +73,13 @@ const FavoriteAndShare = () => {
       ? JSON.parse(localStorage.getItem('favorite-recipes'))
         .find(({ idMeal, idDrink }) => (
           idMeal === foodDetail || idDrink === foodDetail
-        ))
-      : false,
+        )) : false,
     );
   }, []);
 
   return (
     <div className="FavShare_father">
-      {copyComponent(message, Share)}
+      {copyComponent(message)}
       <button
         data-testid="favorite-btn"
         className="FavShare_content"
