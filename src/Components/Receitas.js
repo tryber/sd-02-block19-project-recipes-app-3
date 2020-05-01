@@ -4,7 +4,7 @@ import { resultsRandom } from '../Services/APIs';
 import RecipesContext from '../Context';
 import Footer from '../Components/Footer';
 import Header from './Header';
-import "../Styles/Cards.css"
+import '../Styles/Cards.css';
 
 const renderCard = (setFoodDetail, food, index, local) => (
   <Link
