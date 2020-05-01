@@ -5,13 +5,13 @@ import RecipesContext from '../Context';
 const DropdownOrigem = () => {
   const { origin,
     visibleSearch,
-    setDrinkOrMeal,
+    searchResults,
     copy,
     setRequestInitialPage,
   } = useContext(RecipesContext);
-  const selectedOrigin = (e) => (
-    e === '' ? setRequestInitialPage([...copy]) : setDrinkOrMeal(e)
-  );
+  const selectedOrigin = (e) => {
+    e === '' ? setRequestInitialPage([...copy]) : searchResults(e)
+  };
 
   return !visibleSearch &&
     (
@@ -20,7 +20,7 @@ const DropdownOrigem = () => {
           data-testid="explore-by-area-dropdown"
           onClick={(e) => selectedOrigin(e.target.value)}
         >
-          <option data-testid="Todas-option" value="">Todas</option>
+          <option data-testid="All-option" value="">All</option>
           {origin
             .map(({ strArea }) =>
               <option

@@ -4,7 +4,9 @@ import { Redirect } from 'react-router-dom';
 const onHandleSubmit = (emailValue) => {
   localStorage.setItem('meals-token', '1');
   localStorage.setItem('cocktails-token', '1');
-  localStorage.setItem('user', JSON.stringify({ email: emailValue }));
+  localStorage.setItem('user', JSON.stringify({
+    email: emailValue,
+  }));
   return true;
 };
 
