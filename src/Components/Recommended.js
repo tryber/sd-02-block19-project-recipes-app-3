@@ -67,12 +67,10 @@ const Recommended = () => {
   const [randomRequests, setRandomRequests] = useState([]);
   const [failed, setFailed] = useState([]);
   const [isRequesting, setIsRequesting] = useState(true);
-
   const successRequest = (param) => {
     const condition = param.meals || param.drinks;
     setRandomRequests([...randomRequests, condition[0]]);
   };
-
   const failedRequest = ({ message }) => {
     setFailed(message);
     alert(failed);
