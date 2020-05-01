@@ -14,7 +14,7 @@ const verifyRequest = (
     setCopy([...requestInitialPage]);
   }
   if (requestInitialPage.length < 12 && requestInitialPage.length > 0) { setDrinkOrMeal(resRdm); }
-}
+};
 
 export default function AppProvider({ children }) {
   const local = window.location.pathname.split('/')[3];
@@ -28,7 +28,6 @@ export default function AppProvider({ children }) {
   const [noResults, setNoResults] = useState(false);
   const [foodDetail, setFoodDetail] = useState(local);
   const [foodObject, setFoodObject] = useState({});
-  const [foodObjectFail, setFoodObjectFail] = useState({});
   const [isRecipeStarted, setIsRecipeStarted] = useState(false);
   const [isChecked, setIsChecked] = useState([]);
   const [pageName, setPageName] = useState('Comidas');
@@ -64,13 +63,9 @@ export default function AppProvider({ children }) {
     setFoodObject(apiReturnFood);
   };
 
-  const failFoodRequest = ({ message }) => {
-    setFoodObjectFail(message);
-  };
-
   const idSearch = (searchParam) => {
     apiRequest(searchParam)
-      .then(successFoodRequest, failFoodRequest);
+      .then(successFoodRequest, failDrinkOrMeal);
   };
 
   useEffect(() => {
@@ -142,7 +137,6 @@ export default function AppProvider({ children }) {
     setPageName,
     idSearch,
     foodObject,
-    foodObjectFail,
     isRecipeStarted,
     setIsRecipeStarted,
     isChecked,
