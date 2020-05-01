@@ -39,24 +39,31 @@ const ingredientAndMeasure = (
   </div>
 );
 
+const ingredientsList = (isFood) => (
+  Object.keys(isFood).filter((food) => (
+    food.includes('Ingredient')
+  ))
+);
+
+const measuresList = (isFood) => (
+  Object.keys(isFood).filter((food) => (
+    food.includes('Measure')
+  ))
+);
+
 const DetailsIngredients = () => {
   const {
     foodObject, isChecked, setIsChecked, isRecipeStarted, foodDetail,
   } = useContext(RecipesContext);
   const receive = foodObject.meals || foodObject.drinks;
-  const isFood = receive[0];
-  const isIngredient = Object.keys(isFood).filter((food) => (
-    food.includes('Ingredient')
-  ));
-  const isMeasure = Object.keys(isFood).filter((food) => (
-    food.includes('Measure')
-  ));
+  const isIngredient = ingredientsList(receive[0]);
+  const isMeasure = measuresList(receive[0]);
 
-  useEffect(() => {
-    if (localStorage.getItem(foodDetail)) {
-      setIsChecked([...JSON.parse(localStorage.getItem(foodDetail))]);
-    }
-  }, []);
+    useEffect(() => {
+      if (localStorage.getItem(foodDetail)) {
+        setIsChecked([...JSON.parse(localStorage.getItem(foodDetail))]);
+      }
+    }, []);
 
   useEffect(() => {
     const inProgress = JSON.parse(localStorage.getItem('in-progress')) || [];
@@ -76,12 +83,7 @@ const DetailsIngredients = () => {
               ingredientToShow
               && <div key={`${ingredient} and ${isMeasure[index]} to Recipe`}>
                 {ingredientAndMeasure(
-                  ingredientToShow,
-                  measureToShow,
-                  index,
-                  setIsChecked,
-                  isChecked,
-                  isRecipeStarted,
+                  ingredientToShow, measureToShow, index, setIsChecked, isChecked, isRecipeStarted,
                 )}
               </div>
             );
