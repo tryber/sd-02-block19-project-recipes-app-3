@@ -57,14 +57,14 @@ const DetailsIngredients = () => {
   ));
 
   useEffect(() => {
-    JSON.parse(localStorage.getItem(foodDetail))
+    localStorage.getItem(foodDetail)
       && setIsChecked([...JSON.parse(localStorage.getItem(foodDetail))]);
   }, []);
 
   useEffect(() => {
     const inProgress = JSON.parse(localStorage.getItem('in-progress')) || [];
-    inProgress.includes(foodDetail)
-      && localStorage.setItem(foodDetail, JSON.stringify(isChecked));
+    const includesFood = inProgress.includes(foodDetail);
+    includesFood && localStorage.setItem(foodDetail, JSON.stringify(isChecked));
   }, [isChecked]);
 
   return (
