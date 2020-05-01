@@ -85,10 +85,11 @@ export default function AppProvider({ children }) {
   );
 
 
-  const requestOrigin = (requestParam) => (apiRequest(requestParam)
-    .then(({ meals }) => {setOrigin([...meals]);setStopFetching(false)})
+  const requestOrigin = (requestParam) => (
+    apiRequest(requestParam)
+    .then(({ meals }) => { setOrigin([...meals]); setStopFetching(false); })
   );
-  
+
   const requestRandom = () => (
     apiRequest('/random.php')
       .then(({ drinks = [{}], meals = [{}] }) => {
@@ -136,7 +137,7 @@ export default function AppProvider({ children }) {
     isChecked,
     setIsChecked,
     requestRandom,
-    searchResults
+    searchResults,
   };
 
   return (

@@ -15,7 +15,7 @@ function App() {
   return (
     <BrowserRouter>
       <Switch>
-      <Route path="/receitas/:comidabebida/:id" component={DetailsPage} />
+        <Route path="/receitas/:comidabebida/:id" component={DetailsPage} />
         <Route path="/receitas" component={Receitas} />
         <Route path="/receitas-feitas" component={ReceitasFeitas} />
         <Route path="/receitas-favoritas" component={ReceitasFavoritas} />

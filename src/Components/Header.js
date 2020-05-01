@@ -43,7 +43,7 @@ const renderDebounce = (searchCriteria, inputChange) => (
     maxLength={searchCriteria === '/search.php?f=' ? 1 : 30}
   />
 );
-const arrayPName =['Explorar', 'Explorar - Comidas','Explorar - Bebidas'];
+const arrayPName = ['Explorar', 'Explorar - Comidas', 'Explorar - Bebidas'];
 export default function Header() {
   const [searchCriteria, setSearchCriteria] = useState('');
   const [input, setInput] = useState('');
