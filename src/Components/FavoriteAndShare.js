@@ -15,15 +15,16 @@ const trueFavorited = (haveFavorited, foodDetail) => {
       ));
     localStorage.setItem('favorite-recipes', JSON.stringify(removeFavorited));
   }
-}
+};
 
 const falseFavorited = (haveFavorited, firstObject) => {
   if (!haveFavorited) {
-    JSON.parse(localStorage.getItem('favorite-recipes'))
-      ? localStorage.setItem('favorite-recipes', JSON.stringify([...JSON.parse(localStorage.getItem('favorite-recipes')), firstObject]))
-      : localStorage.setItem('favorite-recipes', JSON.stringify([firstObject]));
+    localStorage.setItem('favorite-recipes',
+      localStorage.getItem('favorite-recipes')
+        ? JSON.stringify([...JSON.parse(localStorage.getItem('favorite-recipes')), firstObject])
+        : JSON.stringify([firstObject]));
   }
-}
+};
 
 const heartClick = (isFavorite, setIsFavorite, foodObject, foodDetail) => {
   const mealOrDrink = foodObject.meals || foodObject.drinks;

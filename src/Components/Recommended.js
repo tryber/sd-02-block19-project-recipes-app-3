@@ -36,7 +36,7 @@ const carouselRecommended = (requests, setFoodDetail, setRandomRequests, setIsRe
     : '/receitas/comidas';
   return (
     <Carousel
-      infinite={true}
+      infinite
       removeArrowOnDeviceType={['tablet', 'mobile']}
       responsive={responsive}
     >
