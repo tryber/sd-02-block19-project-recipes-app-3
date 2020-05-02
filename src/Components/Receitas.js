@@ -4,27 +4,31 @@ import { resultsRandom } from '../Services/APIs';
 import RecipesContext from '../Context';
 import Footer from '../Components/Footer';
 import Header from './Header';
+import CategoryBar from './CategoryBar';
 import '../Styles/Cards.css';
 
-const renderCard = (setFoodDetail, food, index, local) => (
-  <Link
-    onClick={(() => setFoodDetail(food))}
-    className="recipe-container"
-    to={(window.location.href.includes('comidas') ? `/receitas/comidas/${food.idMeal}` : `/bebidas/${food.idDrink}`)}
-    key={`food${Math.random() * 10000000}`}
-  >
-    <img
-      data-testid={`${index}-card-img`}
-      className="recipe-image"
-      alt={food[`str${local}`]}
-      src={food[`str${local}Thumb`]}
-    />
-    <div className="CatName-Wrapper">
-      <p className="recipe-category">{food.strCategory}</p>
-      <p className="recipe-name" data-testid={`${index}-card-name`} >{food[`str${local}`]}</p>
-    </div>
-  </Link>
-);
+const renderCard = (setFoodDetail, food, index, local) => {
+  const type = food.idMeal ? 'Meal' : 'Drink';
+  return (
+    <Link
+      onClick={(() => setFoodDetail(food[`id${type}`]))}
+      className="recipe-container"
+      to={(window.location.href.includes('comidas') ? `/receitas/comidas/${food.idMeal}` : `/receitas/bebidas/${food.idDrink}`)}
+      key={`food${Math.random() * 10000000}`}
+    >
+      <img
+        data-testid={`${index}-card-img`}
+        className="recipe-image"
+        alt={food[`str${local}`]}
+        src={food[`str${local}Thumb`]}
+      />
+      <div className="CatName-Wrapper">
+        <p className="recipe-category">{food.strCategory}</p>
+        <p className="recipe-name" data-testid={`${index}-card-name`} >{food[`str${local}`]}</p>
+      </div>
+    </Link>
+  );
+};
 
 const Receitas = () => {
   const {
@@ -43,6 +47,7 @@ const Receitas = () => {
       ? fetchError ||
       <div>
         <Header />
+        <CategoryBar />
         {!noResults ? requestInitialPage.map((food, index) => {
           const local = food.idDrink ? 'Drink' : 'Meal';
           return (

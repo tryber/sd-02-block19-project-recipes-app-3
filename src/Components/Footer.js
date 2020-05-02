@@ -1,37 +1,62 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import Drinks from '../Images/Drinks.svg';
 import Explore from '../Images/Explore.svg';
 import Meals from '../Images/Meals.svg';
+import RecipesContext from '../Context';
 import '../Styles/Footer.css';
 
-const Footer = () => (
-  <div className="Footer_all">
-    <Link to="/receitas/bebidas" >
-      <div
-        data-testid="drinks-bottom-btn"
-        className="Footer_icon"
-      >
-        <img src={Drinks} alt="Drinks redirect" />
-      </div>
-    </Link>
-    <Link to="/explorar">
-      <div
-        data-testid="explore-bottom-btn"
-        className="Footer_icon"
-      >
-        <img src={Explore} alt="Explore redirect" />
-      </div>
-    </Link>
-    <Link to="/receitas/comidas">
-      <div
-        data-testid="food-bottom-btn"
-        className="Footer_icon"
-      >
-        <img src={Meals} alt="Meals redirect" />
-      </div>
-    </Link>
-  </div>
+const DrinksToFooter = (setRequestInitialPage, setPageName) => (
+  <Link
+    to="/receitas/bebidas"
+    onClick={() => { setRequestInitialPage([]); setPageName('Bebidas'); }}
+  >
+    <div
+      data-testid="drinks-bottom-btn"
+      className="Footer_icon"
+    >
+      <img src={Drinks} alt="Drinks redirect" />
+    </div>
+  </Link>
 );
+
+const ExploreToFooter = (setRequestInitialPage, setPageName) => (
+  <Link
+    onClick={() => { setRequestInitialPage([]); setPageName('Explorar'); }}
+    to="/explorar"
+  >
+    <div
+      data-testid="explore-bottom-btn"
+      className="Footer_icon"
+    >
+      <img src={Explore} alt="Explore redirect" />
+    </div>
+  </Link>
+);
+
+const MealsToFooter = (setRequestInitialPage, setPageName) => (
+  <Link
+    onClick={() => { setRequestInitialPage([]); setPageName('Comidas'); }}
+    to="/receitas/comidas"
+  >
+    <div
+      data-testid="food-bottom-btn"
+      className="Footer_icon"
+    >
+      <img src={Meals} alt="Meals redirect" />
+    </div>
+  </Link>
+);
+
+const Footer = () => {
+  const { setRequestInitialPage, setPageName } = useContext(RecipesContext);
+  return (
+    <div className="Footer_all">
+      {DrinksToFooter(setRequestInitialPage, setPageName)}
+      {ExploreToFooter(setRequestInitialPage, setPageName)}
+      {MealsToFooter(setRequestInitialPage, setPageName)}
+    </div>
+  );
+};
 
 export default Footer;
