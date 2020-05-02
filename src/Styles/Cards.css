@@ -1,25 +1,22 @@
 .recipe-container {
   border-radius: 10px;
   box-shadow: 0 5px 5px gray;
-  display: flex;
-  height: 150px;
+  display: inline-grid;
+  height: 340px;
   margin: 10px;
   text-decoration: none;
-  width: 340px;
+  width: 160px;
 }
 
 .recipe-image {
   border-radius: 10px 10px 0 0;
-  height: 150px;
-  width: 170px;
+  height: 170px;
+  width: 160px;
 }
 
 .CatName-Wrapper {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  display: grid;
   text-align: center;
-  width: 170px;
 }
 
 .recipe-category {
@@ -29,6 +26,5 @@
 
 .recipe-name {
   color: black;
-  font-size: 20px;
-  margin: 0;
+  font-size: 18px;
 }
