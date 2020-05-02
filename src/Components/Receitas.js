@@ -1,10 +1,9 @@
 import React, { useEffect, useContext } from 'react';
-import { Link } from 'react-router-dom';
-import { resultsRandom } from '../Services/APIs';
+import { Link, Redirect } from 'react-router-dom';
+import { resRdm } from '../Services/APIs';
 import RecipesContext from '../Context';
 import Footer from '../Components/Footer';
 import Header from './Header';
-import CategoryBar from './CategoryBar';
 
 const renderCard = (setFoodDetail, food, index, local) => {
   const type = food.idMeal ? 'Meal' : 'Drink';
@@ -27,6 +26,22 @@ const renderCard = (setFoodDetail, food, index, local) => {
   );
 };
 
+const redirectWindow = (array, setFoodDetail) => {
+  const recipe = array.idDrink || array.idMeal;
+  setFoodDetail(recipe);
+  return (
+    <Redirect to={`${window.location.pathname}/${recipe}`} />
+  );
+};
+
+const results = (noResults, requestInitialPage, setFoodDetail) => (
+  !noResults ? requestInitialPage.map((food, index) => {
+    const local = food.idDrink ? 'Drink' : 'Meal';
+    return (
+      index < 12 && renderCard(setFoodDetail, food, index, local));
+  }) : <p>Sem Resultados</p>
+);
+
 const Receitas = () => {
   const {
     setDrinkOrMeal, fetchError, setFoodDetail, requestInitialPage,
@@ -36,23 +51,17 @@ const Receitas = () => {
   useEffect(() => {
     setRequestInitialPage([]);
     setIsFetching(true);
-    setDrinkOrMeal(resultsRandom);
+    setDrinkOrMeal(resRdm);
   }, [window.location.href]);
   if (requestInitialPage === undefined) return (<h1>Nenhum Resultado</h1>);
+
   return (
     !isFetching
       ? fetchError ||
       <div>
         <Header />
-        <CategoryBar />
-        {!noResults ? requestInitialPage.map((food, index) => {
-          const local = food.idDrink ? 'Drink' : 'Meal';
-          return (
-            index < 12
-              ? renderCard(setFoodDetail, food, index, local)
-              : null
-          );
-        }) : <p>Sem Resultados</p>}
+        {requestInitialPage.length === 1 && redirectWindow(requestInitialPage[0], setFoodDetail)}
+        {results(noResults, requestInitialPage, setFoodDetail)}
         <Footer />
       </div>
       : <p>Loading</p>

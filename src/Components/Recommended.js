@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
-import { apiReverse, resultsRandom } from '../Services/APIs';
+import { apiReverse, resRdm } from '../Services/APIs';
 import RecipesContext from '../Context';
 import '../Styles/Recommended.css';
 
@@ -81,7 +81,7 @@ const Recommended = () => {
       setIsRequesting(false);
     }
     if (randomRequests.length < 6) {
-      apiReverse(resultsRandom)
+      apiReverse(resRdm)
         .then(successRequest, failedRequest);
     }
   }, [randomRequests, window.location.href]);

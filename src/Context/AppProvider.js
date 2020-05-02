@@ -1,26 +1,30 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { apiRequest, resultsRandom } from '../Services/APIs';
+import { apiRequest, resRdm } from '../Services/APIs';
 import RecipesContext from './index';
 
 
-const verify = (
-  condition,
-  setnoresults,
-  requestinitialpage,
-  setrequestinitialpage,
-  setstopfetching,
+const verifyRequest = (
+  stopFetching, requestInitialPage, setIsFetching,
+  setCopy, setDrinkOrMeal,
 ) => {
-  if (!condition) return setnoresults(true);
-  if (condition.length > 1) {
-    setrequestinitialpage([...condition]);
-    setstopfetching(true);
-    return '';
-  } if (condition.length === 1) {
-    setrequestinitialpage([...condition, ...requestinitialpage]);
-    setstopfetching(false);
+  if (stopFetching) return;
+  if (requestInitialPage.length === 12) {
+    setIsFetching(false);
+    setCopy([...requestInitialPage]);
   }
-  return '';
+  if (requestInitialPage.length < 12 && requestInitialPage.length > 0) { setDrinkOrMeal(resRdm); }
+};
+
+const categorySearch = (
+  input, searchCriteria, copy, setRequestInitialPage, setNoResults, searchResults,
+) => {
+  if (input !== '' && searchCriteria !== '') {
+    searchResults(`${searchCriteria}${input.split(' ').join('_')}`);
+    return;
+  }
+  setRequestInitialPage([...copy]);
+  setNoResults(false);
 };
 
 export default function AppProvider({ children }) {
@@ -35,22 +39,15 @@ export default function AppProvider({ children }) {
   const [noResults, setNoResults] = useState(false);
   const [foodDetail, setFoodDetail] = useState(local);
   const [foodObject, setFoodObject] = useState({});
-  const [foodObjectFail, setFoodObjectFail] = useState({});
   const [isRecipeStarted, setIsRecipeStarted] = useState(false);
   const [isChecked, setIsChecked] = useState([]);
   const [pageName, setPageName] = useState('Comidas');
-
+  const [origin, setOrigin] = useState([]);
 
   const successDrinkOrMeal = (results) => {
     const condition = results.meals || results.drinks;
-
-    verify(
-      condition,
-      setNoResults,
-      requestInitialPage,
-      setRequestInitialPage,
-      setStopFetching,
-    );
+    setRequestInitialPage([...condition, ...requestInitialPage]);
+    setStopFetching(false);
   };
 
   const failDrinkOrMeal = ({ message }) => {
@@ -59,21 +56,27 @@ export default function AppProvider({ children }) {
 
   const setDrinkOrMeal = (paramRequest) => {
     setNoResults(false);
-    apiRequest(paramRequest)
-      .then(successDrinkOrMeal, failDrinkOrMeal);
+    apiRequest(paramRequest).then(successDrinkOrMeal, failDrinkOrMeal);
+  };
+
+  const successSearch = ({ drinks, meals }) => {
+    if (!drinks && !meals) return setNoResults(true);
+    setStopFetching(true);
+    return setRequestInitialPage([...drinks || meals]);
+  };
+
+  const searchResults = (paramRequest) => {
+    setNoResults(false);
+    apiRequest(paramRequest).then(successSearch, failDrinkOrMeal);
   };
 
   const successFoodRequest = (apiReturnFood) => {
     setFoodObject(apiReturnFood);
   };
 
-  const failFoodRequest = ({ message }) => {
-    setFoodObjectFail(message);
-  };
-
   const idSearch = (searchParam) => {
     apiRequest(searchParam)
-      .then(successFoodRequest, failFoodRequest);
+      .then(successFoodRequest, failDrinkOrMeal);
   };
 
   useEffect(() => {
@@ -83,23 +86,25 @@ export default function AppProvider({ children }) {
   }, [window.location.href]);
 
   useEffect(() => {
-    if (stopFetching) return;
-    if (requestInitialPage.length === 12) {
-      setIsFetching(false);
-      setCopy([...requestInitialPage]);
-    }
-    if (requestInitialPage.length < 12 && requestInitialPage.length > 0) {
-      setDrinkOrMeal(resultsRandom);
-    }
+    verifyRequest(
+      stopFetching, requestInitialPage, setIsFetching,
+      setCopy, setDrinkOrMeal,
+    );
   }, [requestInitialPage]);
 
 
   const requestCategory = (requestParam) => (
     apiRequest(requestParam)
-    .then((results) => {
-      const { categories, drinks } = results;
-      setArrayCategory(categories || drinks);
-    })
+      .then((results) => {
+        const { categories, drinks } = results;
+        setArrayCategory(categories || drinks);
+      })
+  );
+
+
+  const requestOrigin = (requestParam) => (
+    apiRequest(requestParam)
+      .then(({ meals }) => { setOrigin([...meals]); setStopFetching(false); })
   );
 
   const requestRandom = () => (
@@ -111,18 +116,17 @@ export default function AppProvider({ children }) {
       })
   );
 
+
   const defineSearch = (input, searchCriteria) => {
-    if (input !== '' && searchCriteria !== '') {
-      setDrinkOrMeal(`${searchCriteria}${input.split(' ').join('_')}`);
-      return;
-    }
-    setNoResults(false);
-    setRequestInitialPage([...copy]);
+    categorySearch(
+      input, searchCriteria, copy, setRequestInitialPage, setNoResults, searchResults,
+    );
   };
 
   const context = {
     setIsFetching,
     requestInitialPage,
+    setRequestInitialPage,
     setDrinkOrMeal,
     fetchError,
     defineSearch,
@@ -131,20 +135,22 @@ export default function AppProvider({ children }) {
     setVisibleSearch,
     requestCategory,
     arrayCategory,
-    setRequestInitialPage,
     noResults,
     setFoodDetail,
     foodDetail,
+    requestOrigin,
+    origin,
+    copy,
     pageName,
     setPageName,
     idSearch,
     foodObject,
-    foodObjectFail,
     isRecipeStarted,
     setIsRecipeStarted,
     isChecked,
     setIsChecked,
     requestRandom,
+    searchResults,
   };
 
   return (
