@@ -48,8 +48,7 @@ const carouselRecommended = (requests, setFoodDetail, setRandomRequests, setIsRe
             setIsRequesting(true);
           })}
           to={`${toDetailsPage}/${food[`id${type}`]}`}
-        >
-          <div data-testid={`${index}-recomendation-card`}>
+        > <div data-testid={`${index}-recomendation-card`}>
             <img
               className="To_Carousel"
               src={food[`str${type}Thumb`]}
