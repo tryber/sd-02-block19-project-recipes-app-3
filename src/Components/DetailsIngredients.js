@@ -1,5 +1,6 @@
 import React, { useContext, useEffect } from 'react';
 import RecipesContext from '../Context/';
+import './DetailsIngredient.css';
 
 const checkIndex = (isChecked, ingredient, setIsChecked) => (
   isChecked.includes(ingredient)
@@ -23,14 +24,20 @@ const isCheckboxMark = (foodDetail, setIsChecked) => {
   }
 };
 
-const ingredientName = (index, ingredientToShow) => (
-  <span data-testid={`${index}-ingredient-name`}>
+const ingredientName = (index, ingredientToShow, boolCheck) => (
+  <span
+    className={boolCheck && "wordStriking"}
+    data-testid={`${index}-ingredient-name`}
+  >
     {ingredientToShow}
   </span>
 );
 
-const measureText = (index, measureToShow) => (
-  <span data-testid={`${index}-ingredient-measure`}>
+const measureText = (index, measureToShow, boolCheck) => (
+  <span
+    data-testid={`${index}-ingredient-measure`}
+    className={boolCheck && "wordStriking"}
+  >
     {measureToShow}
   </span>
 );
@@ -51,31 +58,32 @@ const toShow = (
   isIngredient, isFood, isMeasure,
   isChecked, setIsChecked, isRecipeStarted,
 ) => (
-  <div>
-    {isIngredient.map((ingredient, index) => {
-      const ingredientToShow = isFood[ingredient];
-      const measureToShow = isFood[isMeasure[index]];
-      const ingAndMeasure = `${ingredientToShow} - ${measureToShow}`;
-      return (
-        ingredientToShow
-        && <div key={`${ingredient} and ${isMeasure[index]} to Recipe`}>
-          {<div>
-            {isRecipeStarted &&
-              <input
-                type="checkbox"
-                checked={isChecked.includes(ingAndMeasure)}
-                onChange={() => checkIndex(isChecked, ingAndMeasure, setIsChecked)}
-              />
-            }
-            {ingredientName(index, ingredientToShow)}
-            <span> - </span>
-            {measureText(index, measureToShow)}
-          </div>}
-        </div>
-      );
-    })}
-  </div>
-);
+    <div>
+      {isIngredient.map((ingredient, index) => {
+        const ingredientToShow = isFood[ingredient];
+        const measureToShow = isFood[isMeasure[index]];
+        const ingAndMeasure = `${ingredientToShow} - ${measureToShow}`;
+        const boolCheck = isChecked.includes(ingAndMeasure);
+        return (
+          ingredientToShow
+          && <div key={`${ingredient} and ${isMeasure[index]} to Recipe`}>
+            {<div>
+              {isRecipeStarted &&
+                <input
+                  type="checkbox"
+                  checked={boolCheck}
+                  onChange={() => checkIndex(isChecked, ingAndMeasure, setIsChecked)}
+                />
+              }
+              {ingredientName(index, ingredientToShow, boolCheck && isRecipeStarted)}
+              <span> - </span>
+              {measureText(index, measureToShow, boolCheck && isRecipeStarted)}
+            </div>}
+          </div>
+        );
+      })}
+    </div>
+  );
 
 const DetailsIngredients = () => {
   const {

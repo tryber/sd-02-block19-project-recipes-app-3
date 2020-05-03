@@ -41,6 +41,7 @@ const carouselRecommended = (requests, setFoodDetail, setRandomRequests, setIsRe
     >
       {requests.map((food, index) => (
         <Link
+          key={food[`id${type}`]}
           onClick={(() => {
             setFoodDetail(food[`id${type}`]);
             setRandomRequests([]);
