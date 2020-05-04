@@ -38,11 +38,13 @@ export default function AppProvider({ children }) {
   const [stopFetching, setStopFetching] = useState(false);
   const [noResults, setNoResults] = useState(false);
   const [foodDetail, setFoodDetail] = useState(local);
+  const [idDetail, setIdDetail] = useState('');
   const [foodObject, setFoodObject] = useState({});
   const [isRecipeStarted, setIsRecipeStarted] = useState(false);
   const [isChecked, setIsChecked] = useState([]);
   const [pageName, setPageName] = useState('Comidas');
   const [origin, setOrigin] = useState([]);
+  const [ingredient, setIngredient] = useState([]);
 
   const successDrinkOrMeal = (results) => {
     const condition = results.meals || results.drinks;
@@ -62,6 +64,7 @@ export default function AppProvider({ children }) {
   const successSearch = ({ drinks, meals }) => {
     if (!drinks && !meals) return setNoResults(true);
     setStopFetching(true);
+    setIsFetching(false);
     return setRequestInitialPage([...drinks || meals]);
   };
 
@@ -98,13 +101,23 @@ export default function AppProvider({ children }) {
       .then((results) => {
         const { categories, drinks } = results;
         setArrayCategory(categories || drinks);
-      })
+      }, failDrinkOrMeal)
+  );
+
+  const requestIngredient = (requestParam) => (
+    apiRequest(requestParam)
+      .then(({ drinks, meals }) => setIngredient(drinks || meals), failDrinkOrMeal)
   );
 
 
+  const searchForIngredient = (requestParam) => (
+    apiRequest(requestParam)
+      .then(successSearch, failDrinkOrMeal)
+  );
+
   const requestOrigin = (requestParam) => (
     apiRequest(requestParam)
-      .then(({ meals }) => { setOrigin([...meals]); setStopFetching(false); })
+      .then(({ meals }) => { setOrigin([...meals]); setStopFetching(false); }, failDrinkOrMeal)
   );
 
   const requestRandom = () => (
@@ -112,8 +125,9 @@ export default function AppProvider({ children }) {
       .then(({ drinks = [{}], meals = [{}] }) => {
         const { idDrink } = drinks[0];
         const { idMeal } = meals[0];
+        setIdDetail(idDrink || idMeal);
         setFoodDetail(idDrink || idMeal);
-      })
+      }, failDrinkOrMeal)
   );
 
 
@@ -151,6 +165,13 @@ export default function AppProvider({ children }) {
     setIsChecked,
     requestRandom,
     searchResults,
+    requestIngredient,
+    ingredient,
+    idDetail,
+    setIdDetail,
+    searchForIngredient,
+    setStopFetching,
+    stopFetching,
   };
 
   return (
