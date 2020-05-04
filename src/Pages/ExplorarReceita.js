@@ -10,8 +10,7 @@ const ExplorarReceita = () => {
   } = useContext(RecipesContext);
   useEffect(() => () => { setIdDetail(''); }, []);
   return (
-    <div>
-      <Header />
+    <div><Header />
       <Link to={`${window.location.pathname}/ingredientes`}>
         <button onClick={() => setPageName('Explorar Ingredientes')} data-testid="explore-by-ingredient" type="button">
           Por Ingredientes
@@ -34,8 +33,7 @@ const ExplorarReceita = () => {
         Me surpreenda!
       </button>
       {(idDetail !== '') && <Redirect to={`/receitas/${window.location.pathname.split('/')[2]}/${idDetail}`} />}
-      <Footer />
-    </div>
+      <Footer /></div>
   );
 };
 
