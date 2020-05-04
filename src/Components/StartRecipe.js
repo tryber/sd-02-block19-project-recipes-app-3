@@ -3,6 +3,8 @@ import { Redirect } from 'react-router-dom';
 import RecipesContext from '../Context';
 
 const inProgress = JSON.parse(localStorage.getItem('in-progress')) || [];
+const doneLocalStorage = JSON.parse(localStorage.getItem('done-recipes')) || [];
+const mealPage = window.location.href.includes('comidas') ? 'Meal' : 'Drink';
 
 const insertLocalStorage = (isRecipeStarted, setIsRecipeStarted, foodDetail, setIsFinish) => {
   if (!inProgress.includes(foodDetail)) {
@@ -47,11 +49,7 @@ const StartRecipe = () => {
   useEffect(() => { setIsFinish(false); }, [window.location.href]);
   useEffect(() => () => setIsRecipeStarted(false), []);
 
-  const doneLocalStorage = JSON.parse(localStorage.getItem('done-recipes')) || [];
-  const food = window.location.href.includes('comidas') ? 'Meal' : 'Drink';
-  const isDone = doneLocalStorage.find((recipe) => (
-    recipe[`id${food}`] == foodDetail
-  ));
+  const isDone = doneLocalStorage.find((recipe) => (recipe[`id${mealPage}`] === foodDetail));
   const startOrEnd = inProgress.includes(foodDetail) ? 'Continuar Receita' : 'Iniciar Receita';
   return isRedirect ? <Redirect to="/receitas-feitas" /> : (
     <div>
