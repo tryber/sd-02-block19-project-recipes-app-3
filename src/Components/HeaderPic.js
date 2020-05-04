@@ -13,6 +13,6 @@ const HeaderPic = () => {
       <img data-testid="profile-top-btn" src={profilePicBtn} alt="profile button" />
     </Link>
   );
-}
+};
 
 export default HeaderPic;

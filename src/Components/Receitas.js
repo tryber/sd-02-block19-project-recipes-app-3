@@ -5,7 +5,7 @@ import RecipesContext from '../Context';
 import Footer from '../Components/Footer';
 import Header from './Header';
 
-const renderCard = (setFoodDetail, food, index, local) => {
+const renderCard = (setFoodDetail, food, index) => {
   const type = food.idMeal ? 'Meal' : 'Drink';
   return (
     <Link
@@ -35,10 +35,9 @@ const redirectWindow = (array, setFoodDetail) => {
 };
 
 const results = (noResults, requestInitialPage, setFoodDetail) => (
-  !noResults ? requestInitialPage.map((food, index) => {
-    return (
-      index < 12 && renderCard(setFoodDetail, food, index));
-  }) : <p>Sem Resultados</p>
+  !noResults ? requestInitialPage.map((food, index) => (
+      index < 12 && renderCard(setFoodDetail, food, index)))
+   : <p>Sem Resultados</p>
 );
 
 const Receitas = () => {
