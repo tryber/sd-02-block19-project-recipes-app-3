@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
-import { apiReverse, resultsRandom } from '../Services/APIs';
+import { apiReverse, resRdm } from '../Services/APIs';
 import RecipesContext from '../Context';
 import '../Styles/Recommended.css';
 
@@ -41,21 +41,21 @@ const carouselRecommended = (requests, setFoodDetail, setRandomRequests, setIsRe
     >
       {requests.map((food, index) => (
         <Link
+          key={food[`id${type}`]}
           onClick={(() => {
             setFoodDetail(food[`id${type}`]);
             setRandomRequests([]);
             setIsRequesting(true);
           })}
           to={`${toDetailsPage}/${food[`id${type}`]}`}
-        >
-          <div data-testid={`${index}-recomendation-card`}>
-            <img
-              className="To_Carousel"
-              src={food[`str${type}Thumb`]}
-              alt={food[`str${type}`]}
-            />
-            <p className="legend">{food[`str${type}`]}</p>
-          </div>
+        > <div data-testid={`${index}-recomendation-card`}>
+          <img
+            className="To_Carousel"
+            src={food[`str${type}Thumb`]}
+            alt={food[`str${type}`]}
+          />
+          <p className="legend">{food[`str${type}`]}</p>
+        </div>
         </Link>
       ))}
     </Carousel>
@@ -81,7 +81,7 @@ const Recommended = () => {
       setIsRequesting(false);
     }
     if (randomRequests.length < 6) {
-      apiReverse(resultsRandom)
+      apiReverse(resRdm)
         .then(successRequest, failedRequest);
     }
   }, [randomRequests, window.location.href]);
