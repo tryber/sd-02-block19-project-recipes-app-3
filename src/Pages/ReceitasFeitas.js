@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import HeaderPerfil from './HeaderPerfil';
-import CopyButton from './CopyButton';
+import HeaderPerfil from '../Components/HeaderPerfil';
+import CopyButton from '../Components/CopyButton';
 import '../Styles/ReceitasFeitas.css';
 
 const renderButtons = (setDoneRecipes, copyDone) => (
@@ -64,12 +64,12 @@ const ReceitasFeitas = () => {
       <HeaderPerfil />
       {renderButtons(setDoneRecipes, copyDone)}
       <div className="containCards">
-        {doneRecipes.map((food, index) => {
+        {doneRecipes > 0 ? doneRecipes.map((food, index) => {
           const type = food.idMeal ? 'Meal' : 'Drink';
           const dataFormatada = food.doneDate.substring(0, food.doneDate.indexOf('T')).split('-');
           const dataFinal = `${dataFormatada[2]}-${dataFormatada[1]}-${dataFormatada[0]}`;
           return renderCard(index, food, type, dataFinal);
-        })}
+        }) : <h3>Sem receitas realizadas</h3>}
       </div>
     </div>);
 };
