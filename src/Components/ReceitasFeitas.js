@@ -33,9 +33,8 @@ const renderButtons = (setDoneRecipes, copyDone) => (
 const renderCard = (index, food, type, dataFinal) => (
   <div>
     <p data-testid={`${index}-horizontal-top-text`}>
-      {`${food.strArea || food.strAlcoholic}-${food.strCategory}`}
+      {food.strAlcoholic? `${food.strAlcoholic} Drink` : `${food.strArea} - ${food.strCategory}`}
     </p>
-    <p>{food.strAlcoholic}</p>
     <Link to={`/receitas/${food.idMeal ? 'comidas' : 'bebidas'}/${food[`id${type}`]}`}>
       <img
         data-testid={`${index}-horizontal-image`}
