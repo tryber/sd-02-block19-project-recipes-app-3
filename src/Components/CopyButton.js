@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types'
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import Share from '../Images/Share.svg';
-import PropTypes from 'prop-types'
 
 const CopyButton = ({ url }) => {
   const [copied, setCopied] = useState('');
@@ -36,4 +36,4 @@ export default CopyButton;
 
 CopyButton.propTypes = {
   url: PropTypes.string.isRequired,
-}
+};
