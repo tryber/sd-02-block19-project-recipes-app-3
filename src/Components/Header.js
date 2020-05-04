@@ -67,9 +67,10 @@ export default function Header() {
         ? <DropdownOrigem />
         : !arrayPName.includes(pageName) && <CategoryBar />
       }
-      {(visibleSearch && !arrayPName.includes(pageName)) && <div> {renderDebounce(searchCriteria, inputChange)}
+      {(visibleSearch && !arrayPName.includes(pageName)) && (
+      <div> {renderDebounce(searchCriteria, inputChange)}
         <div className="searchRecipes">{renderRadio(radioChange)}</div>
-      </div>}
+      </div>)}
     </div>
   );
 }

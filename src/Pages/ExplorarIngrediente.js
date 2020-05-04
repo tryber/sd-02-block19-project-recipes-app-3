@@ -1,17 +1,17 @@
 import React, { useEffect, useContext } from 'react';
-import RecipesContext from '../Context';
 import { Link } from 'react-router-dom';
+import RecipesContext from '../Context';
 import Header from '../Components/Header';
 import Footer from '../Components/Footer';
 
 const ExplorarOrigem = () => {
-  const { requestIngredient, ingredient, searchForIngredient, setStopFetching } = useContext(RecipesContext);
+  const { requestIngredient, ingredient, searchForIngredient, setStopFetching,
+  } = useContext(RecipesContext);
   useEffect(() => {
     requestIngredient('/list.php?i=list');
   }, []);
   return (
-    <div>
-      <Header />
+    <div><Header />
       {ingredient.length > 0 ? ingredient.map(({ strIngredient, strIngredient1 }, index) => {
         const validIngredient = strIngredient || strIngredient1;
         return (
@@ -21,7 +21,7 @@ const ExplorarOrigem = () => {
               key={validIngredient}
               onClick={() => {
                 setStopFetching(true);
-                searchForIngredient(`/filter.php?i=${validIngredient}`)
+                searchForIngredient(`/filter.php?i=${validIngredient}`);
               }}
             >
               <img
@@ -31,10 +31,9 @@ const ExplorarOrigem = () => {
               />
               <p data-testid={`${validIngredient}-card-name`}>{validIngredient}</p>
             </Link>
-          ))
+          ));
       }) : <p>Loading</p>}
-      <Footer />
-    </div>
+      <Footer /></div>
   );
 };
 

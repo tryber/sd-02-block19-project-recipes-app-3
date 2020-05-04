@@ -30,7 +30,7 @@ const redirectWindow = (array, setFoodDetail, foodDetail) => {
   const recipe = array.idDrink || array.idMeal;
   if (foodDetail !== recipe) setFoodDetail(recipe);
   return (
-    <Redirect to={`/receitas${window.location.pathname.includes('comidas')?'/comidas':'/bebidas'}/${recipe}`} />
+    <Redirect to={`/receitas${window.location.pathname.includes('comidas') ? '/comidas' : '/bebidas'}/${recipe}`} />
   );
 };
 
@@ -47,7 +47,7 @@ const Receitas = () => {
   const {
     setDrinkOrMeal, fetchError, setFoodDetail, requestInitialPage,
     isFetching, setIsFetching, setRequestInitialPage, noResults, stopFetching,
-    foodDetail
+    foodDetail,
   } = useContext(RecipesContext);
   useEffect(() => {
     if (!stopFetching) {
@@ -57,17 +57,15 @@ const Receitas = () => {
     }
   }, [window.location.href]);
 
-  useEffect(() => {
-    return () => setRequestInitialPage([]);
-  }, [])
+  useEffect(() => () => setRequestInitialPage([]), []);
   if (requestInitialPage === undefined) return (<h1>Nenhum Resultado</h1>);
-  console.log('entrou')
   return (
     !isFetching
       ? fetchError ||
       <div>
         <Header />
-        {requestInitialPage.length === 1 && redirectWindow(requestInitialPage[0], setFoodDetail, foodDetail)}
+        {requestInitialPage.length === 1 &&
+          redirectWindow(requestInitialPage[0], setFoodDetail, foodDetail)}
         {results(noResults, requestInitialPage, setFoodDetail)}
         <Footer />
       </div>

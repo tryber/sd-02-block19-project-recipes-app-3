@@ -4,13 +4,11 @@ import RecipesContext from '../Context';
 import Header from '../Components/Header';
 import Footer from '../Components/Footer';
 
-
-
 const ExplorarReceita = () => {
-  const { pageName, requestRandom, idDetail, setPageName, setIdDetail,setStopFetching,setVisibleSearch } = useContext(RecipesContext);
-  useEffect(() => {
-    return () => { setIdDetail(''); }
-  }, [])
+  const { pageName, requestRandom, idDetail, setPageName,
+    setIdDetail, setStopFetching, setVisibleSearch,
+  } = useContext(RecipesContext);
+  useEffect(() => () => { setIdDetail(''); }, []);
   return (
     <div>
       <Header />
@@ -20,11 +18,15 @@ const ExplorarReceita = () => {
         </button>
       </Link>
       {pageName !== 'Explorar - Bebidas' && <Link to="/explorar/comidas/area">
-        <button onClick={() => {
-          setStopFetching(false);
-          setPageName('Explorar Origem');
-          setVisibleSearch(false);
-          }} data-testid="explore-by-area" type="button">
+        <button
+          onClick={() => {
+            setStopFetching(false);
+            setPageName('Explorar Origem');
+            setVisibleSearch(false);
+          }}
+          data-testid="explore-by-area"
+          type="button"
+        >
           Por Local de Origem
         </button>
       </Link>}

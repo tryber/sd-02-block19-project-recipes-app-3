@@ -171,7 +171,7 @@ export default function AppProvider({ children }) {
     setIdDetail,
     searchForIngredient,
     setStopFetching,
-    stopFetching
+    stopFetching,
   };
 
   return (
