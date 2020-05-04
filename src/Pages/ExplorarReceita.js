@@ -1,11 +1,16 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import RecipesContext from '../Context';
-import Header from './Header';
-import Footer from './Footer';
+import Header from '../Components/Header';
+import Footer from '../Components/Footer';
+
+
 
 const ExplorarReceita = () => {
-  const { pageName, requestRandom, foodDetail, setPageName } = useContext(RecipesContext);
+  const { pageName, requestRandom, idDetail, setPageName, setIdDetail,setStopFetching,setVisibleSearch } = useContext(RecipesContext);
+  useEffect(() => {
+    return () => { setIdDetail(''); }
+  }, [])
   return (
     <div>
       <Header />
@@ -15,14 +20,18 @@ const ExplorarReceita = () => {
         </button>
       </Link>
       {pageName !== 'Explorar - Bebidas' && <Link to="/explorar/comidas/area">
-        <button onClick={() => setPageName('Explorar Origem')} data-testid="explore-by-area" type="button">
+        <button onClick={() => {
+          setStopFetching(false);
+          setPageName('Explorar Origem');
+          setVisibleSearch(false);
+          }} data-testid="explore-by-area" type="button">
           Por Local de Origem
         </button>
       </Link>}
       <button data-testid="explore-surprise" onClick={requestRandom} type="button">
         Me surpreenda!
       </button>
-      {(foodDetail) && <Redirect to={`/receitas/${window.location.pathname.split('/')[2]}/${foodDetail}`} />}
+      {(idDetail !== '') && <Redirect to={`/receitas/${window.location.pathname.split('/')[2]}/${idDetail}`} />}
       <Footer />
     </div>
   );
