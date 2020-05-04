@@ -1,10 +1,9 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { CopyToClipboard } from 'react-copy-to-clipboard';
-import Share from '../Images/Share.svg';
 import Favorite from '../Images/Favorite.svg';
 import Favorited from '../Images/Favorited.svg';
 import RecipesContext from '../Context';
 import '../Styles/FavoriteAndShare.css';
+import CopyButton from './CopyButton';
 
 
 const trueFavorited = (haveFavorited, foodDetail) => {
@@ -38,18 +37,6 @@ const heartClick = (isFavorite, setIsFavorite, foodObject, foodDetail) => {
   setIsFavorite(!isFavorite);
 };
 
-const copyComponent = (message) => (
-  <CopyToClipboard
-    data-testid="share-btn"
-    text={window.location.href}
-    onCopy={() => message()}
-  >
-    <div className="FavShare_content">
-      <img src={Share} alt="Share your recipe" />
-    </div>
-  </CopyToClipboard>
-);
-
 const favoriteIcon = (isFavorite) => (
   <img
     src={isFavorite ? Favorited : Favorite}
@@ -59,14 +46,7 @@ const favoriteIcon = (isFavorite) => (
 
 const FavoriteAndShare = () => {
   const { foodDetail, foodObject } = useContext(RecipesContext);
-  const [copied, setCopied] = useState('');
   const [isFavorite, setIsFavorite] = useState(false);
-  const message = () => {
-    setCopied('Copied!');
-    setTimeout(() => {
-      setCopied('');
-    }, 2000);
-  };
 
   useEffect(() => {
     setIsFavorite(localStorage.getItem('favorite-recipes')
@@ -79,7 +59,7 @@ const FavoriteAndShare = () => {
 
   return (
     <div className="FavShare_father">
-      {copyComponent(message)}
+      <CopyButton url={window.location.href} />
       <button
         data-testid="favorite-btn"
         className="FavShare_content"
@@ -87,7 +67,6 @@ const FavoriteAndShare = () => {
       >
         {favoriteIcon(isFavorite)}
       </button>
-      <p>{copied}</p>
     </div >
   );
 };

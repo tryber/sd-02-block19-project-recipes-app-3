@@ -16,12 +16,12 @@ const renderCard = (setFoodDetail, food, index, local) => {
       <div>
         <img
           data-testid={`${index}-card-img`}
-          alt={food[`str${local}`]}
-          src={food[`str${local}Thumb`]}
+          alt={food[`str${type}`]}
+          src={food[`str${type}Thumb`]}
         />
       </div>
       <p>{food.strCategory}</p>
-      <p data-testid={`${index}-card-name`} >{food[`str${local}`]}</p>
+      <p data-testid={`${index}-card-name`} >{food[`str${type}`]}</p>
     </Link>
   );
 };
@@ -36,9 +36,8 @@ const redirectWindow = (array, setFoodDetail) => {
 
 const results = (noResults, requestInitialPage, setFoodDetail) => (
   !noResults ? requestInitialPage.map((food, index) => {
-    const local = food.idDrink ? 'Drink' : 'Meal';
     return (
-      index < 12 && renderCard(setFoodDetail, food, index, local));
+      index < 12 && renderCard(setFoodDetail, food, index));
   }) : <p>Sem Resultados</p>
 );
 

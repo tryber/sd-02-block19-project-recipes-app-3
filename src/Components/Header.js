@@ -1,18 +1,15 @@
 import React, { useState, useContext } from 'react';
-import { Link } from 'react-router-dom';
 import { DebounceInput } from 'react-debounce-input';
 import RecipesContext from '../Context';
-import profilePicBtn from '../Images/profilePicBtn.png';
 import HeaderInput from './HeaderInput';
 import CategoryBar from './CategoryBar';
 import DropdownOrigem from './DropdownOrigem';
 import HeaderName from './HeaderName';
+import HeaderPic from './HeaderPic';
 
 const renderTitle = () => (
   <div>
-    <Link to="/perfil">
-      <img data-testid="profile-top-btn" src={profilePicBtn} alt="profile button" />
-    </Link>
+    <HeaderPic />
     <HeaderName />
   </div>
 );
