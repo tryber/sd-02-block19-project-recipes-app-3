@@ -6,6 +6,7 @@ import CategoryBar from './CategoryBar';
 import DropdownOrigem from './DropdownOrigem';
 import HeaderName from './HeaderName';
 import HeaderPic from './HeaderPic';
+import '../Styles/Header.css'
 
 const renderTitle = () => (
   <div>
@@ -65,10 +66,10 @@ export default function Header() {
         : !arrayPName.includes(pageName) && <CategoryBar />
       }
       {(visibleSearch && !arrayPName.includes(pageName)) && (
-      <div> {renderDebounce(searchCriteria, inputChange)}
+        <div> {renderDebounce(searchCriteria, inputChange)}
 
-        <div className="searchRecipes">{renderRadio(radioChange)}</div>
-      </div>)}
+          <div className="searchRecipes">{renderRadio(radioChange)}</div>
+        </div>)}
     </div>
   );
 }
