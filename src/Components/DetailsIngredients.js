@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from 'react';
 import RecipesContext from '../Context/';
-import './DetailsIngredient.css';
+import '../Styles/DetailsIngredient.css';
 
 const checkIndex = (isChecked, ingredient, setIsChecked) => (
   isChecked.includes(ingredient)
