@@ -5,13 +5,13 @@ import RecipesContext from '../Context';
 import profilePicBtn from '../Images/profilePicBtn.png';
 import searchTopBtn from '../Images/searchTopBtn.png';
 import HeaderName from './HeaderName';
+import '../Styles/Header.css';
 
 const renderTitle = () => (
   <div>
     <Link to="/perfil">
       <img data-testid="profile-top-btn" src={profilePicBtn} alt="profile button" />
     </Link>
-    <HeaderName />
   </div>
 );
 
@@ -58,8 +58,9 @@ export default function Header() {
     if (input !== '') defineSearch(input, rValue);
   };
   return (
-    <div className="header">
+    <div className="Header_father">
       {renderTitle()}
+      <HeaderName />
       <input
         disabled={disabledSearch.includes(pageName)}
         type="image"
