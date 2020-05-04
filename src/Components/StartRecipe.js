@@ -47,10 +47,15 @@ const StartRecipe = () => {
   useEffect(() => { setIsFinish(false); }, [window.location.href]);
   useEffect(() => () => setIsRecipeStarted(false), []);
 
+  const doneLocalStorage = JSON.parse(localStorage.getItem('done-recipes')) || [];
+  const food = window.location.href.includes('comidas') ? 'Meal' : 'Drink';
+  const isDone = doneLocalStorage.find((recipe) => (
+    recipe[`id${food}`] == foodDetail
+  ));
   const startOrEnd = inProgress.includes(foodDetail) ? 'Continuar Receita' : 'Iniciar Receita';
   return isRedirect ? <Redirect to="/receitas-feitas" /> : (
     <div>
-      <button
+      {!isDone && <button
         disabled={isRecipeStarted
           && JSON.parse(localStorage.getItem(foodDetail)).length + 1 !== isIngredient.length
         }
@@ -61,7 +66,7 @@ const StartRecipe = () => {
         )}
       >
         {!isFinish ? startOrEnd : 'Finalizar Receita'}
-      </button>
+      </button>}
     </div >
   );
 };
