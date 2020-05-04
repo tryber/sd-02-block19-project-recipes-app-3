@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import HeaderPerfil from './HeaderPerfil';
 import CopyButton from './CopyButton';
 import '../Styles/ReceitasFeitas.css';
-import { Link } from 'react-router-dom';
 
 const renderButtons = (setDoneRecipes, copyDone) => (
   <div>
@@ -33,7 +33,7 @@ const renderButtons = (setDoneRecipes, copyDone) => (
 const renderCard = (index, food, type, dataFinal) => (
   <div>
     <p data-testid={`${index}-horizontal-top-text`}>
-      {food.strAlcoholic? `${food.strAlcoholic} Drink` : `${food.strArea} - ${food.strCategory}`}
+      {food.strAlcoholic ? `${food.strAlcoholic} Drink` : `${food.strArea} - ${food.strCategory}`}
     </p>
     <Link to={`/receitas/${food.idMeal ? 'comidas' : 'bebidas'}/${food[`id${type}`]}`}>
       <img
