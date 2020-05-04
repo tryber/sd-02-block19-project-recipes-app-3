@@ -3,7 +3,7 @@ import { renderButtons, renderCard } from './ReceitasFeitas';
 import Favorited from '../Images/Favorited.svg';
 import HeaderPerfil from '../Components/HeaderPerfil';
 
-const ReceitasFeitas = () => {
+const ReceitasFavoritas = () => {
   const [favoriteRecipes, setFavoriteRecipes] = useState([]);
   const [copyFav, setCopyFav] = useState([]);
   useEffect(() => {
@@ -16,28 +16,24 @@ const ReceitasFeitas = () => {
     localStorage.setItem('favorite-recipes', JSON.stringify(copyFav));
   }, [copyFav]);
   return (
-    <div >
-      <HeaderPerfil />
+    <div ><HeaderPerfil />
       {favoriteRecipes && renderButtons(setFavoriteRecipes, copyFav)}
       <div className="containCards">
         {favoriteRecipes.map((food, index) => {
           const type = food.idMeal ? 'Meal' : 'Drink';
-          return (
-            <div>
-              {renderCard(index, food, type)}
-              <input
-                data-testid={`${index}-horizontal-favorite-btn`}
-                type="image"
-                src={Favorited}
-                alt="heart"
-                onClick={() => setCopyFav(favoriteRecipes.filter(({ idMeal, idDrink }) => (
-                  food.idDrink !== idDrink || food.idMeal !== idMeal)))}
-              />
-            </div>
+          return (<div>
+            {renderCard(index, food, type)}
+            <input
+              data-testid={`${index}-horizontal-favorite-btn`}
+              type="image"
+              src={Favorited}
+              alt="heart"
+              onClick={() => setCopyFav(favoriteRecipes.filter(({ idMeal, idDrink }) => (
+                food.idDrink !== idDrink || food.idMeal !== idMeal)))}
+            /></div>
           );
-        })}
-      </div>
+        })}</div>
     </div>);
 };
 
-export default ReceitasFeitas;
+export default ReceitasFavoritas;
