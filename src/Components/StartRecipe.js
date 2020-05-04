@@ -44,9 +44,8 @@ const StartRecipe = () => {
     food.includes('Ingredient') && isFood[food]
   ));
 
-  useEffect(() => {
-    setIsFinish(false);
-  }, [window.location.href]);
+  useEffect(() => { setIsFinish(false); }, [window.location.href]);
+  useEffect(() => () => setIsRecipeStarted(false), []);
 
   const startOrEnd = inProgress.includes(foodDetail) ? 'Continuar Receita' : 'Iniciar Receita';
   return isRedirect ? <Redirect to="/receitas-feitas" /> : (
