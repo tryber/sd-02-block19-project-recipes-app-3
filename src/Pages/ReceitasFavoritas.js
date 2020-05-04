@@ -34,10 +34,10 @@ const ReceitasFeitas = () => {
                   food.idDrink !== idDrink || food.idMeal !== idMeal)))}
               />
             </div>
-          )
+          );
         })}
       </div>
     </div>);
-}
+};
 
 export default ReceitasFeitas;
