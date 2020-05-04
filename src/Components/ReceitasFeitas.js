@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import HeaderPerfil from './HeaderPerfil';
 import CopyButton from './CopyButton';
 import '../Styles/ReceitasFeitas.css';
+import { Link } from 'react-router-dom';
 
 const renderButtons = (setDoneRecipes, copyDone) => (
   <div>
@@ -31,16 +32,18 @@ const renderButtons = (setDoneRecipes, copyDone) => (
 
 const renderCard = (index, food, type, dataFinal) => (
   <div>
-    <img
-      data-testid={`${index}-horizontal-image`}
-      alt={food[`str${type}`]}
-      src={food[`str${type}Thumb`]}
-    />
     <p data-testid={`${index}-horizontal-top-text`}>
       {`${food.strArea || food.strAlcoholic}-${food.strCategory}`}
     </p>
     <p>{food.strAlcoholic}</p>
-    <p data-testid={`${index}-horizontal-name`}>{food[`str${type}`]}</p>
+    <Link to={`/receitas/${food.idMeal ? 'comidas' : 'bebidas'}/${food[`id${type}`]}`}>
+      <img
+        data-testid={`${index}-horizontal-image`}
+        alt={food[`str${type}`]}
+        src={food[`str${type}Thumb`]}
+      />
+      <p data-testid={`${index}-horizontal-name`}>{food[`str${type}`]}</p>
+    </Link>
     <p data-testid={`${index}-horizontal-done-date`}>{dataFinal}</p>
     <CopyButton
       data-testid={`${index}-horizontal-share-btn`}
