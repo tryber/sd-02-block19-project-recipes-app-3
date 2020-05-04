@@ -55,7 +55,7 @@ const FavoriteAndShare = () => {
           idMeal === foodDetail || idDrink === foodDetail
         )) : false,
     );
-  }, []);
+  }, [window.location.pathname]);
 
   return (
     <div className="FavShare_father">
