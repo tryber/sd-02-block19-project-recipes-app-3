@@ -4,7 +4,7 @@ import HeaderPerfil from '../Components/HeaderPerfil';
 import CopyButton from '../Components/CopyButton';
 import '../Styles/ReceitasFeitas.css';
 
-const renderButtons = (setDoneRecipes, copyDone) => (
+export const renderButtons = (setDoneRecipes, copyDone) => (
   <div>
     <button
       data-testid="filter-by-all-btn"
@@ -30,7 +30,7 @@ const renderButtons = (setDoneRecipes, copyDone) => (
   </div>
 );
 
-const renderCard = (index, food, type, dataFinal) => (
+export const renderCard = (index, food, type, dataFinal) => (
   <div>
     <p data-testid={`${index}-horizontal-top-text`}>
       {food.strAlcoholic ? `${food.strAlcoholic} Drink` : `${food.strArea} - ${food.strCategory}`}
@@ -64,12 +64,12 @@ const ReceitasFeitas = () => {
       <HeaderPerfil />
       {doneRecipes && renderButtons(setDoneRecipes, copyDone)}
       <div className="containCards">
-        {doneRecipes > 0 ? doneRecipes.map((food, index) => {
+        {doneRecipes.map((food, index) => {
           const type = food.idMeal ? 'Meal' : 'Drink';
           const dataFormatada = food.doneDate.substring(0, food.doneDate.indexOf('T')).split('-');
           const dataFinal = `${dataFormatada[2]}-${dataFormatada[1]}-${dataFormatada[0]}`;
           return renderCard(index, food, type, dataFinal);
-        }) : <h3>Sem receitas realizadas</h3>}
+        })}
       </div>
     </div>);
 };
