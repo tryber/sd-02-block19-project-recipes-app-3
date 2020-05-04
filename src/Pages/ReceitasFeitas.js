@@ -62,7 +62,7 @@ const ReceitasFeitas = () => {
   return (
     <div >
       <HeaderPerfil />
-      {renderButtons(setDoneRecipes, copyDone)}
+      {doneRecipes && renderButtons(setDoneRecipes, copyDone)}
       <div className="containCards">
         {doneRecipes > 0 ? doneRecipes.map((food, index) => {
           const type = food.idMeal ? 'Meal' : 'Drink';
