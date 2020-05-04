@@ -41,21 +41,21 @@ const carouselRecommended = (requests, setFoodDetail, setRandomRequests, setIsRe
     >
       {requests.map((food, index) => (
         <Link
+          key={food[`id${type}`]}
           onClick={(() => {
             setFoodDetail(food[`id${type}`]);
             setRandomRequests([]);
             setIsRequesting(true);
           })}
           to={`${toDetailsPage}/${food[`id${type}`]}`}
-        >
-          <div data-testid={`${index}-recomendation-card`}>
-            <img
-              className="To_Carousel"
-              src={food[`str${type}Thumb`]}
-              alt={food[`str${type}`]}
-            />
-            <p className="legend">{food[`str${type}`]}</p>
-          </div>
+        > <div data-testid={`${index}-recomendation-card`}>
+          <img
+            className="To_Carousel"
+            src={food[`str${type}Thumb`]}
+            alt={food[`str${type}`]}
+          />
+          <p className="legend">{food[`str${type}`]}</p>
+        </div>
         </Link>
       ))}
     </Carousel>

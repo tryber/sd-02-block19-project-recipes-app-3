@@ -11,11 +11,9 @@ const DetailsPage = () => {
   const { foodDetail, foodObject, idSearch } = useContext(RecipesContext);
   const isFood = foodObject.meals || foodObject.drinks;
   const isMeal = `/lookup.php?i=${foodDetail}`;
-
   useEffect(() => {
     idSearch(isMeal);
-  }, [window.location.href]);
-
+  }, [foodDetail]);
   return (
     <div>{
       isFood ?

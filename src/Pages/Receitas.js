@@ -3,7 +3,7 @@ import { Link, Redirect } from 'react-router-dom';
 import { resRdm } from '../Services/APIs';
 import RecipesContext from '../Context';
 import Footer from '../Components/Footer';
-import Header from './Header';
+import Header from '../Components/Header';
 
 const renderCard = (setFoodDetail, food, index) => {
   const type = food.idMeal ? 'Meal' : 'Drink';
@@ -26,13 +26,14 @@ const renderCard = (setFoodDetail, food, index) => {
   );
 };
 
-const redirectWindow = (array, setFoodDetail) => {
+const redirectWindow = (array, setFoodDetail, foodDetail) => {
   const recipe = array.idDrink || array.idMeal;
-  setFoodDetail(recipe);
+  if (foodDetail !== recipe) setFoodDetail(recipe);
   return (
-    <Redirect to={`${window.location.pathname}/${recipe}`} />
+    <Redirect to={`/receitas${window.location.pathname.includes('comidas') ? '/comidas' : '/bebidas'}/${recipe}`} />
   );
 };
+
 
 const results = (noResults, requestInitialPage, setFoodDetail) => (
   !noResults ? requestInitialPage.map((food, index) => (
@@ -43,22 +44,26 @@ const results = (noResults, requestInitialPage, setFoodDetail) => (
 const Receitas = () => {
   const {
     setDrinkOrMeal, fetchError, setFoodDetail, requestInitialPage,
-    isFetching, setIsFetching, setRequestInitialPage, noResults,
+    isFetching, setIsFetching, setRequestInitialPage, noResults, stopFetching,
+    foodDetail,
   } = useContext(RecipesContext);
-
   useEffect(() => {
-    setRequestInitialPage([]);
-    setIsFetching(true);
-    setDrinkOrMeal(resRdm);
+    if (!stopFetching) {
+      setRequestInitialPage([]);
+      setIsFetching(true);
+      setDrinkOrMeal(resRdm);
+    }
   }, [window.location.href]);
-  if (requestInitialPage === undefined) return (<h1>Nenhum Resultado</h1>);
 
+  useEffect(() => () => setRequestInitialPage([]), []);
+  if (requestInitialPage === undefined) return (<h1>Nenhum Resultado</h1>);
   return (
     !isFetching
       ? fetchError ||
       <div>
         <Header />
-        {requestInitialPage.length === 1 && redirectWindow(requestInitialPage[0], setFoodDetail)}
+        {requestInitialPage.length === 1 &&
+          redirectWindow(requestInitialPage[0], setFoodDetail, foodDetail)}
         {results(noResults, requestInitialPage, setFoodDetail)}
         <Footer />
       </div>
