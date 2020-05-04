@@ -6,7 +6,7 @@ import CategoryBar from './CategoryBar';
 import DropdownOrigem from './DropdownOrigem';
 import HeaderName from './HeaderName';
 import HeaderPic from './HeaderPic';
-import '../Styles/Header.css'
+import '../Styles/Header.css';
 
 const renderTitle = () => (
   <div>
