@@ -17,9 +17,10 @@ export const mockApi = () => (
     })).mockImplementationOnce(() => Promise.resolve({
       ok: true,
       json: () => Promise.resolve({
-        meals: [object, object, object, object, object, object, object, object, object, object, object, object],
+        meals: [object, object, object, object, object,
+          object, object, object, object, object, object, object],
         categories: [{ strCategory: 'test1' }, { strCategory: 'test2' }],
-      })
+      }),
     }))
 );
 const object2 = {
@@ -29,7 +30,7 @@ const object2 = {
   strCategory: 'Dessert',
   strArea: 'British',
   strDrinkThumb: 'https:www.theDrinkdb.com/images/media/Drinks/tqrrsq1511723764.jpg',
-}
+};
 
 export const mockApiDrink = () => (
   jest.spyOn(global, 'fetch')
@@ -42,9 +43,9 @@ export const mockApiDrink = () => (
     .mockImplementationOnce(() => Promise.resolve({
       ok: true,
       json: () => Promise.resolve({
-        drinks: [object2, object2, object2, object2, object2, object2, object2, object2, object2, object2, object2, object2],
-      })
+        drinks: [object2, object2, object2, object2, object2, object2,
+          object2, object2, object2, object2, object2, object2],
+      }),
     }))
-
 );
 

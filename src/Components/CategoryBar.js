@@ -1,6 +1,17 @@
 import React, { useContext, useEffect } from 'react';
 import RecipesContext from '../Context/';
 
+const renderButtonAll = (defineSearch) => (
+  <button
+    onClick={() => defineSearch('')}
+    value=""
+    type="button"
+    data-testid="All-category-filter"
+  >
+    All
+  </button>
+);
+
 const CategoryBar = () => {
   const { visibleSearch, arrayCategory, requestCategory, setDrinkOrMeal, defineSearch,
   } = useContext(RecipesContext);
@@ -15,14 +26,7 @@ const CategoryBar = () => {
 
   return !visibleSearch && (
     <div>
-      <button
-        onClick={() => defineSearch('')}
-        value=""
-        type="button"
-        data-testid="All-category-filter"
-      >
-        All
-        </button>
+      {renderButtonAll(defineSearch)}
       {
         arrayCategory.map((food, index) => (
           index < 5

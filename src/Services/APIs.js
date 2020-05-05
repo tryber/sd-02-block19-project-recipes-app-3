@@ -7,7 +7,10 @@ export const apiRequest = (requisition) => {
   return (
     fetch(`https://www.${drinkOrMeal}.com/api/json/v1/1${requisition}`)
       .then((response) => response.json()
-        .then((JSON) => response.ok ? Promise.resolve(JSON) : Promise.reject(JSON)))
+        .then((JSON) => {
+          if (response.ok) return Promise.resolve(JSON);
+          return Promise.reject(JSON);
+        }))
   );
 };
 
