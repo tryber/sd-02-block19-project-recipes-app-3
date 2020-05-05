@@ -13,13 +13,12 @@ export const mockApi = () => (
       ok: true,
       json: () => Promise.resolve({
         categories: [{ strCategory: 'test1' }, { strCategory: 'test2' }],
-      })
+      }),
     })).mockImplementationOnce(() => Promise.resolve({
       ok: true,
       json: () => Promise.resolve({
         meals: [object, object, object, object, object,
           object, object, object, object, object, object, object],
-        categories: [{ strCategory: 'test1' }, { strCategory: 'test2' }],
       }),
     }))
 );
@@ -38,7 +37,7 @@ export const mockApiDrink = () => (
       ok: true,
       json: () => Promise.resolve({
         drinks: [{ strCategory: 'test1' }, { strCategory: 'test2' }, { strCategory: 'test3' }, { strCategory: 'test4' }, { strCategory: 'test5' }, { strCategory: 'test6' }],
-      })
+      }),
     }))
     .mockImplementationOnce(() => Promise.resolve({
       ok: true,
@@ -49,3 +48,12 @@ export const mockApiDrink = () => (
     }))
 );
 
+export const mockApiFailDrink = () => (
+  jest.spyOn(global, 'fetch')
+    .mockImplementationOnce(() => Promise.resolve({
+      ok: false,
+      json: () => Promise.resolve({
+        message:'fail to fetch'
+      }),
+    }))
+);

@@ -53,6 +53,7 @@ export default function AppProvider({ children }) {
   };
 
   const failDrinkOrMeal = ({ message }) => {
+    setIsFetching(false);
     setFetchError(message);
   };
 
