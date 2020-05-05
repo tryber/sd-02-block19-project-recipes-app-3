@@ -6,8 +6,11 @@ export const apiRequest = (requisition) => {
   const drinkOrMeal = window.location.href.includes('comidas') ? meal : cocktail;
   return (
     fetch(`https://www.${drinkOrMeal}.com/api/json/v1/1${requisition}`)
-      .then((response) => response.json()
-        .then(response.ok ? Promise.resolve(JSON) : Promise.reject(JSON)))
+      .then((response) => {
+        return response.json()
+        .then((JSON) => {
+          return response.ok ? Promise.resolve(JSON) : Promise.reject(JSON)
+        })})
   );
 };
 

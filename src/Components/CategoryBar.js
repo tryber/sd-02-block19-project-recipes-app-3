@@ -15,20 +15,27 @@ const CategoryBar = () => {
 
   return !visibleSearch && (
     <div>
-      <button onClick={() => defineSearch('')} value="" type="button">All</button>
+      <button
+        onClick={() => defineSearch('')}
+        value=""
+        type="button"
+        data-testid="All-category-filter"
+      >
+        All
+        </button>
       {
         arrayCategory.map((food, index) => (
           index < 5
-          ? <div key={food.strCategory}>
-            <button
-              data-testid={`${food.strCategory}-category-filter`}
-              value={`/filter.php?c=${food.strCategory}`}
-              type="button"
-              onClick={(e) => clickCategory(e.target.value)}
-            >
-              {food.strCategory}
-            </button>
-          </div>
+            ? <div key={food.strCategory}>
+              <button
+                data-testid={`${food.strCategory}-category-filter`}
+                value={`/filter.php?c=${food.strCategory}`}
+                type="button"
+                onClick={(e) => clickCategory(e.target.value)}
+              >
+                {food.strCategory}
+              </button>
+            </div>
             : null
         ))
       }
