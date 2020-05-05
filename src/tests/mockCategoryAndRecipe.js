@@ -53,7 +53,7 @@ export const mockApiFailDrink = () => (
     .mockImplementationOnce(() => Promise.resolve({
       ok: false,
       json: () => Promise.resolve({
-        message:'fail to fetch'
+        message: 'fail to fetch',
       }),
     }))
 );
