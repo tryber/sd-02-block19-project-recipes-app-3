@@ -1,7 +1,7 @@
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
 import { render, cleanup } from '@testing-library/react';
-import Receitas from '../Components/Receitas';
+import Receitas from '../Pages/Receitas';
 import AppProvider from '../Context/AppProvider';
 
 afterEach(cleanup);
