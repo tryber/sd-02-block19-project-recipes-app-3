@@ -32,6 +32,9 @@ describe('Test Loading and click CategoryBar', () => {
           <App />
         </AppProvider>,'/receitas/comidas'
     );
+    // delete global.window.location;
+    // const href = 'http://localhost:3000/test';
+    // global.window.location = { href, pathname:'/test' }; 
     const emailInput = getByTestId('email-input');
     const passwordInput = getByTestId('password-input');
     const loginButton = getByTestId('login-submit-btn');
@@ -49,7 +52,9 @@ describe('Test Loading and click CategoryBar', () => {
     expect(test2).toBeInTheDocument();
     expect(all).toBeInTheDocument();
     fireEvent.click(test1);
-    fireEvent.click(test2);
+    await wait();
+    expect(getAllByText(/Julinho/)[0]).toBeInTheDocument();
     fireEvent.click(all);
+    expect(getAllByText(/Rock Cakes/)[0]).toBeInTheDocument();
   });
 });

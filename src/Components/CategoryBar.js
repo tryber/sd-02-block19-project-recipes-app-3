@@ -13,7 +13,7 @@ const renderButtonAll = (defineSearch) => (
 );
 
 const CategoryBar = () => {
-  const { visibleSearch, arrayCategory, requestCategory, setDrinkOrMeal, defineSearch,
+  const { visibleSearch, arrayCategory, requestCategory, searchResults, defineSearch,
   } = useContext(RecipesContext);
   useEffect(() => {
     const category = window.location.href.includes('comidas') ? '/categories.php' : '/list.php?c=list';
@@ -21,9 +21,8 @@ const CategoryBar = () => {
   }, [window.location.href]);
 
   const clickCategory = (value) => {
-    setDrinkOrMeal(value);
+    searchResults(value);
   };
-
   return !visibleSearch && (
     <div>
       {renderButtonAll(defineSearch)}

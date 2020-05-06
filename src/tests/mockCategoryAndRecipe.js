@@ -20,15 +20,24 @@ export const mockApi = () => (
         meals: [object, object, object, object, object,
           object, object, object, object, object, object, object],
       }),
+    })).mockImplementationOnce(() => Promise.resolve({
+      ok: true,
+      json: () => Promise.resolve({
+        categories: [{ strCategory: 'test1' }, { strCategory: 'test2' }],
+      }),
+    }))
+    .mockImplementationOnce(() => Promise.resolve({
+      ok: true,
+      json: () => Promise.resolve({
+        meals: [{ idMeal: '52901',
+        strMeal: 'Julinho', }, { idMeal: '52901',
+        strMeal: 'Julinho', }],
+      }),
     }))
 );
+
 const object2 = {
-  idDrink: '52901',
-  strDrink: 'Caipiríssima',
-  strDrinkAlternate: null,
-  strCategory: 'Dessert',
-  strArea: 'British',
-  strDrinkThumb: 'https:www.theDrinkdb.com/images/media/Drinks/tqrrsq1511723764.jpg',
+  idDrink: '13206', strDrink: 'Caipirissima', strVideo: null, strCategory: 'Ordinary Drink', strAlcoholic: 'Alcoholic', strGlass: 'Collins Glass', strInstructions: "Same as Caipirinha but instead of cachaca you add WHITE RUM. It's great!!!!!!!!", strInstructionsDE: 'Wie Caipirinha, aber anstelle von Cachaca f\u00fcgen Sie WHITE RUM hinzu. Es ist gro\u00dfartig!!!!!!!!', strDrinkThumb: 'https:\/\/www.thecocktaildb.com\/images\/media\/drink\/yd47111503565515.jpg', strIngredient1: 'Lime', strIngredient2: 'Sugar', strIngredient3: 'White rum', strIngredient4: 'Ice', strIngredient5: null, strMeasure1: '2 ', strMeasure2: '2 tblsp ', strMeasure3: '2-3 oz ', strMeasure4: 'crushed ', strMeasure5: null, strMeasure6: null, strMeasure7: null, strMeasure8: null, strMeasure9: null, strMeasure10: null, strMeasure11: null, strMeasure12: null, strMeasure13: null, strMeasure14: null, strMeasure15: null, strCreativeCommonsConfirmed: 'No', dateModified: '2017-08-24 10:05:15'
 };
 
 export const mockApiDrink = () => (
@@ -54,6 +63,26 @@ export const mockApiFailDrink = () => (
       ok: false,
       json: () => Promise.resolve({
         message: 'fail to fetch',
+      }),
+    }))
+);
+
+export const mockApiDetails = () => (
+  jest.spyOn(global, 'fetch')
+    .mockImplementationOnce(() => Promise.resolve({
+      ok: true,
+      json: () => Promise.resolve({
+        drinks: [object2],
+      }),
+    }))
+);
+
+export const mockNullApiDetails = () => (
+  jest.spyOn(global, 'fetch')
+    .mockImplementationOnce(() => Promise.resolve({
+      ok: true,
+      json: () => Promise.resolve({
+        xablau: 'não é valido',
       }),
     }))
 );

@@ -1,9 +1,9 @@
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
-import { render, cleanup, wait, } from '@testing-library/react';
+import { render, cleanup, wait, fireEvent } from '@testing-library/react';
 import Receitas from '../Pages/Receitas';
 import AppProvider from '../Context/AppProvider';
-import { mockApiDrink,mockApiFailDrink } from './mockCategoryAndRecipe';
+import { mockApiDrink, mockApiFailDrink } from './mockCategoryAndRecipe';
 
 afterEach(cleanup);
 afterEach(() => jest.restoreAllMocks());
@@ -12,7 +12,7 @@ describe('test category', () => {
   it('render category bar drink', async () => {
     mockApiDrink();
     const { getAllByText, getByTestId } = render(
-      <MemoryRouter initialEntries={["/users/2"]}>
+      <MemoryRouter initialEntries={["/"]}>
         <AppProvider>
           <Receitas />
         </AppProvider>
@@ -25,12 +25,13 @@ describe('test category', () => {
     expect(test1).toBeInTheDocument();
     expect(test2).toBeInTheDocument();
     expect(all).toBeInTheDocument();
-    expect(getAllByText(/Caipiríssima/)[0]).toBeInTheDocument();
+    expect(getAllByText(/Caipirissima/)[0]).toBeInTheDocument();
+    fireEvent.click(getByTestId('search-top-btn'));
   });
   it('fail fetch', async () => {
     mockApiFailDrink();
     const { getByText } = render(
-      <MemoryRouter initialEntries={["/users/2"]}>
+      <MemoryRouter initialEntries={["/"]}>
         <AppProvider>
           <Receitas />
         </AppProvider>

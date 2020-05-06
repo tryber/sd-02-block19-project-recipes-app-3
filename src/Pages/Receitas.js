@@ -49,7 +49,6 @@ const Receitas = () => {
   } = useContext(RecipesContext);
   useEffect(() => {
     if (!stopFetching) {
-      setRequestInitialPage([]);
       setIsFetching(true);
       setDrinkOrMeal(resRdm);
     }
