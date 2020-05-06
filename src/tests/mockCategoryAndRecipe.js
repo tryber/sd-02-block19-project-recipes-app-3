@@ -6,26 +6,24 @@ const object = {
   strArea: 'British',
   strMealThumb: 'https:www.themealdb.com/images/media/meals/tqrrsq1511723764.jpg',
 };
+const promisse = {
+  ok: true,
+  json: () => Promise.resolve({
+    categories: [{ strCategory: 'test1' }, { strCategory: 'test2' }],
+  }),
+}
 
 export const mockApi = () => (
   jest.spyOn(global, 'fetch')
+    .mockImplementationOnce(() => Promise.resolve(promisse))
     .mockImplementationOnce(() => Promise.resolve({
-      ok: true,
-      json: () => Promise.resolve({
-        categories: [{ strCategory: 'test1' }, { strCategory: 'test2' }],
-      }),
-    })).mockImplementationOnce(() => Promise.resolve({
       ok: true,
       json: () => Promise.resolve({
         meals: [object, object, object, object, object,
           object, object, object, object, object, object, object],
       }),
-    })).mockImplementationOnce(() => Promise.resolve({
-      ok: true,
-      json: () => Promise.resolve({
-        categories: [{ strCategory: 'test1' }, { strCategory: 'test2' }],
-      }),
-    })).mockImplementationOnce(() => Promise.resolve({
+    })).mockImplementationOnce(() => Promise.resolve(promisse))
+    .mockImplementationOnce(() => Promise.resolve({
       ok: true,
       json: () => Promise.resolve({
         meals: [{
