@@ -11,7 +11,7 @@ const promisse = {
   json: () => Promise.resolve({
     categories: [{ strCategory: 'test1' }, { strCategory: 'test2' }],
   }),
-}
+};
 
 export const mockApi = () => (
   jest.spyOn(global, 'fetch')
