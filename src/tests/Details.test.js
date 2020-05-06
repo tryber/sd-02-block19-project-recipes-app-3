@@ -1,6 +1,6 @@
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
-import { render, cleanup, wait, fireEvent } from '@testing-library/react';
+import { render, cleanup, wait, fireEvent, findByTestId, getByTestId } from '@testing-library/react';
 import DetailsPage from '../Pages/DetailsPage';
 import AppProvider from '../Context/AppProvider';
 import { mockApiDetails, mockNullApiDetails } from './mockCategoryAndRecipe';
@@ -49,5 +49,21 @@ describe('test page details', () => {
       </AppProvider>,
     );
     await wait();
+  });
+  it('Renders Favorite and Share Component', async () => {
+    mockApiDetails();
+    localStorage.setItem('favorite-recipes', JSON.stringify([{idDrink: '13206'}]));
+    const { getByTestId, findByTestId } = render(
+      <AppProvider>
+        <MemoryRouter>
+          <DetailsPage />
+        </MemoryRouter>
+      </AppProvider>,
+    );
+    await findByTestId('favorite-btn');
+    fireEvent.click(getByTestId('favorite-btn'));
+    fireEvent.click(getByTestId('favorite-btn'));
+    localStorage.clear();
+    fireEvent.click(getByTestId('favorite-btn'));
   });
 });
