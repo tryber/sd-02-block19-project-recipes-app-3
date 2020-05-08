@@ -1,0 +1,30 @@
+.recipe-container {
+  border-radius: 10px;
+  box-shadow: 0 5px 5px gray;
+  display: inline-grid;
+  height: 340px;
+  margin: 10px;
+  text-decoration: none;
+  width: 160px;
+}
+
+.recipe-image {
+  border-radius: 10px 10px 0 0;
+  height: 170px;
+  width: 160px;
+}
+
+.CatName-Wrapper {
+  display: grid;
+  text-align: center;
+}
+
+.recipe-category {
+  color: lightslategrey;
+  font-size: 20px;
+}
+
+.recipe-name {
+  color: black;
+  font-size: 18px;
+}
