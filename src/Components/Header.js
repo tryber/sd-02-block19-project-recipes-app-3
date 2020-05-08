@@ -1,16 +1,16 @@
 import React, { useState, useContext } from 'react';
-import { Link } from 'react-router-dom';
 import { DebounceInput } from 'react-debounce-input';
 import RecipesContext from '../Context';
-import profilePicBtn from '../Images/profilePicBtn.png';
-import searchTopBtn from '../Images/searchTopBtn.png';
+import HeaderInput from './HeaderInput';
+import CategoryBar from './CategoryBar';
+import DropdownOrigem from './DropdownOrigem';
 import HeaderName from './HeaderName';
+import HeaderPic from './HeaderPic';
+import '../Styles/Header.css';
 
 const renderTitle = () => (
   <div>
-    <Link to="/perfil">
-      <img data-testid="profile-top-btn" src={profilePicBtn} alt="profile button" />
-    </Link>
+    <HeaderPic />
     <HeaderName />
   </div>
 );
@@ -41,16 +41,16 @@ const renderDebounce = (searchCriteria, inputChange) => (
     maxLength={searchCriteria === '/search.php?f=' ? 1 : 30}
   />
 );
-
-const disabledSearch = ['Explorar', 'Explorar - Comidas', 'Explorar - Bebidas'];
+const arrayPName = ['Explorar', 'Explorar - Comidas', 'Explorar - Bebidas'];
 export default function Header() {
   const [searchCriteria, setSearchCriteria] = useState('');
   const [input, setInput] = useState('');
-  const { defineSearch, setVisibleSearch, visibleSearch, setRequestInitialPage, pageName,
+  const { defineSearch, visibleSearch, setRequestInitialPage, pageName,
   } = useContext(RecipesContext);
   const inputChange = (iValue) => {
     setInput(iValue);
     setRequestInitialPage([]);
+    setInput(iValue);
     defineSearch(iValue, searchCriteria);
   };
   const radioChange = (rValue) => {
@@ -58,20 +58,18 @@ export default function Header() {
     if (input !== '') defineSearch(input, rValue);
   };
   return (
-    <div className="header">
+    <div className="Header_father">
       {renderTitle()}
-      <input
-        disabled={disabledSearch.includes(pageName)}
-        type="image"
-        data-testid="search-top-btn"
-        src={searchTopBtn}
-        alt="search top button"
-        onClick={() => { setVisibleSearch(!visibleSearch); setSearchCriteria(null); setInput(''); }}
-      />
-      {visibleSearch && <form>
-        {renderDebounce(searchCriteria, inputChange)}
-        <div className="searchRecipes">{renderRadio(radioChange)}</div>
-      </form>}
+      {HeaderInput(setSearchCriteria, setInput)}
+      {pageName === 'Explorar Origem' && window.location.href.includes('comidas')
+        ? <DropdownOrigem />
+        : !arrayPName.includes(pageName) && <CategoryBar />
+      }
+      {(visibleSearch && !arrayPName.includes(pageName)) && (
+        <div> {renderDebounce(searchCriteria, inputChange)}
+
+          <div className="searchRecipes">{renderRadio(radioChange)}</div>
+        </div>)}
     </div>
   );
 }

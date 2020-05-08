@@ -1,13 +1,15 @@
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import React from 'react';
 import Home from './Pages/Home';
-import Receitas from './Components/Receitas';
-import Explorar from './Components/Explorar';
+import Receitas from './Pages/Receitas';
+import Explorar from './Pages/Explorar';
 import Perfil from './Pages/Perfil';
 import DetailsPage from './Pages/DetailsPage';
-import ReceitasFeitas from './Components/ReceitasFeitas';
-import ReceitasFavoritas from './Components/ReceitasFavoritas';
-import ExplorarReceita from './Components/ExplorarReceita';
+import ReceitasFeitas from './Pages/ReceitasFeitas';
+import ReceitasFavoritas from './Pages/ReceitasFavoritas';
+import ExplorarReceita from './Pages/ExplorarReceita';
+import ExplorarOrigem from './Pages/ExplorarOrigem';
+import ExplorarIngrediente from './Pages/ExplorarIngrediente';
 import './App.css';
 
 function App() {
@@ -18,9 +20,10 @@ function App() {
         <Route path="/receitas" component={Receitas} />
         <Route path="/receitas-feitas" component={ReceitasFeitas} />
         <Route path="/receitas-favoritas" component={ReceitasFavoritas} />
+        <Route exact path="/explorar/comidas/area" component={ExplorarOrigem} />
+        <Route path="/explorar/:comidabebida/ingredientes" component={ExplorarIngrediente} />
+        <Route path="/explorar/:comidabebida" component={ExplorarReceita} />
         <Route exact path="/explorar" component={Explorar} />
-        <Route path="/explorar" component={ExplorarReceita} />
-        {/* <Route path="/explorar" component={ExplorarReceita} /> */}
         <Route path="/perfil" component={Perfil} />
         <Route exact path="/" component={Home} />
       </Switch>
