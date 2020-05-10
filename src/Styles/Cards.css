@@ -16,6 +16,7 @@
 
 .CatName-Wrapper {
   display: grid;
+  flex-wrap: wrap;
   text-align: center;
 }
 

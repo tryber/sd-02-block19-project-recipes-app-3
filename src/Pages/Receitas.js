@@ -62,7 +62,7 @@ const Receitas = () => {
   return (
     !isFetching
       ? fetchError ||
-      <div>
+      <div className="Recipes_all">
         <Header />
         {requestInitialPage.length === 1 &&
           redirectWindow(requestInitialPage[0], setFoodDetail, foodDetail)}

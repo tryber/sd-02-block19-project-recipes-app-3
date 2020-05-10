@@ -2,5 +2,10 @@
   background-color: rgb(196, 196, 196);
   display: flex;
   justify-content: space-around;
-  margin: 1em;
+  margin: 0;
+  padding: 1em;
+}
+
+.Header_all {
+  position: fixed;
 }

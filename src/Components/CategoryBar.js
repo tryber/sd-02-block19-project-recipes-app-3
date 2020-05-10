@@ -1,5 +1,6 @@
 import React, { useContext, useEffect } from 'react';
 import RecipesContext from '../Context/';
+import '../Styles/CategoryBar.css';
 
 const CategoryBar = () => {
   const { visibleSearch, arrayCategory, requestCategory, setDrinkOrMeal, defineSearch,
@@ -14,13 +15,21 @@ const CategoryBar = () => {
   };
 
   return !visibleSearch && (
-    <div>
-      <button onClick={() => defineSearch('')} value="" type="button">All</button>
+    <div className="CategoryBar_all">
+      <button
+        className="Category_Button"
+        onClick={() => defineSearch('')}
+        value=""
+        type="button"
+      >
+        All
+      </button>
       {
         arrayCategory.map((food, index) => (
           index < 5
-          ? <div key={food.strCategory}>
+            ?
             <button
+              className="Category_Button"
               data-testid={`${food.strCategory}-category-filter`}
               value={`/filter.php?c=${food.strCategory}`}
               type="button"
@@ -28,7 +37,6 @@ const CategoryBar = () => {
             >
               {food.strCategory}
             </button>
-          </div>
             : null
         ))
       }

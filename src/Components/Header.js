@@ -8,13 +8,6 @@ import HeaderName from './HeaderName';
 import HeaderPic from './HeaderPic';
 import '../Styles/Header.css';
 
-const renderTitle = () => (
-  <div>
-    <HeaderPic />
-    <HeaderName />
-  </div>
-);
-
 const renderRadio = (radioChange) => {
   const arrayRadio = ['Ingrediente', 'Nome', 'Primeira letra'];
   const arrayValueRadio = ['/filter.php?i=', '/search.php?s=', '/search.php?f='];
@@ -58,18 +51,23 @@ export default function Header() {
     if (input !== '') defineSearch(input, rValue);
   };
   return (
-    <div className="Header_father">
-      {renderTitle()}
-      {HeaderInput(setSearchCriteria, setInput)}
-      {pageName === 'Explorar Origem' && window.location.href.includes('comidas')
-        ? <DropdownOrigem />
-        : !arrayPName.includes(pageName) && <CategoryBar />
-      }
-      {(visibleSearch && !arrayPName.includes(pageName)) && (
-        <div> {renderDebounce(searchCriteria, inputChange)}
+    <div className="Header_all">
+      <div className="Header_father">
+        <HeaderPic />
+        <HeaderName />
+        {HeaderInput(setSearchCriteria, setInput)}
+      </div>
+      <div>
+        {pageName === 'Explorar Origem' && window.location.href.includes('comidas')
+          ? <DropdownOrigem />
+          : !arrayPName.includes(pageName) && <CategoryBar />
+        }
+        {(visibleSearch && !arrayPName.includes(pageName)) && (
+          <div> {renderDebounce(searchCriteria, inputChange)}
 
-          <div className="searchRecipes">{renderRadio(radioChange)}</div>
-        </div>)}
+            <div className="searchRecipes">{renderRadio(radioChange)}</div>
+          </div>)}
+      </div>
     </div>
   );
 }
