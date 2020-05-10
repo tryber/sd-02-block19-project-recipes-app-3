@@ -6,6 +6,7 @@ import CategoryBar from './CategoryBar';
 import DropdownOrigem from './DropdownOrigem';
 import HeaderName from './HeaderName';
 import HeaderPic from './HeaderPic';
+import '../Styles/Header.css';
 
 const renderTitle = () => (
   <div>
@@ -57,7 +58,7 @@ export default function Header() {
     if (input !== '') defineSearch(input, rValue);
   };
   return (
-    <div className="header">
+    <div className="Header_father">
       {renderTitle()}
       {HeaderInput(setSearchCriteria, setInput)}
       {pageName === 'Explorar Origem' && window.location.href.includes('comidas')
@@ -65,9 +66,10 @@ export default function Header() {
         : !arrayPName.includes(pageName) && <CategoryBar />
       }
       {(visibleSearch && !arrayPName.includes(pageName)) && (
-      <div> {renderDebounce(searchCriteria, inputChange)}
-        <div className="searchRecipes">{renderRadio(radioChange)}</div>
-      </div>)}
+        <div> {renderDebounce(searchCriteria, inputChange)}
+
+          <div className="searchRecipes">{renderRadio(radioChange)}</div>
+        </div>)}
     </div>
   );
 }

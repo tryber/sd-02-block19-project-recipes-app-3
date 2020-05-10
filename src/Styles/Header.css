@@ -1,0 +1,6 @@
+.Header_father {
+  background-color: rgb(196, 196, 196);
+  display: flex;
+  justify-content: space-around;
+  margin: 1em;
+}
