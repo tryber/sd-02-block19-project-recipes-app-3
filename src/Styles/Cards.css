@@ -1,9 +1,12 @@
+* {
+  outline: 1px solid red;
+}
+
 .recipe-container {
   border-radius: 10px;
   box-shadow: 0 5px 5px gray;
   display: inline-grid;
-  height: 340px;
-  margin: 10px;
+  margin: 2vh;
   text-decoration: none;
   width: 160px;
 }
@@ -22,10 +25,14 @@
 
 .recipe-category {
   color: lightslategrey;
-  font-size: 20px;
+  font-size: 1em;
 }
 
 .recipe-name {
   color: black;
-  font-size: 18px;
+  font-size: 1em;
+}
+
+.Recipes_all {
+  padding: 10em 0 6em 0;
 }

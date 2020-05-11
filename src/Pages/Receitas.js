@@ -62,13 +62,15 @@ const Receitas = () => {
   return (
     !isFetching
       ? fetchError ||
-      <div className="Recipes_all">
+      <div>
         <Header />
-        {requestInitialPage.length === 1 &&
-          redirectWindow(requestInitialPage[0], setFoodDetail, foodDetail)}
-        {results(noResults, requestInitialPage, setFoodDetail)}
-        <Footer />
-      </div>
+        <div className="Recipes_all">
+          {requestInitialPage.length === 1 &&
+            redirectWindow(requestInitialPage[0], setFoodDetail, foodDetail)}
+          {results(noResults, requestInitialPage, setFoodDetail)}
+          <Footer />
+        </div>
+      </div >
       : <p>Loading</p>
   );
 };
