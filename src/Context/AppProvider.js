@@ -139,7 +139,6 @@ export default function AppProvider({ children }) {
       .then(({ drinks, meals }) => setIngredient(drinks || meals), failDrinkOrMeal)
   );
 
-
   const searchForIngredient = (requestParam) => (
     apiRequest(requestParam)
       .then(successSearch, failDrinkOrMeal)
