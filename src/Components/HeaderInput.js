@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import RecipesContext from '../Context';
-import searchTopBtn from '../Images/searchTopBtn.png';
+import searchTopBtn from '../Images/searchTopBtn.svg';
 
 const arrayPName = ['Explorar', 'Explorar - Comidas', 'Explorar - Bebidas'];
 

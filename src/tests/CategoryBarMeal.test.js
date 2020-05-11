@@ -39,7 +39,7 @@ describe('Test Loading and click CategoryBar', () => {
     const passwordInput = getByTestId('password-input');
     const loginButton = getByTestId('login-submit-btn');
     fireEvent.change(emailInput, { target: { value: 'test@test.com' } });
-    fireEvent.change(passwordInput, { target: { value: '123456' } });
+    fireEvent.change(passwordInput, { target: { value: '1234567' } });
     fireEvent.click(loginButton);
     const LoadText = getByText('Loading');
     expect(LoadText).toBeInTheDocument();
@@ -54,6 +54,10 @@ describe('Test Loading and click CategoryBar', () => {
     fireEvent.click(test1);
     await wait();
     expect(getAllByText(/Julinho/)[0]).toBeInTheDocument();
+    fireEvent.click(test1);
+    await wait();
+    fireEvent.click(test1);
+    await wait();
     fireEvent.click(all);
     expect(getAllByText(/Rock Cakes/)[0]).toBeInTheDocument();
     fireEvent.click(getByTestId('search-top-btn'));

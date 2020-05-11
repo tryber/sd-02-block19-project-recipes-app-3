@@ -8,10 +8,11 @@ import HeaderName from './HeaderName';
 import HeaderPic from './HeaderPic';
 import '../Styles/Header.css';
 
-const renderTitle = () => (
-  <div>
+const toSearchAndProfile = (setSearchCriteria, setInput) => (
+  <div className="Header_father">
     <HeaderPic />
     <HeaderName />
+    {HeaderInput(setSearchCriteria, setInput)}
   </div>
 );
 
@@ -35,13 +36,17 @@ const renderRadio = (radioChange) => {
 };
 
 const renderDebounce = (searchCriteria, inputChange) => (
-  <DebounceInput
-    disabled={!searchCriteria}
-    debounceTimeout={600}
-    onChange={(e) => inputChange(e.target.value)}
-    data-testid="search-input"
-    maxLength={searchCriteria === '/search.php?f=' ? 1 : 30}
-  />
+  <div className="Debounce_father">
+    <DebounceInput
+      className="Debounce_input"
+      disabled={!searchCriteria}
+      debounceTimeout={600}
+      placeholder="Buscar Receita"
+      onChange={(e) => inputChange(e.target.value)}
+      data-testid="search-input"
+      maxLength={searchCriteria === '/search.php?f=' ? 1 : 30}
+    />
+  </div>
 );
 const arrayPName = ['Explorar', 'Explorar - Comidas', 'Explorar - Bebidas'];
 export default function Header() {
@@ -60,18 +65,19 @@ export default function Header() {
     if (input !== '') defineSearch(input, rValue);
   };
   return (
-    <div className="Header_father">
-      {renderTitle()}
-      {HeaderInput(setSearchCriteria, setInput)}
-      {pageName === 'Explorar Origem' && window.location.href.includes('comidas')
-        ? <DropdownOrigem />
-        : !arrayPName.includes(pageName) && <CategoryBar />
-      }
-      {(visibleSearch && !arrayPName.includes(pageName)) && (
-        <div> {renderDebounce(searchCriteria, inputChange)}
+    <div className="Header_all">
+      {toSearchAndProfile(setSearchCriteria, setInput)}
+      <div className="Header_Search">
+        {pageName === 'Explorar Origem' && window.location.href.includes('comidas')
+          ? <DropdownOrigem />
+          : !arrayPName.includes(pageName) && <CategoryBar />
+        }
+        {(visibleSearch && !arrayPName.includes(pageName)) && (
+          <div> {renderDebounce(searchCriteria, inputChange)}
 
-          <div className="searchRecipes">{renderRadio(radioChange)}</div>
-        </div>)}
+            <div className="Recipes_radio">{renderRadio(radioChange)}</div>
+          </div>)}
+      </div>
     </div>
   );
 }

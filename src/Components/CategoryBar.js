@@ -1,8 +1,10 @@
 import React, { useContext, useEffect } from 'react';
 import RecipesContext from '../Context/';
+import '../Styles/CategoryBar.css';
 
 const renderButtonAll = (defineSearch) => (
   <button
+    className="Category_Button"
     onClick={() => defineSearch('')}
     value=""
     type="button"
@@ -20,28 +22,26 @@ const CategoryBar = () => {
     requestCategory(category);
   }, [window.location.href]);
 
-  const clickCategory = (value) => {
-    searchResults(value);
+  const clickCategory = (value, nameButton) => {
+    searchResults(value, nameButton);
   };
   return !visibleSearch && (
-    <div>
+    <div className="CategoryBar_all">
       {renderButtonAll(defineSearch)}
-      {
-        arrayCategory.map((food, index) => (
-          index < 5
-            ? <div key={food.strCategory}>
-              <button
-                data-testid={`${food.strCategory}-category-filter`}
-                value={`/filter.php?c=${food.strCategory}`}
-                type="button"
-                onClick={(e) => clickCategory(e.target.value)}
-              >
-                {food.strCategory}
-              </button>
-            </div>
-            : null
-        ))
-      }
+      {arrayCategory.map((food, index) => (
+        index < 5
+          ? <button
+            key={`${food.strCategory} filter`}
+            className="Category_Button"
+            data-testid={`${food.strCategory}-category-filter`}
+            value={`/filter.php?c=${food.strCategory}`}
+            type="button"
+            onClick={(e) => clickCategory(e.target.value, food.strCategory)}
+          >
+            {food.strCategory}
+          </button>
+          : null
+      ))}
     </div>
   );
 };

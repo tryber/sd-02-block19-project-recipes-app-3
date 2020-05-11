@@ -21,7 +21,7 @@ describe('test Explorar Origem component', () => {
     const passwordInput = getByTestId('password-input');
     const loginButton = getByTestId('login-submit-btn');
     fireEvent.change(emailInput, { target: { value: 'test@test.com' } });
-    fireEvent.change(passwordInput, { target: { value: '123456' } });
+    fireEvent.change(passwordInput, { target: { value: '1234567' } });
     fireEvent.click(loginButton);
     await wait();
     fireEvent.click(getByTestId('explore-bottom-btn'));

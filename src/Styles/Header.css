@@ -2,5 +2,41 @@
   background-color: rgb(196, 196, 196);
   display: flex;
   justify-content: space-around;
-  margin: 1em;
+  margin: 0;
+  padding: 1em 0;
+  width: 100vw;
+}
+
+.Header_all {
+  position: fixed;
+}
+
+.Profile_picture {
+  display: flex;
+  text-align: center;
+}
+
+.Recipes_radio {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-around;
+  padding: 0 1vw;
+}
+
+.Debounce_father {
+  display: flex;
+  justify-content: center;
+  padding-top: 1vh;
+}
+
+.Radio_element {
+  padding: 0 4vw;
+}
+
+.Debounce_input {
+  width: 90vw;
+}
+
+.Header_Search {
+  background-color: white;
 }

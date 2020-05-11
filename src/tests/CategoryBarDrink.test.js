@@ -18,7 +18,7 @@ describe('test category', () => {
         </AppProvider>
       </MemoryRouter>,
     );
-    await wait()
+    await wait();
     const test1 = getByTestId('test1-category-filter');
     const test2 = getByTestId('test2-category-filter');
     const all = getByTestId('All-category-filter');

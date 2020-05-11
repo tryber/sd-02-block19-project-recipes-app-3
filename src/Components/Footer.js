@@ -9,7 +9,11 @@ import '../Styles/Footer.css';
 const DrinksToFooter = (setRequestInitialPage, setPageName) => (
   <Link
     to="/receitas/bebidas"
-    onClick={() => { setRequestInitialPage([]); setPageName('Bebidas'); }}
+    onClick={
+      !window.location.href.includes('bebidas')
+        ? () => { setRequestInitialPage([]); setPageName('Bebidas'); }
+        : null
+    }
   >
     <div
       data-testid="drinks-bottom-btn"
@@ -22,7 +26,11 @@ const DrinksToFooter = (setRequestInitialPage, setPageName) => (
 
 const ExploreToFooter = (setRequestInitialPage, setPageName) => (
   <Link
-    onClick={() => { setRequestInitialPage([]); setPageName('Explorar'); }}
+    onClick={
+      !window.location.href.includes('explorar')
+        ? () => { setRequestInitialPage([]); setPageName('Explorar'); }
+        : null
+    }
     to="/explorar"
   >
     <div
@@ -36,7 +44,11 @@ const ExploreToFooter = (setRequestInitialPage, setPageName) => (
 
 const MealsToFooter = (setRequestInitialPage, setPageName) => (
   <Link
-    onClick={() => { setRequestInitialPage([]); setPageName('Comidas'); }}
+    onClick={
+      !window.location.href.includes('comidas')
+        ? () => { setRequestInitialPage([]); setPageName('Comidas'); }
+        : null
+    }
     to="/receitas/comidas"
   >
     <div

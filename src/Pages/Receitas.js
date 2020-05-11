@@ -12,7 +12,10 @@ const renderCard = (setFoodDetail, food, index) => {
     <Link
       onClick={(() => setFoodDetail(food[`id${type}`]))}
       className="recipe-container"
-      to={(window.location.href.includes('comidas') ? `/receitas/comidas/${food.idMeal}` : `/receitas/bebidas/${food.idDrink}`)}
+      to={(window.location.href.includes('comidas')
+        ? `/receitas/comidas/${food.idMeal}`
+        : `/receitas/bebidas/${food.idDrink}`
+      )}
       key={`food${Math.random() * 10000000}`}
     >
       <img
@@ -22,7 +25,12 @@ const renderCard = (setFoodDetail, food, index) => {
         src={food[`str${type}Thumb`]}
       />
       <div className="CatName-Wrapper">
-        <p className="recipe-category">{food.strCategory}</p>
+        <p
+          className="recipe-category"
+          data-testid={`${index}-card-category`}
+        >
+          {food.strCategory}
+        </p>
         <p className="recipe-name" data-testid={`${index}-card-name`} >{food[`str${type}`]}</p>
       </div>
     </Link>
@@ -63,11 +71,13 @@ const Receitas = () => {
       ? fetchError ||
       <div>
         <Header />
-        {requestInitialPage.length === 1 &&
-          redirectWindow(requestInitialPage[0], setFoodDetail, foodDetail)}
-        {results(noResults, requestInitialPage, setFoodDetail)}
-        <Footer />
-      </div>
+        <div className="Recipes_all">
+          {requestInitialPage.length === 1 &&
+            redirectWindow(requestInitialPage[0], setFoodDetail, foodDetail)}
+          {results(noResults, requestInitialPage, setFoodDetail)}
+          <Footer />
+        </div>
+      </div >
       : <p>Loading</p>
   );
 };

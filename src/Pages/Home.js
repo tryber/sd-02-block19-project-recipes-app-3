@@ -34,7 +34,7 @@ const Home = () => {
       <button
         type="button"
         data-testid="login-submit-btn"
-        disabled={!(passwordValue.length > 5 && regexEmail.test(emailValue))}
+        disabled={!(passwordValue.length > 6 && regexEmail.test(emailValue))}
         onClick={() => setIsRedirect(onHandleSubmit(emailValue))}
       >
         Entrar

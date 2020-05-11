@@ -3,6 +3,17 @@ import PropTypes from 'prop-types';
 import { apiRequest, resRdm } from '../Services/APIs';
 import RecipesContext from './index';
 
+const conditionToToggle = (
+  buttonName,
+  usedButton,
+  paramRequest,
+  toggleOn,
+  toggleOff,
+) => (
+  buttonName === usedButton
+    ? toggleOn()
+    : toggleOff(paramRequest, buttonName)
+);
 
 const verifyRequest = (
   stopFetching, requestInitialPage, setIsFetching,
@@ -20,7 +31,7 @@ const categorySearch = (
   input, searchCriteria, copy, setRequestInitialPage, setNoResults, searchResults,
 ) => {
   if (input !== '' && searchCriteria !== '') {
-    searchResults(`${searchCriteria}${input.split(' ').join('_')}`);
+    searchResults(`${searchCriteria}${input.split(' ').join('_')}`, 'request');
     return;
   }
   setRequestInitialPage([...copy]);
@@ -45,6 +56,7 @@ export default function AppProvider({ children }) {
   const [pageName, setPageName] = useState('Comidas');
   const [origin, setOrigin] = useState([]);
   const [ingredient, setIngredient] = useState([]);
+  const [usedButton, setUsedButton] = useState('');
 
   const successDrinkOrMeal = (results) => {
     const condition = results.meals || results.drinks;
@@ -69,10 +81,27 @@ export default function AppProvider({ children }) {
     return setRequestInitialPage([...drinks || meals]);
   };
 
-  const searchResults = (paramRequest) => {
+  const toggleOn = () => {
+    setUsedButton('');
+    setNoResults(false);
+    setRequestInitialPage([...copy]);
+  };
+
+  const toggleOff = (paramRequest, buttonName) => {
+    setUsedButton(buttonName);
     setNoResults(false);
     apiRequest(paramRequest).then(successSearch, failDrinkOrMeal);
   };
+
+  const searchResults = (paramRequest, buttonName) => (
+    conditionToToggle(
+      buttonName,
+      usedButton,
+      paramRequest,
+      toggleOn,
+      toggleOff,
+    )
+  );
 
   const successFoodRequest = (apiReturnFood) => {
     setFoodObject(apiReturnFood);
@@ -109,7 +138,6 @@ export default function AppProvider({ children }) {
     apiRequest(requestParam)
       .then(({ drinks, meals }) => setIngredient(drinks || meals), failDrinkOrMeal)
   );
-
 
   const searchForIngredient = (requestParam) => (
     apiRequest(requestParam)
