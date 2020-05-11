@@ -18,9 +18,9 @@
 
 .Recipes_radio {
   display: flex;
+  flex-flow: row nowrap;
   justify-content: space-around;
   padding: 0 1vw;
-  flex-flow: row nowrap;
 }
 
 .Debounce_father {
