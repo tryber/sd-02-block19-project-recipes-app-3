@@ -15,7 +15,6 @@ const DetailsPage = () => {
   useEffect(() => {
     idSearch(isMeal);
   }, [foodDetail]);
-  console.log(isFood)
   return (
     <div>{
       isFood ?

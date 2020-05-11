@@ -103,7 +103,7 @@ const DetailsIngredients = () => {
   }, [isChecked]);
 
   return (
-    <div>
+    <div className="ingredientInfo">
       {isIngredient
         && <div>
           <h4>Ingredients</h4>
