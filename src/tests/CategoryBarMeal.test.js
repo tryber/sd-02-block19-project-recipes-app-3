@@ -54,6 +54,10 @@ describe('Test Loading and click CategoryBar', () => {
     fireEvent.click(test1);
     await wait();
     expect(getAllByText(/Julinho/)[0]).toBeInTheDocument();
+    fireEvent.click(test1);
+    await wait();
+    fireEvent.click(test1);
+    await wait();
     fireEvent.click(all);
     expect(getAllByText(/Rock Cakes/)[0]).toBeInTheDocument();
     fireEvent.click(getByTestId('search-top-btn'));
