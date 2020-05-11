@@ -88,112 +88,112 @@ export default function AppProvider({ children }) {
       : toggleOff(paramRequest, buttonName)
   );
 
-const successFoodRequest = (apiReturnFood) => {
-  setFoodObject(apiReturnFood);
-};
+  const successFoodRequest = (apiReturnFood) => {
+    setFoodObject(apiReturnFood);
+  };
 
-const idSearch = (searchParam) => {
-  apiRequest(searchParam)
-    .then(successFoodRequest, failDrinkOrMeal);
-};
+  const idSearch = (searchParam) => {
+    apiRequest(searchParam)
+      .then(successFoodRequest, failDrinkOrMeal);
+  };
 
-useEffect(() => {
-  if (local !== undefined) {
-    setFoodDetail(local);
-  }
-}, [window.location.href]);
+  useEffect(() => {
+    if (local !== undefined) {
+      setFoodDetail(local);
+    }
+  }, [window.location.href]);
 
-useEffect(() => {
-  verifyRequest(
-    stopFetching, requestInitialPage, setIsFetching,
-    setCopy, setDrinkOrMeal,
+  useEffect(() => {
+    verifyRequest(
+      stopFetching, requestInitialPage, setIsFetching,
+      setCopy, setDrinkOrMeal,
+    );
+  }, [requestInitialPage]);
+
+
+  const requestCategory = (requestParam) => (
+    apiRequest(requestParam)
+      .then((results) => {
+        const { categories, drinks } = results;
+        setArrayCategory(categories || drinks);
+      }, failDrinkOrMeal)
   );
-}, [requestInitialPage]);
 
-
-const requestCategory = (requestParam) => (
-  apiRequest(requestParam)
-    .then((results) => {
-      const { categories, drinks } = results;
-      setArrayCategory(categories || drinks);
-    }, failDrinkOrMeal)
-);
-
-const requestIngredient = (requestParam) => (
-  apiRequest(requestParam)
-    .then(({ drinks, meals }) => setIngredient(drinks || meals), failDrinkOrMeal)
-);
-
-
-const searchForIngredient = (requestParam) => (
-  apiRequest(requestParam)
-    .then(successSearch, failDrinkOrMeal)
-);
-
-const requestOrigin = (requestParam) => (
-  apiRequest(requestParam)
-    .then(({ meals }) => { setOrigin([...meals]); setStopFetching(false); }, failDrinkOrMeal)
-);
-
-const requestRandom = () => (
-  apiRequest('/random.php')
-    .then(({ drinks = [{}], meals = [{}] }) => {
-      const { idDrink } = drinks[0];
-      const { idMeal } = meals[0];
-      setIdDetail(idDrink || idMeal);
-      setFoodDetail(idDrink || idMeal);
-    }, failDrinkOrMeal)
-);
-
-
-const defineSearch = (input, searchCriteria) => {
-  categorySearch(
-    input, searchCriteria, copy, setRequestInitialPage, setNoResults, searchResults,
+  const requestIngredient = (requestParam) => (
+    apiRequest(requestParam)
+      .then(({ drinks, meals }) => setIngredient(drinks || meals), failDrinkOrMeal)
   );
-};
 
-const context = {
-  setIsFetching,
-  requestInitialPage,
-  setRequestInitialPage,
-  setDrinkOrMeal,
-  fetchError,
-  defineSearch,
-  isFetching,
-  visibleSearch,
-  setVisibleSearch,
-  requestCategory,
-  arrayCategory,
-  noResults,
-  setFoodDetail,
-  foodDetail,
-  requestOrigin,
-  origin,
-  copy,
-  pageName,
-  setPageName,
-  idSearch,
-  foodObject,
-  isRecipeStarted,
-  setIsRecipeStarted,
-  isChecked,
-  setIsChecked,
-  requestRandom,
-  searchResults,
-  requestIngredient,
-  ingredient,
-  idDetail,
-  setIdDetail,
-  searchForIngredient,
-  setStopFetching,
-  stopFetching,
-};
 
-return (
-  <RecipesContext.Provider value={context}>
-    {children}
-  </RecipesContext.Provider>
-);
+  const searchForIngredient = (requestParam) => (
+    apiRequest(requestParam)
+      .then(successSearch, failDrinkOrMeal)
+  );
+
+  const requestOrigin = (requestParam) => (
+    apiRequest(requestParam)
+      .then(({ meals }) => { setOrigin([...meals]); setStopFetching(false); }, failDrinkOrMeal)
+  );
+
+  const requestRandom = () => (
+    apiRequest('/random.php')
+      .then(({ drinks = [{}], meals = [{}] }) => {
+        const { idDrink } = drinks[0];
+        const { idMeal } = meals[0];
+        setIdDetail(idDrink || idMeal);
+        setFoodDetail(idDrink || idMeal);
+      }, failDrinkOrMeal)
+  );
+
+
+  const defineSearch = (input, searchCriteria) => {
+    categorySearch(
+      input, searchCriteria, copy, setRequestInitialPage, setNoResults, searchResults,
+    );
+  };
+
+  const context = {
+    setIsFetching,
+    requestInitialPage,
+    setRequestInitialPage,
+    setDrinkOrMeal,
+    fetchError,
+    defineSearch,
+    isFetching,
+    visibleSearch,
+    setVisibleSearch,
+    requestCategory,
+    arrayCategory,
+    noResults,
+    setFoodDetail,
+    foodDetail,
+    requestOrigin,
+    origin,
+    copy,
+    pageName,
+    setPageName,
+    idSearch,
+    foodObject,
+    isRecipeStarted,
+    setIsRecipeStarted,
+    isChecked,
+    setIsChecked,
+    requestRandom,
+    searchResults,
+    requestIngredient,
+    ingredient,
+    idDetail,
+    setIdDetail,
+    searchForIngredient,
+    setStopFetching,
+    stopFetching,
+  };
+
+  return (
+    <RecipesContext.Provider value={context}>
+      {children}
+    </RecipesContext.Provider>
+  );
 }
 
 AppProvider.propTypes = {
