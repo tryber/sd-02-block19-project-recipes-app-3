@@ -1,7 +1,6 @@
 import React, { useContext } from 'react';
 import RecipesContext from '../Context';
 
-
 const DropdownOrigem = () => {
   const { origin,
     visibleSearch,
