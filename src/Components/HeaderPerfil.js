@@ -8,7 +8,7 @@ const HeaderPerfil = () => (
     <div className="ContainerHeaderP">
       <div className="headerPerfil">
         <HeaderPic />
-        <HeaderName style="HeaderName" />
+        <HeaderName classHeader="HeaderName" />
       </div>
     </div>
     <h2 className="HeaderNameh2" data-testid="profile-email">

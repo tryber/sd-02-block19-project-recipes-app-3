@@ -43,6 +43,6 @@
 
 .HeaderNameh2 {
   display: flex;
-  width: 100%;
   justify-content: center;
+  width: 100%;
 }
