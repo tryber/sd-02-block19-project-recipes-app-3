@@ -30,8 +30,7 @@ const CategoryBar = () => {
       {renderButtonAll(defineSearch)}
       {arrayCategory.map((food, index) => (
         index < 5
-          ?
-          <button
+          ? <button
             key={`${food.strCategory} filter`}
             className="Category_Button"
             data-testid={`${food.strCategory}-category-filter`}
