@@ -21,7 +21,7 @@ const ReceitasFavoritas = () => {
       <div className="containCards">
         {favoriteRecipes.map((food, index) => {
           const type = food.idMeal ? 'Meal' : 'Drink';
-          return (<div key={food}>
+          return (<div key={food[`str${type}`]}>
             {renderCard(index, food, type)}
             <input
               data-testid={`${index}-horizontal-favorite-btn`}

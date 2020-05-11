@@ -27,8 +27,8 @@ const DetailsVideo = () => {
   const isMeal = window.location.href.includes('comidas') ? 'Youtube' : 'Video';
   const condition = foodObject.meals || foodObject.drinks;
 
-  return (
-    <div className="containVideo" hidden={isRecipeStarted}>
+  return !isRecipeStarted && (
+    <div className="containVideo">
       <h4>Video</h4>
       {isVideo(condition, isMeal)}
     </div>
