@@ -35,9 +35,10 @@ const renderRadio = (radioChange) => {
   ));
 };
 
-const renderDebounce = (searchCriteria, inputChange) => (
+const renderDebounce = (searchCriteria, inputChange, input) => (
   <div className="Debounce_father">
     <DebounceInput
+      value={input}
       className="Debounce_input"
       disabled={!searchCriteria}
       debounceTimeout={600}
@@ -62,6 +63,7 @@ export default function Header() {
   };
   const radioChange = (rValue) => {
     setSearchCriteria(rValue);
+    setInput('');
     if (input !== '') defineSearch(input, rValue);
   };
   return (
@@ -73,7 +75,7 @@ export default function Header() {
           : !arrayPName.includes(pageName) && <CategoryBar />
         }
         {(visibleSearch && !arrayPName.includes(pageName)) && (
-          <div> {renderDebounce(searchCriteria, inputChange)}
+          <div> {renderDebounce(searchCriteria, inputChange, input)}
 
             <div className="Recipes_radio">{renderRadio(radioChange)}</div>
           </div>)}
