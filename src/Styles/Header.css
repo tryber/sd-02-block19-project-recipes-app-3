@@ -15,3 +15,28 @@
   display: flex;
   text-align: center;
 }
+
+.Recipes_radio {
+  display: flex;
+  justify-content: space-around;
+  padding: 0 1vw;
+  flex-flow: row nowrap;
+}
+
+.Debounce_father {
+  display: flex;
+  justify-content: center;
+  padding-top: 1vh;
+}
+
+.Radio_element {
+  padding: 0 4vw;
+}
+
+.Debounce_input {
+  width: 90vw;
+}
+
+.Header_Search {
+  background-color: white;
+}

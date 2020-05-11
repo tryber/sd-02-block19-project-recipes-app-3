@@ -36,13 +36,17 @@ const renderRadio = (radioChange) => {
 };
 
 const renderDebounce = (searchCriteria, inputChange) => (
-  <DebounceInput
-    disabled={!searchCriteria}
-    debounceTimeout={600}
-    onChange={(e) => inputChange(e.target.value)}
-    data-testid="search-input"
-    maxLength={searchCriteria === '/search.php?f=' ? 1 : 30}
-  />
+  <div className="Debounce_father">
+    <DebounceInput
+      className="Debounce_input"
+      disabled={!searchCriteria}
+      debounceTimeout={600}
+      placeholder="Buscar Receita"
+      onChange={(e) => inputChange(e.target.value)}
+      data-testid="search-input"
+      maxLength={searchCriteria === '/search.php?f=' ? 1 : 30}
+    />
+  </div>
 );
 const arrayPName = ['Explorar', 'Explorar - Comidas', 'Explorar - Bebidas'];
 export default function Header() {
@@ -63,7 +67,7 @@ export default function Header() {
   return (
     <div className="Header_all">
       {toSearchAndProfile(setSearchCriteria, setInput)}
-      <div>
+      <div className="Header_Search">
         {pageName === 'Explorar Origem' && window.location.href.includes('comidas')
           ? <DropdownOrigem />
           : !arrayPName.includes(pageName) && <CategoryBar />
@@ -71,7 +75,7 @@ export default function Header() {
         {(visibleSearch && !arrayPName.includes(pageName)) && (
           <div> {renderDebounce(searchCriteria, inputChange)}
 
-            <div className="searchRecipes">{renderRadio(radioChange)}</div>
+            <div className="Recipes_radio">{renderRadio(radioChange)}</div>
           </div>)}
       </div>
     </div>
