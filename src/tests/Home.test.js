@@ -36,8 +36,8 @@ describe('Test Home page', () => {
     const loginButton = getByTestId('login-submit-btn');
     fireEvent.change(emailInput, { target: { value: 'test@test.com' } });
     expect(emailInput.value).toBe('test@test.com');
-    fireEvent.change(passwordInput, { target: { value: '123456' } });
-    expect(passwordInput.value).toBe('123456');
+    fireEvent.change(passwordInput, { target: { value: '1234567' } });
+    expect(passwordInput.value).toBe('1234567');
     expect(loginButton.disabled).toBe(false);
     expect(loginButton.innerHTML).toBe('Entrar');
     fireEvent.click(loginButton);

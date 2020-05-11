@@ -33,6 +33,7 @@ const CategoryBar = () => {
           index < 5
             ?
             <button
+              key={`${food.strCategory} filter`}
               className="Category_Button"
               data-testid={`${food.strCategory}-category-filter`}
               value={`/filter.php?c=${food.strCategory}`}

@@ -39,7 +39,7 @@ describe('Test Loading and click CategoryBar', () => {
     const passwordInput = getByTestId('password-input');
     const loginButton = getByTestId('login-submit-btn');
     fireEvent.change(emailInput, { target: { value: 'test@test.com' } });
-    fireEvent.change(passwordInput, { target: { value: '123456' } });
+    fireEvent.change(passwordInput, { target: { value: '1234567' } });
     fireEvent.click(loginButton);
     const LoadText = getByText('Loading');
     expect(LoadText).toBeInTheDocument();
