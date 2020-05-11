@@ -8,6 +8,14 @@ import HeaderName from './HeaderName';
 import HeaderPic from './HeaderPic';
 import '../Styles/Header.css';
 
+const toSearchAndProfile = (setSearchCriteria, setInput) => (
+  <div className="Header_father">
+    <HeaderPic />
+    <HeaderName />
+    {HeaderInput(setSearchCriteria, setInput)}
+  </div>
+);
+
 const renderRadio = (radioChange) => {
   const arrayRadio = ['Ingrediente', 'Nome', 'Primeira letra'];
   const testIdRadio = ['ingredient', 'name', 'first-letter'];
@@ -54,11 +62,7 @@ export default function Header() {
   };
   return (
     <div className="Header_all">
-      <div className="Header_father">
-        <HeaderPic />
-        <HeaderName />
-        {HeaderInput(setSearchCriteria, setInput)}
-      </div>
+      {toSearchAndProfile(setSearchCriteria, setInput)}
       <div>
         {pageName === 'Explorar Origem' && window.location.href.includes('comidas')
           ? <DropdownOrigem />
