@@ -12,9 +12,7 @@ const ExplorarReceita = () => {
   return (
     <div><Header /><div className="containExplore">
       <Link className="exploreLinks" to={`${window.location.pathname}/ingredientes`}>
-        <button className="exploreButtons" onClick={() => setPageName('Explorar Ingredientes')} data-testid="explore-by-ingredient" type="button">
-          Por Ingredientes
-        </button></Link>
+        <button className="exploreButtons" onClick={() => setPageName('Explorar Ingredientes')} data-testid="explore-by-ingredient" type="button">Por Ingredientes</button></Link>
       {window.location.pathname.includes('comidas') && <Link className="exploreLinks" to="/explorar/comidas/area">
         <button
           className="exploreButtons"
