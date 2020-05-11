@@ -56,5 +56,11 @@ describe('Test Loading and click CategoryBar', () => {
     expect(getAllByText(/Julinho/)[0]).toBeInTheDocument();
     fireEvent.click(all);
     expect(getAllByText(/Rock Cakes/)[0]).toBeInTheDocument();
+    fireEvent.click(getByTestId('search-top-btn'));
+    await wait();
+    fireEvent.click(getByTestId('ingredient-search-radio'));
+    fireEvent.click(getByTestId('name-search-radio'));
+    fireEvent.click(getByTestId('first-letter-search-radio'));
+    fireEvent.change(getByTestId('search-input'), {target: {value:'a'}});
   });
 });

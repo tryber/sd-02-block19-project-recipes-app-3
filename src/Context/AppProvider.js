@@ -9,7 +9,7 @@ const verifyRequest = (
   setCopy, setDrinkOrMeal,
 ) => {
   if (stopFetching) return;
-  if (requestInitialPage.length === 12) {
+  if (requestInitialPage.length >= 12) {
     setIsFetching(false);
     setCopy([...requestInitialPage]);
   }
@@ -118,7 +118,7 @@ export default function AppProvider({ children }) {
 
   const requestOrigin = (requestParam) => (
     apiRequest(requestParam)
-      .then(({ meals }) => { setOrigin([...meals]); setStopFetching(false); }, failDrinkOrMeal)
+      .then(({ meals }) => {setOrigin([...meals]); setStopFetching(false); }, failDrinkOrMeal)
   );
 
   const requestRandom = () => (

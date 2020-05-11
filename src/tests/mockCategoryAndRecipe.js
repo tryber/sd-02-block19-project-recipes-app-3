@@ -1,4 +1,4 @@
-const object = {
+export const object = {
   idMeal: '52901',
   strMeal: 'Rock Cakes',
   strDrinkAlternate: null,
@@ -35,9 +35,22 @@ export const mockApi = () => (
         }],
       }),
     }))
+    .mockImplementationOnce(() => Promise.resolve({
+      ok: true,
+      json: () => Promise.resolve({
+        meals: [{ strArea: 'Area1' }, { strArea: 'Area2' }],
+      }),
+    }))
+    .mockImplementationOnce(() => Promise.resolve({
+      ok: true,
+      json: () => Promise.resolve({
+        meals: [object, object, object, object, object,
+          object, object, object, object, object, object, object],
+      }),
+    }))
 );
 
-const object2 = {
+export const object2 = {
   idDrink: '13206', strDrink: 'Caipirissima', strVideo: null, strCategory: 'Ordinary Drink', strAlcoholic: 'Alcoholic', strGlass: 'Collins Glass', strInstructions: "Same as Caipirinha but instead of cachaca you add WHITE RUM. It's great!!!!!!!!", strInstructionsDE: 'Wie Caipirinha, aber anstelle von Cachaca f\u00fcgen Sie WHITE RUM hinzu. Es ist großartig!!!!!!!!', strDrinkThumb: 'https://www.thecocktaildb.com/images/media/drink/yd47111503565515.jpg', strIngredient1: 'Lime', strIngredient2: 'Sugar', strIngredient3: 'White rum', strIngredient4: 'Ice', strIngredient5: null, strMeasure1: '2 ', strMeasure2: '2 tblsp ', strMeasure3: '2-3 oz ', strMeasure4: 'crushed ', strMeasure5: null, strMeasure6: null, strMeasure7: null, strMeasure8: null, strMeasure9: null, strMeasure10: null, strMeasure11: null, strMeasure12: null, strMeasure13: null, strMeasure14: null, strMeasure15: null, strCreativeCommonsConfirmed: 'No', dateModified: '2017-08-24 10:05:15',
 };
 
