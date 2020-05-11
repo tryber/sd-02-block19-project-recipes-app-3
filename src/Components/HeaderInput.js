@@ -2,13 +2,13 @@ import React, { useContext } from 'react';
 import RecipesContext from '../Context';
 import searchTopBtn from '../Images/searchTopBtn.svg';
 
-const arrayPName = ['Explorar', 'Explorar - Comidas', 'Explorar - Bebidas'];
+const arrayPName = ['/explorar', '/explorar/comidas', '/explorar/bebidas'];
 
 export default function HeaderInput(setSearchCriteria, setInput) {
-  const { setVisibleSearch, visibleSearch, pageName } = useContext(RecipesContext);
+  const { setVisibleSearch, visibleSearch } = useContext(RecipesContext);
   return (
     <input
-      disabled={arrayPName.includes(pageName)}
+      disabled={arrayPName.includes(window.location.pathname)}
       type="image"
       data-testid="search-top-btn"
       src={searchTopBtn}

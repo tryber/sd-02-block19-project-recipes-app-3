@@ -11,27 +11,32 @@ const ExplorarReceita = () => {
   useEffect(() => () => { setIdDetail(''); }, []);
   return (
     <div><Header />
-      <Link to={`${window.location.pathname}/ingredientes`}>
-        <button onClick={() => setPageName('Explorar Ingredientes')} data-testid="explore-by-ingredient" type="button">
-          Por Ingredientes
+      <div className="containExplore">
+        <Link className="exploreLinks" to={`${window.location.pathname}/ingredientes`}>
+          <button className="exploreButtons" onClick={() => setPageName('Explorar Ingredientes')} data-testid="explore-by-ingredient" type="button">
+            Por Ingredientes
         </button>
-      </Link>
-      {pageName !== 'Explorar - Bebidas' && <Link to="/explorar/comidas/area">
-        <button
-          onClick={() => {
-            setStopFetching(false);
-            setPageName('Explorar Origem');
-            setVisibleSearch(false);
-          }}
-          data-testid="explore-by-area"
-          type="button"
-        >
-          Por Local de Origem
+        </Link>
+        {window.location.pathname.includes('comidas') && <Link className="exploreLinks" to="/explorar/comidas/area">
+          <button
+            className="exploreButtons"
+            onClick={() => {
+              setStopFetching(false);
+              setPageName('Explorar Origem');
+              setVisibleSearch(false);
+            }}
+            data-testid="explore-by-area"
+            type="button"
+          >
+            Por Local de Origem
         </button>
-      </Link>}
-      <button data-testid="explore-surprise" onClick={requestRandom} type="button">
-        Me surpreenda!
-      </button>
+        </Link>}
+        <div className="exploreLinks">
+          <button className="exploreButtons" data-testid="explore-surprise" onClick={requestRandom} type="button">
+            Me surpreenda!
+          </button>
+        </div>
+      </div>
       {(idDetail !== '') && <Redirect to={`/receitas/${window.location.pathname.split('/')[2]}/${idDetail}`} />}
       <Footer /></div>
   );
