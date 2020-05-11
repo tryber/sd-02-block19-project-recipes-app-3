@@ -22,8 +22,8 @@ const CategoryBar = () => {
     requestCategory(category);
   }, [window.location.href]);
 
-  const clickCategory = (value) => {
-    searchResults(value);
+  const clickCategory = (value, nameButton) => {
+    searchResults(value, nameButton);
   };
   return !visibleSearch && (
     <div className="CategoryBar_all">
@@ -36,7 +36,7 @@ const CategoryBar = () => {
             data-testid={`${food.strCategory}-category-filter`}
             value={`/filter.php?c=${food.strCategory}`}
             type="button"
-            onClick={(e) => clickCategory(e.target.value)}
+            onClick={(e) => clickCategory(e.target.value, food.strCategory)}
           >
             {food.strCategory}
           </button>

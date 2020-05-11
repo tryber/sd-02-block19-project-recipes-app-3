@@ -45,6 +45,7 @@ export default function AppProvider({ children }) {
   const [pageName, setPageName] = useState('Comidas');
   const [origin, setOrigin] = useState([]);
   const [ingredient, setIngredient] = useState([]);
+  const [usedButton, setUsedButton] = useState('');
 
   const successDrinkOrMeal = (results) => {
     const condition = results.meals || results.drinks;
@@ -69,7 +70,13 @@ export default function AppProvider({ children }) {
     return setRequestInitialPage([...drinks || meals]);
   };
 
-  const searchResults = (paramRequest) => {
+  const searchResults = (paramRequest, buttonName) => {
+    if (buttonName === usedButton) {
+      setRequestInitialPage([...copy]);
+      setUsedButton('');
+      return '';
+    };
+    setUsedButton(buttonName);
     setNoResults(false);
     apiRequest(paramRequest).then(successSearch, failDrinkOrMeal);
   };
