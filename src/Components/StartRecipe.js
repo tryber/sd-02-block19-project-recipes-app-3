@@ -63,9 +63,7 @@ const StartRecipe = () => {
         onClick={() => (!isFinish
           ? insertLocalStorage(isRecipeStarted, setIsRecipeStarted, foodDetail, setIsFinish)
           : redirectAndDone(setIsRedirect, foodObject, foodDetail))}
-      >
-        {!isFinish ? startOrEnd : 'Finalizar Receita'}
-      </button>}
+      >{!isFinish ? startOrEnd : 'Finalizar Receita'}</button>}
     </div >
   );
 };
