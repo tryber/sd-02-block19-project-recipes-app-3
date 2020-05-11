@@ -46,13 +46,13 @@ export const renderCard = (index, food, type, dataFinal) => (
         index={index}
         url={`${window.location.origin}/receitas/${food.idMeal ? 'comidas' : 'bebidas'}/${food[`id${type}`]}`}
       />
+      <p className="text" data-testid={`${index}-horizontal-top-text`}>
+        {food.strAlcoholic ? `${food.strAlcoholic} Drink` : `${food.strArea} - ${food.strCategory}`}
+      </p>
       <Link to={`/receitas/${food.idMeal ? 'comidas' : 'bebidas'}/${food[`id${type}`]}`}>
-        <p className="text" data-testid={`${index}-horizontal-top-text`}>
-          {food.strAlcoholic ? `${food.strAlcoholic} Drink` : `${food.strArea} - ${food.strCategory}`}
-        </p>
         <p className="text" data-testid={`${index}-horizontal-name`}>{food[`str${type}`]}</p>
-        <p className="text" data-testid={`${index}-horizontal-done-date`}>{`Feita em ${dataFinal}`}</p>
       </Link>
+      <p className="text" data-testid={`${index}-horizontal-done-date`}>{`Feita em ${dataFinal}`}</p>
     </div>
   </div>
 );

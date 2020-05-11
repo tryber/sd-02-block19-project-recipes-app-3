@@ -18,7 +18,7 @@ const CopyButton = ({ url, index }) => {
         {copied && <div><p className="copiedText">{copied}</p></div>}
         <CopyToClipboard
           className="copyButton"
-          data-testid={(index === undefined) ? 'share-btn' : `${index}-horizontal-share-btn`}
+          data-testid={(index === undefined || index === null) ? 'share-btn' : `${index}-horizontal-share-btn`}
           text={url}
           onCopy={message}
         >
@@ -35,4 +35,9 @@ export default CopyButton;
 
 CopyButton.propTypes = {
   url: PropTypes.string.isRequired,
+  index: PropTypes.number,
 };
+
+CopyButton.defaultProps = {
+  index: null, 
+}
