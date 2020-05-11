@@ -20,7 +20,7 @@ const categorySearch = (
   input, searchCriteria, copy, setRequestInitialPage, setNoResults, searchResults,
 ) => {
   if (input !== '' && searchCriteria !== '') {
-    searchResults(`${searchCriteria}${input.split(' ').join('_')}`);
+    searchResults(`${searchCriteria}${input.split(' ').join('_')}`, 'request');
     return;
   }
   setRequestInitialPage([...copy]);
