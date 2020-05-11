@@ -30,7 +30,7 @@ export const renderButtons = (setDoneRecipes, copyDone) => (
   </div>
 );
 
-export const renderCard = (index, food, type, dataFinal) => (
+export const renderCard = (index, food, type, dataFinal, inputLike) => (
   <div className="HorizontalCard" key={food[`str${type}`]}>
     <Link className="linkDone" to={`/receitas/${food.idMeal ? 'comidas' : 'bebidas'}/${food[`id${type}`]}`}>
       <img
@@ -41,18 +41,19 @@ export const renderCard = (index, food, type, dataFinal) => (
       />
     </Link>
     <div className="containText">
+      {inputLike && inputLike()}
       <CopyButton
         className="copyButton"
         index={index}
         url={`${window.location.origin}/receitas/${food.idMeal ? 'comidas' : 'bebidas'}/${food[`id${type}`]}`}
-      />
+        />
       <p className="text" data-testid={`${index}-horizontal-top-text`}>
         {food.strAlcoholic ? `${food.strAlcoholic} Drink` : `${food.strArea} - ${food.strCategory}`}
       </p>
       <Link to={`/receitas/${food.idMeal ? 'comidas' : 'bebidas'}/${food[`id${type}`]}`}>
         <p className="text" data-testid={`${index}-horizontal-name`}>{food[`str${type}`]}</p>
       </Link>
-      <p className="text" data-testid={`${index}-horizontal-done-date`}>{`Feita em ${dataFinal}`}</p>
+      {dataFinal && <p className="text" data-testid={`${index}-horizontal-done-date`}>{`Feita em ${dataFinal}`}</p>}
     </div>
   </div>
 );

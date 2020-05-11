@@ -3,7 +3,6 @@
   display: flex;
   flex-direction: column;
   height: 100vh;
-  justify-content: space-between;
   padding-bottom: 100px;
 }
 
@@ -82,4 +81,9 @@
 
 .HeaderName {
   width: 60%;
+}
+
+.inputLike {
+  display: flex;
+  justify-content: flex-end;
 }
