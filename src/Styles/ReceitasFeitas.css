@@ -67,8 +67,8 @@
 }
 
 .ContainerHeaderP {
-  background-color: rgb(196, 196, 196);
   align-items: center;
+  background-color: rgb(196, 196, 196);
   display: flex;
   flex-direction: column;
   width: 100vw;
