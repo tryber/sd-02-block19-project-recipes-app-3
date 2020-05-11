@@ -3,6 +3,17 @@ import PropTypes from 'prop-types';
 import { apiRequest, resRdm } from '../Services/APIs';
 import RecipesContext from './index';
 
+const conditionToToggle = (
+  buttonName,
+  usedButton,
+  paramRequest,
+  toggleOn,
+  toggleOff
+) => (
+  buttonName === usedButton
+    ? toggleOn()
+    : toggleOff(paramRequest, buttonName)
+);
 
 const verifyRequest = (
   stopFetching, requestInitialPage, setIsFetching,
@@ -73,7 +84,7 @@ export default function AppProvider({ children }) {
   const toggleOn = () => {
     setUsedButton('');
     setNoResults(false);
-    setRequestInitialPage([...copy])
+    setRequestInitialPage([...copy]);
   };
 
   const toggleOff = (paramRequest, buttonName) => {
@@ -83,9 +94,13 @@ export default function AppProvider({ children }) {
   };
 
   const searchResults = (paramRequest, buttonName) => (
-    buttonName === usedButton
-      ? toggleOn()
-      : toggleOff(paramRequest, buttonName)
+    conditionToToggle(
+      buttonName,
+      usedButton,
+      paramRequest,
+      toggleOn,
+      toggleOff
+    )
   );
 
   const successFoodRequest = (apiReturnFood) => {
