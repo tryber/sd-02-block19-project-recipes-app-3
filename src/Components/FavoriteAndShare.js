@@ -60,13 +60,15 @@ const FavoriteAndShare = () => {
   return (
     <div className="FavShare_father">
       <CopyButton url={window.location.href} />
-      <button
-        data-testid="favorite-btn"
-        className="FavShare_content buttonLike"
-        onClick={() => heartClick(isFavorite, setIsFavorite, foodObject, foodDetail)}
-      >
-        {favoriteIcon(isFavorite)}
-      </button>
+      <div>
+        <button
+          data-testid="favorite-btn"
+          className="FavShare_content buttonLike"
+          onClick={() => heartClick(isFavorite, setIsFavorite, foodObject, foodDetail)}
+        >
+          {favoriteIcon(isFavorite)}
+        </button>
+      </div>
     </div >
   );
 };
