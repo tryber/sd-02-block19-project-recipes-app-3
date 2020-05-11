@@ -1,11 +1,19 @@
 import React, { useContext } from 'react';
+import PropTypes from 'prop-types';
 import RecipesContext from '../Context';
 
-const HeaderName = () => {
-  const { pageName } = useContext(RecipesContext);
-  return (
-    <h2 className="HeaderName" data-testid="page-title">{pageName}</h2>
-  );
-};
+const HeaderName = ({ classHeader }) => (
+  <h2 className={classHeader} data-testid="page-title">
+    {useContext(RecipesContext).pageName}
+  </h2>
+);
 
 export default HeaderName;
+
+HeaderName.propTypes = {
+  classHeader: PropTypes.string,
+};
+
+HeaderName.defaultProps = {
+  classHeader: null,
+};

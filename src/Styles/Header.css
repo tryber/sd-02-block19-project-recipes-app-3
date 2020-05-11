@@ -40,3 +40,9 @@
 .Header_Search {
   background-color: white;
 }
+
+.HeaderNameh2 {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
