@@ -31,4 +31,9 @@
 
 .Recipes_all {
   padding: 10em 0 6em;
+  text-align: center;
+}
+
+.loading {
+  text-align: center;
 }

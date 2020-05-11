@@ -63,7 +63,6 @@ const Receitas = () => {
       setDrinkOrMeal(resRdm);
     }
   }, [window.location.href]);
-
   useEffect(() => () => setRequestInitialPage([]), []);
   if (requestInitialPage === undefined) return (<h1>Nenhum Resultado</h1>);
   return (
@@ -78,7 +77,7 @@ const Receitas = () => {
           <Footer />
         </div>
       </div >
-      : <p>Loading</p>
+      : <p className="loading">Loading</p>
   );
 };
 

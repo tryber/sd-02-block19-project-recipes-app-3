@@ -6,6 +6,7 @@ import RecipesContext from '../Context';
 import DetailsVideo from '../Components/DetailsVideo';
 import Recommended from '../Components/Recommended';
 import StartRecipe from '../Components/StartRecipe';
+import '../Styles/DetailsPage.css';
 
 const DetailsPage = () => {
   const { foodDetail, foodObject, idSearch } = useContext(RecipesContext);
@@ -14,10 +15,11 @@ const DetailsPage = () => {
   useEffect(() => {
     idSearch(isMeal);
   }, [foodDetail]);
+  console.log(isFood)
   return (
     <div>{
       isFood ?
-        <div>
+        <div className="containAll">
           <DetailImage />
           <DetailsIngredients />
           <Instructions />

@@ -1,0 +1,23 @@
+.containHome {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: 80vh;
+  justify-content: center;
+}
+
+.elementDisplay {
+  margin: 10px;
+}
+
+.inputHome {
+  height: 100%;
+  width: 100%;
+}
+
+.loginButton {
+  background: rgb(108 , 227 , 79);
+  color: black;
+  height: 8%;
+  width: 80%;
+}

@@ -62,7 +62,7 @@ const FavoriteAndShare = () => {
       <CopyButton url={window.location.href} />
       <button
         data-testid="favorite-btn"
-        className="FavShare_content"
+        className="FavShare_content buttonLike"
         onClick={() => heartClick(isFavorite, setIsFavorite, foodObject, foodDetail)}
       >
         {favoriteIcon(isFavorite)}

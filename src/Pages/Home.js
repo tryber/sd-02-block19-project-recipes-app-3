@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom';
+import '../Styles/Home.css';
 
 const onHandleSubmit = (emailValue) => {
   localStorage.setItem('meals-token', '1');
@@ -16,15 +17,17 @@ const Home = () => {
   const [passwordValue, setPasswordValue] = useState('');
   const [isRedirect, setIsRedirect] = useState(false);
   return (
-    <div><h1>Login</h1>
-      <div><input
+    <div className="containHome"><h1 className="elementDisplay">Login</h1>
+      <div className="elementDisplay"><input
+        className="inputHome"
         type="email"
         placeholder="Email"
         data-testid="email-input"
         value={emailValue}
         onChange={({ target }) => setEmailValue(target.value)}
       /></div>
-      <div> <input
+      <div className="elementDisplay"> <input
+        className="inputHome"
         type="password"
         placeholder="Senha"
         data-testid="password-input"
@@ -36,6 +39,7 @@ const Home = () => {
         data-testid="login-submit-btn"
         disabled={!(passwordValue.length > 6 && regexEmail.test(emailValue))}
         onClick={() => setIsRedirect(onHandleSubmit(emailValue))}
+        className="elementDisplay loginButton"
       >
         Entrar
       </button>
