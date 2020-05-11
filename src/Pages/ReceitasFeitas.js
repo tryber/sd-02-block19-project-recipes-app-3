@@ -31,7 +31,7 @@ export const renderButtons = (setDoneRecipes, copyDone) => (
 );
 
 export const renderCard = (index, food, type, dataFinal) => (
-  <div>
+  <div key={food}>
     <p data-testid={`${index}-horizontal-top-text`}>
       {food.strAlcoholic ? `${food.strAlcoholic} Drink` : `${food.strArea} - ${food.strCategory}`}
     </p>

@@ -26,7 +26,7 @@ const isCheckboxMark = (foodDetail, setIsChecked) => {
 
 const ingredientName = (index, ingredientToShow, boolCheck) => (
   <span
-    className={boolCheck && 'wordStriking'}
+    className={boolCheck ? 'wordStriking' : 'false'}
     data-testid={`${index}-ingredient-name`}
   >
     {ingredientToShow}
@@ -36,7 +36,7 @@ const ingredientName = (index, ingredientToShow, boolCheck) => (
 const measureText = (index, measureToShow, boolCheck) => (
   <span
     data-testid={`${index}-ingredient-measure`}
-    className={boolCheck && 'wordStriking'}
+    className={boolCheck ? 'wordStriking' : 'false'}
   >
     {measureToShow}
   </span>

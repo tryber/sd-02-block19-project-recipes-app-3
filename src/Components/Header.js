@@ -10,6 +10,7 @@ import '../Styles/Header.css';
 
 const renderRadio = (radioChange) => {
   const arrayRadio = ['Ingrediente', 'Nome', 'Primeira letra'];
+  const testIdRadio = ['ingredient', 'name', 'first-letter'];
   const arrayValueRadio = ['/filter.php?i=', '/search.php?s=', '/search.php?f='];
   return arrayRadio.map((ele, index) => (
     <div key={ele}>
@@ -19,6 +20,7 @@ const renderRadio = (radioChange) => {
         value={arrayValueRadio[index]}
         onClick={(e) => radioChange(e.target.value)}
         id={ele}
+        data-testid={`${testIdRadio[index]}-search-radio`}
       />
       <label htmlFor={ele}>{ele}</label>
     </div>

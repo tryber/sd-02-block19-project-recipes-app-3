@@ -2,8 +2,20 @@ import React, { useContext, useEffect } from 'react';
 import RecipesContext from '../Context/';
 import '../Styles/CategoryBar.css';
 
+const renderButtonAll = (defineSearch) => (
+  <button
+    className="Category_Button"
+    onClick={() => defineSearch('')}
+    value=""
+    type="button"
+    data-testid="All-category-filter"
+  >
+    All
+  </button>
+);
+
 const CategoryBar = () => {
-  const { visibleSearch, arrayCategory, requestCategory, setDrinkOrMeal, defineSearch,
+  const { visibleSearch, arrayCategory, requestCategory, searchResults, defineSearch,
   } = useContext(RecipesContext);
   useEffect(() => {
     const category = window.location.href.includes('comidas') ? '/categories.php' : '/list.php?c=list';
@@ -11,19 +23,11 @@ const CategoryBar = () => {
   }, [window.location.href]);
 
   const clickCategory = (value) => {
-    setDrinkOrMeal(value);
+    searchResults(value);
   };
-
   return !visibleSearch && (
     <div className="CategoryBar_all">
-      <button
-        className="Category_Button"
-        onClick={() => defineSearch('')}
-        value=""
-        type="button"
-      >
-        All
-      </button>
+      {renderButtonAll(defineSearch)}
       {
         arrayCategory.map((food, index) => (
           index < 5

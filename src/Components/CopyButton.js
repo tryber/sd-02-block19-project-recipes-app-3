@@ -18,7 +18,7 @@ const CopyButton = ({ url }) => {
         <CopyToClipboard
           data-testid="share-btn"
           text={url}
-          onCopy={() => message()}
+          onCopy={message}
         >
           <div className="FavShare_content">
             <img src={Share} alt="Share your recipe" />

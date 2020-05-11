@@ -57,11 +57,11 @@ const StartRecipe = () => {
         disabled={isRecipeStarted
           && JSON.parse(localStorage.getItem(foodDetail)).length + 1 !== isIngredient.length
         }
+        data-testid="buttonDetails"
         type="button"
         onClick={() => (!isFinish
           ? insertLocalStorage(isRecipeStarted, setIsRecipeStarted, foodDetail, setIsFinish)
-          : redirectAndDone(setIsRedirect, foodObject, foodDetail)
-        )}
+          : redirectAndDone(setIsRedirect, foodObject, foodDetail))}
       >
         {!isFinish ? startOrEnd : 'Finalizar Receita'}
       </button>}
