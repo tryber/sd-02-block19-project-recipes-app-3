@@ -1,28 +1,28 @@
 .containCards {
+  align-items: center;
   display: flex;
   flex-direction: column;
   height: 100vh;
-  align-items: center;
   justify-content: space-between;
   padding-bottom: 100px;
 }
 
 .HorizontalCard {
-  margin: 10px;
+  align-items: center;
   border: 1px solid black;
   border-radius: 6px;
-  height: 30%;
-  width: 97%;
   display: flex;
-  align-items:center;
+  height: 30%;
+  margin: 10px;
+  width: 97%;
 }
 
 .linkDone {
-  display: flex;
   align-items: center;
+  display: flex;
   height: 100%;
-  width: 30%;
   margin-left: 5px;
+  width: 30%;
 }
 
 .imageDone {
@@ -30,17 +30,17 @@
 }
 
 .text {
-  text-decoration: none;
   color: black;
+  margin: 3px;
   text-align: end;
+  text-decoration: none;
   width: 80%;
-  margin: 3px 3px;
 }
 
 .containText {
+  height: 80%;
   margin-right: 5px;
   width: 70%;
-  height: 80%;
 }
 
 .copyButton {
@@ -50,14 +50,14 @@
 
 .buttonAndCopied {
   display: flex;
-  height: 100%;
   flex-direction: column;
+  height: 100%;
   margin-left: 5px;
 }
 
 .copiedText {
-  margin: 0 50px;
   justify-content: flex-start;
+  margin: 0 50px;
 }
 
 .headerDone {
@@ -68,16 +68,16 @@
 }
 
 .ContainerHeaderP {
-  display: flex;
-  width: 100vw;
-  flex-direction: column;
   align-items: center;
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
 }
 
 .headerPerfil {
   display: flex;
-  width: 100%;
   justify-content: space-around;
+  width: 100%;
 }
 
 .HeaderName {

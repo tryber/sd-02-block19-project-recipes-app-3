@@ -1,7 +1,7 @@
 .FavShare_father {
+  align-items: center;
   display: flex;
   flex-flow: row nowrap;
-  align-items: center;
 }
 
 .FavShare_content {

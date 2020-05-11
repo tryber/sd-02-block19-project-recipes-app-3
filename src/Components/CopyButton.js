@@ -18,7 +18,7 @@ const CopyButton = ({ url, index }) => {
         {copied && <div><p className="copiedText">{copied}</p></div>}
         <CopyToClipboard
           className="copyButton"
-          data-testid={(index === undefined) ? "share-btn" : `${index}-horizontal-share-btn`}
+          data-testid={(index === undefined) ? 'share-btn' : `${index}-horizontal-share-btn`}
           text={url}
           onCopy={message}
         >

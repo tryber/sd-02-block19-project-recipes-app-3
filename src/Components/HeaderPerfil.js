@@ -9,9 +9,9 @@ const HeaderPerfil = () => (
       <HeaderPic />
       <HeaderName />
     </div>
-      <h2 data-testid="profile-email">
-        {JSON.parse(localStorage.getItem('user')).email}
-      </h2>
+    <h2 data-testid="profile-email">
+      {JSON.parse(localStorage.getItem('user')).email}
+    </h2>
   </div>
 );
 
