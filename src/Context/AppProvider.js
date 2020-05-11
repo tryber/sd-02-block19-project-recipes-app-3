@@ -118,7 +118,7 @@ export default function AppProvider({ children }) {
 
   const requestOrigin = (requestParam) => (
     apiRequest(requestParam)
-      .then(({ meals }) => {setOrigin([...meals]); setStopFetching(false); }, failDrinkOrMeal)
+      .then(({ meals }) => { setOrigin([...meals]); setStopFetching(false); }, failDrinkOrMeal)
   );
 
   const requestRandom = () => (
