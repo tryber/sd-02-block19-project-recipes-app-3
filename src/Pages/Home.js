@@ -10,6 +10,16 @@ const onHandleSubmit = (emailValue) => {
   }));
   return true;
 };
+const renderEmailInput = (emailValue, setEmailValue) => (
+  <input
+    className="inputHome"
+    type="email"
+    placeholder="Email"
+    data-testid="email-input"
+    value={emailValue}
+    onChange={({ target }) => setEmailValue(target.value)}
+  />
+);
 
 const regexEmail = new RegExp(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
 const Home = () => {
@@ -18,14 +28,7 @@ const Home = () => {
   const [isRedirect, setIsRedirect] = useState(false);
   return (
     <div className="containHome"><h1 className="elementDisplay">Login</h1>
-      <div className="elementDisplay"><input
-        className="inputHome"
-        type="email"
-        placeholder="Email"
-        data-testid="email-input"
-        value={emailValue}
-        onChange={({ target }) => setEmailValue(target.value)}
-      /></div>
+      <div className="elementDisplay">{renderEmailInput(emailValue, setEmailValue)}</div>
       <div className="elementDisplay"> <input
         className="inputHome"
         type="password"
