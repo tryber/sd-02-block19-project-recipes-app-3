@@ -18,11 +18,13 @@ const DetailsPage = () => {
   return (
     <div>{
       isFood ?
-        <div className="containAll">
-          <DetailImage />
-          <DetailsIngredients />
-          <Instructions />
-          <DetailsVideo />
+        <div className="containAllInfos">
+          <div className="containAll">
+            <DetailImage />
+            <DetailsIngredients />
+            <Instructions />
+            <DetailsVideo />
+          </div>
           <Recommended />
           <StartRecipe />
         </div>

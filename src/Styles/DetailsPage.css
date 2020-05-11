@@ -4,3 +4,7 @@
   flex-direction: column;
   width: 100vw;
 }
+
+.containAllInfos {
+  margin-bottom: 50px;
+}

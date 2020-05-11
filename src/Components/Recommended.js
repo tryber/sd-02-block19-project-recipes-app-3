@@ -88,7 +88,7 @@ const Recommended = () => {
 
   return (
     <div hidden={isRecipeStarted}>
-      <h4>Recomendadas</h4>
+      <h4 className="recommended">Recomendadas</h4>
       {!isRequesting
         ? <div>
           {carouselRecommended(randomRequests, setFoodDetail, setRandomRequests, setIsRequesting)}

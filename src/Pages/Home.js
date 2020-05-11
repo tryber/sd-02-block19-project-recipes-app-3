@@ -39,7 +39,7 @@ const Home = () => {
         data-testid="login-submit-btn"
         disabled={!(passwordValue.length > 6 && regexEmail.test(emailValue))}
         onClick={() => setIsRedirect(onHandleSubmit(emailValue))}
-        className="elementDisplay loginButton"
+        className="elementDisplay loginButton buttonGreen"
       >
         Entrar
       </button>

@@ -1,7 +1,3 @@
-* {
-  border: 0.1px red solid;
-}
-
 .contentInfo {
   width: 100vw;
 }
@@ -39,4 +35,8 @@
   display: flex;
   flex-direction: row;
   width: 33%;
+}
+
+.recipe-title {
+  padding-left: 10px;
 }

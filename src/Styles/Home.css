@@ -15,9 +15,12 @@
   width: 100%;
 }
 
-.loginButton {
+.buttonGreen {
   background: rgb(108, 227, 79);
   color: black;
+}
+
+.loginButton {
   height: 8%;
   width: 80%;
 }

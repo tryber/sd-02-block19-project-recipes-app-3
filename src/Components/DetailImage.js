@@ -22,7 +22,7 @@ const DetailImage = () => {
         </div>
         <div className="containFavorite">
           <div className="containTitle">
-            <h3 data-testid="recipe-title">{unity[`str${isMeal}`]}</h3>
+            <h3 className="recipe-title" data-testid="recipe-title">{unity[`str${isMeal}`]}</h3>
             {isMeal === 'Drink' ? <p>{unity.strAlcoholic}</p> : <p>{unity.strCategory}</p>}
           </div>
           <div className="containFavAndShare">
