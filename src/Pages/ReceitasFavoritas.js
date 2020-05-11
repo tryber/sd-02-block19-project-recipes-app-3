@@ -21,15 +21,16 @@ const ReceitasFavoritas = () => {
       <div className="containCards">
         {favoriteRecipes.map((food, index) => {
           const type = food.idMeal ? 'Meal' : 'Drink';
-          const inputLike = () => (<div className="inputLike"><input
-            data-testid={`${index}-horizontal-favorite-btn`}
-            type="image"
-            src={Favorited}
-            alt="heart"
-            onClick={() => setCopyFav(favoriteRecipes.filter(({ idMeal, idDrink }) => (
-              food.idDrink !== idDrink || food.idMeal !== idMeal)))}
-          /></div>)
-          return renderCard(index, food, type,'', inputLike);
+          const inputLike = () => (<div className="inputLike">
+            <input
+              data-testid={`${index}-horizontal-favorite-btn`}
+              type="image"
+              src={Favorited}
+              alt="heart"
+              onClick={() => setCopyFav(favoriteRecipes.filter(({ idMeal, idDrink }) => (
+                food.idDrink !== idDrink || food.idMeal !== idMeal)))}
+            /></div>);
+          return renderCard(index, food, type, '', inputLike);
         })}</div>
     </div>);
 };
