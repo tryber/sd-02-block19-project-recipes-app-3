@@ -30,6 +30,12 @@ export const renderButtons = (setDoneRecipes, copyDone) => (
   </div>
 );
 
+const renderCopyButton = (index, food, type) => (<CopyButton
+  className="copyButton"
+  index={index}
+  url={`${window.location.origin}/receitas/${food.idMeal ? 'comidas' : 'bebidas'}/${food[`id${type}`]}`}
+/>);
+
 export const renderCard = (index, food, type, dataFinal, inputLike) => (
   <div className="HorizontalCard" key={food[`str${type}`]}>
     <Link className="linkDone" to={`/receitas/${food.idMeal ? 'comidas' : 'bebidas'}/${food[`id${type}`]}`}>
@@ -42,11 +48,7 @@ export const renderCard = (index, food, type, dataFinal, inputLike) => (
     </Link>
     <div className="containText">
       {inputLike && inputLike()}
-      <CopyButton
-        className="copyButton"
-        index={index}
-        url={`${window.location.origin}/receitas/${food.idMeal ? 'comidas' : 'bebidas'}/${food[`id${type}`]}`}
-        />
+      {renderCopyButton(index, food, type)}
       <p className="text" data-testid={`${index}-horizontal-top-text`}>
         {food.strAlcoholic ? `${food.strAlcoholic} Drink` : `${food.strArea} - ${food.strCategory}`}
       </p>
