@@ -70,15 +70,24 @@ export default function AppProvider({ children }) {
     return setRequestInitialPage([...drinks || meals]);
   };
 
-  const searchResults = (paramRequest, buttonName) => {
-    if (buttonName === usedButton) {
-      setRequestInitialPage([...copy]);
-      setUsedButton('');
-      return '';
-    };
+  const toggleOn = () => {
+    setUsedButton('');
+    setNoResults(false);
+    setRequestInitialPage([...copy])
+  };
+
+  const toggleOff = (paramRequest, buttonName) => {
     setUsedButton(buttonName);
     setNoResults(false);
     apiRequest(paramRequest).then(successSearch, failDrinkOrMeal);
+  }
+
+  const searchResults = (paramRequest, buttonName) => {
+    return (
+      buttonName === usedButton
+        ? toggleOn()
+        : toggleOff(paramRequest, buttonName)
+    )
   };
 
   const successFoodRequest = (apiReturnFood) => {
