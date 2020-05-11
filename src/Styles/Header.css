@@ -10,3 +10,8 @@
 .Header_all {
   position: fixed;
 }
+
+.Profile_picture {
+  display: flex;
+  text-align: center;
+}
