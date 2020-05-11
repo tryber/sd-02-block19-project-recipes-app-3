@@ -28,23 +28,21 @@ const CategoryBar = () => {
   return !visibleSearch && (
     <div className="CategoryBar_all">
       {renderButtonAll(defineSearch)}
-      {
-        arrayCategory.map((food, index) => (
-          index < 5
-            ?
-            <button
-              key={`${food.strCategory} filter`}
-              className="Category_Button"
-              data-testid={`${food.strCategory}-category-filter`}
-              value={`/filter.php?c=${food.strCategory}`}
-              type="button"
-              onClick={(e) => clickCategory(e.target.value)}
-            >
-              {food.strCategory}
-            </button>
-            : null
-        ))
-      }
+      {arrayCategory.map((food, index) => (
+        index < 5
+          ?
+          <button
+            key={`${food.strCategory} filter`}
+            className="Category_Button"
+            data-testid={`${food.strCategory}-category-filter`}
+            value={`/filter.php?c=${food.strCategory}`}
+            type="button"
+            onClick={(e) => clickCategory(e.target.value)}
+          >
+            {food.strCategory}
+          </button>
+          : null
+      ))}
     </div>
   );
 };
