@@ -8,7 +8,7 @@ const conditionToToggle = (
   usedButton,
   paramRequest,
   toggleOn,
-  toggleOff
+  toggleOff,
 ) => (
   buttonName === usedButton
     ? toggleOn()
@@ -99,7 +99,7 @@ export default function AppProvider({ children }) {
       usedButton,
       paramRequest,
       toggleOn,
-      toggleOff
+      toggleOff,
     )
   );
 
