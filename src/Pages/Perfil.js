@@ -11,9 +11,10 @@ const Perfil = () => {
   return (
     <div>
       <HeaderPerfil />
-      <div>{buttonsArray.map((button, index) => (
-        <Link key={button} to={valueButtons[index]}>
+      <div className="containExplore" >{buttonsArray.map((button, index) => (
+        <Link className="exploreLinks" key={button} to={valueButtons[index]}>
           <button
+            className="exploreButtons"
             onClick={() => setPageName(button)}
             data-testid={(index === 0) ? 'profile-done-btn' : 'profile-favorite-btn'}
             type="button"
@@ -21,16 +22,18 @@ const Perfil = () => {
             {button}
           </button>
         </Link>
-      ))}</div>
-      <Link to="/">
-        <button
-          type="button"
-          onClick={() => localStorage.clear()}
-          data-testid="profile-logout-btn"
-        >
-          Sair
+      ))}
+        <Link className="exploreLinks" to="/">
+          <button
+            className="exploreButtons"
+            type="button"
+            onClick={() => localStorage.clear()}
+            data-testid="profile-logout-btn"
+          >
+            Sair
         </button>
-      </Link>
+        </Link>
+      </div>
       <Footer />
     </div>
   );

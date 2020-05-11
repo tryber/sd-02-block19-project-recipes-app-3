@@ -1,0 +1,25 @@
+.containExplore {
+  align-items: center;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  justify-content: center;
+}
+
+.exploreLinks {
+  display: flex;
+  height: 5%;
+  justify-content: center;
+  margin: 10px;
+  width: 80%;
+}
+
+.exploreButtons {
+  height: 100%;
+  width: 100%;
+}
+
+.selectDropdown::-ms-expand {
+  width: 100px;
+}

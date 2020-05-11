@@ -5,7 +5,7 @@ import CopyButton from '../Components/CopyButton';
 import '../Styles/ReceitasFeitas.css';
 
 export const renderButtons = (setDoneRecipes, copyDone) => (
-  <div>
+  <div className="buttonFilter">
     <button
       data-testid="filter-by-all-btn"
       type="button"
@@ -30,24 +30,33 @@ export const renderButtons = (setDoneRecipes, copyDone) => (
   </div>
 );
 
-export const renderCard = (index, food, type, dataFinal) => (
-  <div key={food}>
-    <p data-testid={`${index}-horizontal-top-text`}>
-      {food.strAlcoholic ? `${food.strAlcoholic} Drink` : `${food.strArea} - ${food.strCategory}`}
-    </p>
-    <Link to={`/receitas/${food.idMeal ? 'comidas' : 'bebidas'}/${food[`id${type}`]}`}>
+const renderCopyButton = (index, food, type) => (<CopyButton
+  className="copyButton"
+  index={index}
+  url={`${window.location.origin}/receitas/${food.idMeal ? 'comidas' : 'bebidas'}/${food[`id${type}`]}`}
+/>);
+
+export const renderCard = (index, food, type, dataFinal, inputLike) => (
+  <div className="HorizontalCard" key={food[`str${type}`]}>
+    <Link className="linkDone" to={`/receitas/${food.idMeal ? 'comidas' : 'bebidas'}/${food[`id${type}`]}`}>
       <img
+        className="imageDone"
         data-testid={`${index}-horizontal-image`}
         alt={food[`str${type}`]}
         src={food[`str${type}Thumb`]}
       />
-      <p data-testid={`${index}-horizontal-name`}>{food[`str${type}`]}</p>
     </Link>
-    <p data-testid={`${index}-horizontal-done-date`}>{dataFinal}</p>
-    <CopyButton
-      data-testid={`${index}-horizontal-share-btn`}
-      url={`${window.location.origin}/receitas/${food.idMeal ? 'comidas' : 'bebidas'}/${food[`id${type}`]}`}
-    />
+    <div className="containText">
+      {inputLike && inputLike()}
+      {renderCopyButton(index, food, type)}
+      <p className="text" data-testid={`${index}-horizontal-top-text`}>
+        {food.strAlcoholic ? `${food.strAlcoholic} Drink` : `${food.strArea} - ${food.strCategory}`}
+      </p>
+      <Link to={`/receitas/${food.idMeal ? 'comidas' : 'bebidas'}/${food[`id${type}`]}`}>
+        <p className="text" data-testid={`${index}-horizontal-name`}>{food[`str${type}`]}</p>
+      </Link>
+      {dataFinal && <p className="text" data-testid={`${index}-horizontal-done-date`}>{`Feita em ${dataFinal}`}</p>}
+    </div>
   </div>
 );
 
@@ -61,8 +70,10 @@ const ReceitasFeitas = () => {
   }, []);
   return (
     <div >
-      <HeaderPerfil />
-      {doneRecipes && renderButtons(setDoneRecipes, copyDone)}
+      <div className="headerDone">
+        <HeaderPerfil />
+        {doneRecipes && renderButtons(setDoneRecipes, copyDone)}
+      </div>
       <div className="containCards">
         {doneRecipes.map((food, index) => {
           const type = food.idMeal ? 'Meal' : 'Drink';

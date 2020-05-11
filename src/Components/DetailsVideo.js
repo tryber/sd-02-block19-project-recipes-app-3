@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import Youtube from 'react-youtube';
 import RecipesContext from '../Context';
+import '../Styles/DetailsVideo.css';
 
 const isVideo = (condition, isMeal) => {
   if (condition[0][`str${isMeal}`]) {
@@ -8,8 +9,9 @@ const isVideo = (condition, isMeal) => {
     const indexEqual = [...videoToComp].indexOf('=');
     const idVideo = [...videoToComp].slice(indexEqual + 1).join('');
     return (
-      <div>
+      <div className="videoSize">
         <Youtube
+          className="video"
           data-testid="video"
           videoId={idVideo}
         />
@@ -25,8 +27,8 @@ const DetailsVideo = () => {
   const isMeal = window.location.href.includes('comidas') ? 'Youtube' : 'Video';
   const condition = foodObject.meals || foodObject.drinks;
 
-  return (
-    <div hidden={isRecipeStarted}>
+  return !isRecipeStarted && (
+    <div className="containVideo">
       <h4>Video</h4>
       {isVideo(condition, isMeal)}
     </div>

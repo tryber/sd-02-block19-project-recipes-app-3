@@ -1,4 +1,90 @@
 .containCards {
+  align-items: center;
   display: flex;
   flex-direction: column;
+  height: 100vh;
+  padding-bottom: 100px;
+}
+
+.HorizontalCard {
+  align-items: center;
+  border: 1px solid black;
+  border-radius: 6px;
+  display: flex;
+  height: 30%;
+  margin: 10px;
+  width: 97%;
+}
+
+.linkDone {
+  align-items: center;
+  display: flex;
+  height: 100%;
+  margin-left: 5px;
+  width: 30%;
+}
+
+.imageDone {
+  height: 60%;
+}
+
+.text {
+  color: black;
+  margin: 3px;
+  text-align: end;
+  text-decoration: none;
+  width: 80%;
+}
+
+.containText {
+  height: 80%;
+  margin-right: 5px;
+  width: 70%;
+}
+
+.copyButton {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.buttonAndCopied {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  margin-left: 5px;
+}
+
+.copiedText {
+  justify-content: flex-start;
+  margin: 0 50px;
+}
+
+.headerDone {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+}
+
+.ContainerHeaderP {
+  align-items: center;
+  background-color: rgb(196, 196, 196);
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+}
+
+.headerPerfil {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+}
+
+.HeaderName {
+  width: 60%;
+}
+
+.inputLike {
+  display: flex;
+  justify-content: flex-end;
 }

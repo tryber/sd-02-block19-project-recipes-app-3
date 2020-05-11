@@ -21,8 +21,7 @@ const ReceitasFavoritas = () => {
       <div className="containCards">
         {favoriteRecipes.map((food, index) => {
           const type = food.idMeal ? 'Meal' : 'Drink';
-          return (<div key={food}>
-            {renderCard(index, food, type)}
+          const inputLike = () => (<div className="inputLike">
             <input
               data-testid={`${index}-horizontal-favorite-btn`}
               type="image"
@@ -30,8 +29,8 @@ const ReceitasFavoritas = () => {
               alt="heart"
               onClick={() => setCopyFav(favoriteRecipes.filter(({ idMeal, idDrink }) => (
                 food.idDrink !== idDrink || food.idMeal !== idMeal)))}
-            /></div>
-          );
+            /></div>);
+          return renderCard(index, food, type, '', inputLike);
         })}</div>
     </div>);
 };

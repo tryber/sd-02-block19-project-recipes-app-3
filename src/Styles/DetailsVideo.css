@@ -1,0 +1,14 @@
+.containVideo {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  width: 95%;
+}
+
+.video {
+  width: 100%;
+}
+
+.videoSize {
+  width: 100%;
+}

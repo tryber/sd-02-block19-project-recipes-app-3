@@ -6,12 +6,12 @@ import Meals from '../Images/Meals.svg';
 import RecipesContext from '../Context';
 import '../Styles/Footer.css';
 
-const DrinksToFooter = (setRequestInitialPage, setPageName) => (
+const DrinksToFooter = (setRequestInitialPage, setPageName, setStopFetching) => (
   <Link
     to="/receitas/bebidas"
     onClick={
       !window.location.href.includes('bebidas')
-        ? () => { setRequestInitialPage([]); setPageName('Bebidas'); }
+        ? () => { setRequestInitialPage([]); setPageName('Bebidas'); setStopFetching(false); }
         : null
     }
   >
@@ -24,13 +24,9 @@ const DrinksToFooter = (setRequestInitialPage, setPageName) => (
   </Link>
 );
 
-const ExploreToFooter = (setRequestInitialPage, setPageName) => (
+const ExploreToFooter = (setRequestInitialPage, setPageName, setStopFetching) => (
   <Link
-    onClick={
-      !window.location.href.includes('explorar')
-        ? () => { setRequestInitialPage([]); setPageName('Explorar'); }
-        : null
-    }
+    onClick={() => { setRequestInitialPage([]); setPageName('Explorar'); setStopFetching(false); }}
     to="/explorar"
   >
     <div
@@ -42,11 +38,11 @@ const ExploreToFooter = (setRequestInitialPage, setPageName) => (
   </Link>
 );
 
-const MealsToFooter = (setRequestInitialPage, setPageName) => (
+const MealsToFooter = (setRequestInitialPage, setPageName, setStopFetching) => (
   <Link
     onClick={
       !window.location.href.includes('comidas')
-        ? () => { setRequestInitialPage([]); setPageName('Comidas'); }
+        ? () => { setRequestInitialPage([]); setPageName('Comidas'); setStopFetching(false); }
         : null
     }
     to="/receitas/comidas"
@@ -61,12 +57,12 @@ const MealsToFooter = (setRequestInitialPage, setPageName) => (
 );
 
 const Footer = () => {
-  const { setRequestInitialPage, setPageName } = useContext(RecipesContext);
+  const { setRequestInitialPage, setPageName, setStopFetching } = useContext(RecipesContext);
   return (
     <div className="Footer_all">
-      {DrinksToFooter(setRequestInitialPage, setPageName)}
-      {ExploreToFooter(setRequestInitialPage, setPageName)}
-      {MealsToFooter(setRequestInitialPage, setPageName)}
+      {DrinksToFooter(setRequestInitialPage, setPageName, setStopFetching)}
+      {ExploreToFooter(setRequestInitialPage, setPageName, setStopFetching)}
+      {MealsToFooter(setRequestInitialPage, setPageName, setStopFetching)}
     </div>
   );
 };

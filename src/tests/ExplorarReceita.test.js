@@ -8,6 +8,9 @@ afterEach(cleanup);
 
 describe('test explorar', () => {
   it('render explorar', async () => {
+    delete global.window.location;
+    const href = 'http://localhost:3000/explorar/comidas';
+    global.window.location = { href, pathname: '/explorar/comidas' };
     const { getByTestId } = render(
       <AppProvider>
         <MemoryRouter>
@@ -21,6 +24,5 @@ describe('test explorar', () => {
     fireEvent.click(getByTestId('explore-by-area'));
     expect(getByTestId('explore-surprise')).toBeInTheDocument();
     fireEvent.click(getByTestId('explore-surprise'));
-    
   })
 })

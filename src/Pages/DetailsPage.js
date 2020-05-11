@@ -6,6 +6,7 @@ import RecipesContext from '../Context';
 import DetailsVideo from '../Components/DetailsVideo';
 import Recommended from '../Components/Recommended';
 import StartRecipe from '../Components/StartRecipe';
+import '../Styles/DetailsPage.css';
 
 const DetailsPage = () => {
   const { foodDetail, foodObject, idSearch } = useContext(RecipesContext);
@@ -17,11 +18,13 @@ const DetailsPage = () => {
   return (
     <div>{
       isFood ?
-        <div>
-          <DetailImage />
-          <DetailsIngredients />
-          <Instructions />
-          <DetailsVideo />
+        <div className="containAllInfos">
+          <div className="containAll">
+            <DetailImage />
+            <DetailsIngredients />
+            <Instructions />
+            <DetailsVideo />
+          </div>
           <Recommended />
           <StartRecipe />
         </div>

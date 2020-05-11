@@ -4,14 +4,14 @@ import HeaderName from './HeaderName';
 
 
 const HeaderPerfil = () => (
-  <div>
-    <div>
+  <div className="ContainerHeaderP">
+    <div className="headerPerfil">
       <HeaderPic />
       <HeaderName />
-      <h2 data-testid="profile-email">
-        {JSON.parse(localStorage.getItem('user')).email}
-      </h2>
     </div>
+    <h2 data-testid="profile-email">
+      {JSON.parse(localStorage.getItem('user')).email}
+    </h2>
   </div>
 );
 

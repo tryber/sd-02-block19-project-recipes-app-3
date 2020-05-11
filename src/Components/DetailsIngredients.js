@@ -103,9 +103,9 @@ const DetailsIngredients = () => {
   }, [isChecked]);
 
   return (
-    <div>
+    <div className="ingredientContainer">
       {isIngredient
-        && <div>
+        && <div className="ingredientInfo">
           <h4>Ingredients</h4>
           {toShow(
             isIngredient, isFood, isMeasure,

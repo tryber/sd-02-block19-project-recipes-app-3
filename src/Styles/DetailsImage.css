@@ -1,0 +1,42 @@
+.contentInfo {
+  width: 100vw;
+}
+
+.containChildren {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.containImage {
+  width: 100%;
+}
+
+.imageDetail {
+  width: 100%;
+}
+
+.containTitle {
+  align-items: center;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  width: 33%;
+}
+
+.containFavorite {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.containFavAndShare {
+  align-items: baseline;
+  display: flex;
+  flex-direction: row;
+  width: 33%;
+}
+
+.recipe-title {
+  padding-left: 10px;
+}
