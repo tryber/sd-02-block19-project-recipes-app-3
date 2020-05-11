@@ -8,9 +8,7 @@ import '../Styles/Explorar.css';
 const Explorar = () => {
   const { setPageName } = useContext(RecipesContext);
   return (
-    <div>
-      <Header />
-      <div className="containExplore">
+    <div><Header /><div className="containExplore">
         <Link
           className="exploreLinks"
           onClick={() => setPageName('Explorar - Comidas')}
@@ -36,10 +34,7 @@ const Explorar = () => {
           >
             Explorar Bebidas
         </button>
-        </Link>
-      </div>
-      <Footer />
-    </div>
+        </Link></div><Footer /></div>
   );
 };
 export default Explorar;
