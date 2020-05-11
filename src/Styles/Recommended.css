@@ -4,19 +4,19 @@
 }
 
 .recommended {
- text-align: center;
+  text-align: center;
 }
 
 .containStart {
-  display: flex;
-  width: 100vw;
   align-items: center;
+  display: flex;
   justify-content: center;
+  width: 100vw;
 }
 
 .fixedButton {
-  position: fixed;
   bottom: 15px;
-  width: 80%;
   height: 5%;
+  position: fixed;
+  width: 80%;
 }

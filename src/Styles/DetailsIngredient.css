@@ -3,9 +3,9 @@
 }
 
 .ingredientContainer {
- align-self: flex-start;
- margin-left: 3px;
- width: 80%;
+  align-self: flex-start;
+  margin-left: 3px;
+  width: 80%;
 }
 
 .ingredientInfo {
