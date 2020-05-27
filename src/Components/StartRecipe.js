@@ -7,7 +7,12 @@ const doneLocalStorage = JSON.parse(localStorage.getItem('done-recipes')) || [];
 const mealPage = window.location.href.includes('comidas') ? 'Meal' : 'Drink';
 const classSelect = (finish) => (
   finish ? 'red' : 'green'
-)
+);
+const finish = (isRecipeStarted, foodDetail, isIngredient) => {
+  return (
+    isRecipeStarted && JSON.parse(localStorage.getItem(foodDetail)).length + 1 !== isIngredient.length
+  )
+};
 const insertLocalStorage = (isRecipeStarted, setIsRecipeStarted, foodDetail, setIsFinish) => {
   if (!inProgress.includes(foodDetail)) {
     localStorage.setItem(foodDetail, JSON.stringify([]));
@@ -47,18 +52,15 @@ const StartRecipe = () => {
   const isIngredient = Object.keys(isFood).filter((food) => (
     food.includes('Ingredient') && isFood[food]
   ));
-
   useEffect(() => { setIsFinish(false); }, [window.location.href]);
   useEffect(() => () => setIsRecipeStarted(false), []);
-  const isDone = doneLocalStorage.some((recipe) => (recipe[`id${mealPage}`] === foodDetail));
+  const isDone = doneLocalStorage.some(({ idDrink, idMeal }) => (idDrink === foodDetail) || idMeal === foodDetail);
   const startOrEnd = inProgress.includes(foodDetail) ? 'Continuar Receita' : 'Iniciar Receita';
-  const finish = !isRedirect ? isRecipeStarted
-    && JSON.parse(localStorage.getItem(foodDetail)).length + 1 !== isIngredient.length : false;
   return isRedirect ? <Redirect to="/receitas-feitas" /> : (
     <div className="containStart">
       {!isDone && <button
-        className={`buttonGreen fixedButton ${classSelect(finish)}`}
-        disabled={finish}
+        className={`buttonGreen fixedButton ${classSelect(finish(isRecipeStarted, foodDetail, isIngredient))}`}
+        disabled={finish(isRecipeStarted, foodDetail, isIngredient)}
         data-testid={`${!isRecipeStarted && 'start-recipe-btn'}`}
         type="button"
         onClick={() => (!isFinish

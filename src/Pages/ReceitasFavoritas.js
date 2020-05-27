@@ -1,11 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { renderButtons, renderCard } from './ReceitasFeitas';
 import Favorited from '../Images/Favorited.svg';
 import HeaderPerfil from '../Components/HeaderPerfil';
+import RecipesContext from '../Context';
 
 const ReceitasFavoritas = () => {
   const [favoriteRecipes, setFavoriteRecipes] = useState([]);
   const [copyFav, setCopyFav] = useState([]);
+  const { setFoodDetail } = useContext(RecipesContext);
   useEffect(() => {
     const done = JSON.parse(localStorage.getItem('favorite-recipes'));
     setFavoriteRecipes(done);
@@ -31,7 +33,7 @@ const ReceitasFavoritas = () => {
               onClick={() => setCopyFav(favoriteRecipes.filter(({ idMeal, idDrink }) => (
                 food.idDrink !== idDrink || food.idMeal !== idMeal)))}
             /></div>);
-          return renderCard(index, food, type, '', inputLike);
+          return renderCard(index, food, type, '', inputLike, setFoodDetail);
         })}</div>
     </div>);
 };
