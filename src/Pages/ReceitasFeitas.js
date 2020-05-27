@@ -55,7 +55,8 @@ export const renderCard = (index, food, type, dataFinal, inputLike, setFoodDetai
       </p>
       <Link
         onClick={() => setFoodDetail(food.idMeal || food.idDrink)}
-        to={`/receitas/${food.idMeal ? 'comidas' : 'bebidas'}/${food[`id${type}`]}`}>
+        to={`/receitas/${food.idMeal ? 'comidas' : 'bebidas'}/${food[`id${type}`]}`}
+      >
         <p className="text" data-testid={`${index}-horizontal-name`}>{food[`str${type}`]}</p>
       </Link>
       {dataFinal && <p className="text" data-testid={`${index}-horizontal-done-date`}>{`Feita em ${dataFinal}`}</p>}

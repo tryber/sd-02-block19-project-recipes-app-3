@@ -18,9 +18,8 @@ const ReceitasFavoritas = () => {
     localStorage.setItem('favorite-recipes', JSON.stringify(copyFav));
   }, [copyFav]);
   return (
-    <div ><HeaderPerfil />
-      <div className="containButtonFav">
-        {favoriteRecipes && renderButtons(setFavoriteRecipes, copyFav)}</div>
+    <div ><HeaderPerfil /><div className="containButtonFav">
+      {favoriteRecipes && renderButtons(setFavoriteRecipes, copyFav)}</div>
       <div className="containCards">
         {favoriteRecipes.map((food, index) => {
           const type = food.idMeal ? 'Meal' : 'Drink';
@@ -34,8 +33,7 @@ const ReceitasFavoritas = () => {
                 food.idDrink !== idDrink || food.idMeal !== idMeal)))}
             /></div>);
           return renderCard(index, food, type, '', inputLike, setFoodDetail);
-        })}</div>
-    </div>);
+        })}</div></div>);
 };
 
 export default ReceitasFavoritas;

@@ -58,32 +58,32 @@ const toShow = (
   isIngredient, isFood, isMeasure,
   isChecked, setIsChecked, isRecipeStarted,
 ) => (
-  <div>
-    {isIngredient.map((ingredient, index) => {
-      const ingredientToShow = isFood[ingredient];
-      const measureToShow = isFood[isMeasure[index]];
-      const ingAndMeasure = `${ingredientToShow} - ${measureToShow}`;
-      const boolCheck = isChecked.includes(ingAndMeasure);
-      return (
-        ingredientToShow
-        && <div key={`${ingredient} and ${isMeasure[index]} to Recipe`}>
-          {<div>
-            {isRecipeStarted &&
-              <input
-                type="checkbox"
-                checked={boolCheck}
-                onChange={() => checkIndex(isChecked, ingAndMeasure, setIsChecked)}
-              />
-            }
-            {ingredientName(index, ingredientToShow, boolCheck && isRecipeStarted)}
-            <span> - </span>
-            {measureText(index, measureToShow, boolCheck && isRecipeStarted)}
-          </div>}
-        </div>
-      );
-    })}
-  </div>
-);
+    <div>
+      {isIngredient.map((ingredient, index) => {
+        const ingredientToShow = isFood[ingredient];
+        const measureToShow = isFood[isMeasure[index]];
+        const ingAndMeasure = `${ingredientToShow} - ${measureToShow}`;
+        const boolCheck = isChecked.includes(ingAndMeasure);
+        return (
+          ingredientToShow
+          && <div key={`${ingredient} and ${isMeasure[index]} to Recipe`}>
+            {<div>
+              {isRecipeStarted &&
+                <input
+                  type="checkbox"
+                  checked={boolCheck}
+                  onChange={() => checkIndex(isChecked, ingAndMeasure, setIsChecked)}
+                />
+              }
+              {ingredientName(index, ingredientToShow, boolCheck && isRecipeStarted)}
+              <span> - </span>
+              {measureText(index, measureToShow, boolCheck && isRecipeStarted)}
+            </div>}
+          </div>
+        );
+      })}
+    </div>
+  );
 
 const DetailsIngredients = () => {
   const {
@@ -102,7 +102,7 @@ const DetailsIngredients = () => {
     checkboxMark(foodDetail, isChecked);
   }, [isChecked]);
 
-  useEffect(()=> ()=> setIsChecked([]),[])
+  useEffect(() => () => setIsChecked([]), []);
   return (
     <div className="ingredientContainer">
       {isIngredient

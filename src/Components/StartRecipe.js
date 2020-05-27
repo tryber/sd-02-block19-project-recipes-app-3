@@ -4,15 +4,14 @@ import RecipesContext from '../Context';
 
 const inProgress = JSON.parse(localStorage.getItem('in-progress')) || [];
 const doneLocalStorage = JSON.parse(localStorage.getItem('done-recipes')) || [];
-const mealPage = window.location.href.includes('comidas') ? 'Meal' : 'Drink';
 const classSelect = (finish) => (
   finish ? 'red' : 'green'
 );
-const finish = (isRecipeStarted, foodDetail, isIngredient) => {
-  return (
-    isRecipeStarted && JSON.parse(localStorage.getItem(foodDetail)).length + 1 !== isIngredient.length
-  )
-};
+const finish = (isRecipeStarted, foodDetail, isIngredient) => (
+  isRecipeStarted && JSON.parse(localStorage.getItem(foodDetail)).length + 1
+  !== isIngredient.length
+);
+
 const insertLocalStorage = (isRecipeStarted, setIsRecipeStarted, foodDetail, setIsFinish) => {
   if (!inProgress.includes(foodDetail)) {
     localStorage.setItem(foodDetail, JSON.stringify([]));
@@ -54,7 +53,8 @@ const StartRecipe = () => {
   ));
   useEffect(() => { setIsFinish(false); }, [window.location.href]);
   useEffect(() => () => setIsRecipeStarted(false), []);
-  const isDone = doneLocalStorage.some(({ idDrink, idMeal }) => (idDrink === foodDetail) || idMeal === foodDetail);
+  const isDone = doneLocalStorage.some(({ idDrink, idMeal }) => (
+    idDrink === foodDetail) || idMeal === foodDetail);
   const startOrEnd = inProgress.includes(foodDetail) ? 'Continuar Receita' : 'Iniciar Receita';
   return isRedirect ? <Redirect to="/receitas-feitas" /> : (
     <div className="containStart">
