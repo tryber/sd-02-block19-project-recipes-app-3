@@ -58,7 +58,7 @@ const MealsToFooter = (setRequestInitialPage, setPageName, setStopFetching, page
 
 const Footer = () => {
   const {
-    setRequestInitialPage, setPageName, setStopFetching, pageName
+    setRequestInitialPage, setPageName, setStopFetching, pageName,
   } = useContext(RecipesContext);
   return (
     <div className="Footer_all">
