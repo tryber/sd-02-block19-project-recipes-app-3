@@ -88,3 +88,9 @@
   display: flex;
   justify-content: flex-end;
 }
+
+.buttonFilter {
+  display: flex;
+  align-items: center;
+  justify-content: space-around
+}

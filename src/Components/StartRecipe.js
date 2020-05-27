@@ -50,15 +50,15 @@ const StartRecipe = () => {
   useEffect(() => () => setIsRecipeStarted(false), []);
 
   const isDone = doneLocalStorage.find((recipe) => (recipe[`id${mealPage}`] === foodDetail));
-  const startOrEnd = inProgress.includes(foodDetail) ? 'Continuar Receita' : 'Iniciar Receita';
+  const startOrEnd = inProgress.includes(foodDetail) ? 'Continuar Receita' : 'Iniciar Receita'; 
   return isRedirect ? <Redirect to="/receitas-feitas" /> : (
     <div className="containStart">
       {!isDone && <button
-        className="buttonGreen fixedButton"
+        className={`buttonGreen fixedButton ${!isFinish ? 'green' : 'red'}`}
         disabled={isRecipeStarted
           && JSON.parse(localStorage.getItem(foodDetail)).length + 1 !== isIngredient.length
         }
-        data-testid="buttonDetails"
+        data-testid={`${!isRecipeStarted && 'start-recipe-btn'}`}
         type="button"
         onClick={() => (!isFinish
           ? insertLocalStorage(isRecipeStarted, setIsRecipeStarted, foodDetail, setIsFinish)

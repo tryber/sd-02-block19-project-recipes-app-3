@@ -17,7 +17,7 @@ const ReceitasFavoritas = () => {
   }, [copyFav]);
   return (
     <div ><HeaderPerfil />
-      {favoriteRecipes && renderButtons(setFavoriteRecipes, copyFav)}
+      <div className="containButtonFav">{favoriteRecipes && renderButtons(setFavoriteRecipes, copyFav)}</div>
       <div className="containCards">
         {favoriteRecipes.map((food, index) => {
           const type = food.idMeal ? 'Meal' : 'Drink';
