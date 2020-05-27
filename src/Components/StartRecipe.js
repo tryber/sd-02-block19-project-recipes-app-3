@@ -50,7 +50,7 @@ const StartRecipe = () => {
   useEffect(() => () => setIsRecipeStarted(false), []);
 
   const isDone = doneLocalStorage.find((recipe) => (recipe[`id${mealPage}`] === foodDetail));
-  const startOrEnd = inProgress.includes(foodDetail) ? 'Continuar Receita' : 'Iniciar Receita'; 
+  const startOrEnd = inProgress.includes(foodDetail) ? 'Continuar Receita' : 'Iniciar Receita';
   return isRedirect ? <Redirect to="/receitas-feitas" /> : (
     <div className="containStart">
       {!isDone && <button

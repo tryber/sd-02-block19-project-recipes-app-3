@@ -5,7 +5,7 @@ import RecipesContext from '../Context';
 
 
 const HeaderPerfil = () => {
-  const {pageName} = useContext(RecipesContext);
+  const { pageName } = useContext(RecipesContext);
   return (
     <div>
       <div className="ContainerHeaderP">
@@ -18,7 +18,7 @@ const HeaderPerfil = () => {
         {JSON.parse(localStorage.getItem('user')).email}
       </h2> : null}
     </div>
-  )
+  );
 };
 
 export default HeaderPerfil;

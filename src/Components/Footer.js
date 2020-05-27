@@ -41,7 +41,7 @@ const ExploreToFooter = (setRequestInitialPage, setPageName, setStopFetching) =>
 const MealsToFooter = (setRequestInitialPage, setPageName, setStopFetching, pageName) => (
   <Link
     onClick={
-      !window.location.href.includes('comidas') || pageName == 'Explorar Origem'
+      !window.location.href.includes('comidas') || pageName === 'Explorar Origem'
         ? () => { setRequestInitialPage([]); setPageName('Comidas'); setStopFetching(false); }
         : null
     }
@@ -57,7 +57,9 @@ const MealsToFooter = (setRequestInitialPage, setPageName, setStopFetching, page
 );
 
 const Footer = () => {
-  const { setRequestInitialPage, setPageName, setStopFetching,pageName } = useContext(RecipesContext);
+  const {
+    setRequestInitialPage, setPageName, setStopFetching, pageName
+  } = useContext(RecipesContext);
   return (
     <div className="Footer_all">
       {DrinksToFooter(setRequestInitialPage, setPageName, setStopFetching)}
