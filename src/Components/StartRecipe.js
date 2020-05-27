@@ -58,7 +58,7 @@ const StartRecipe = () => {
         disabled={isRecipeStarted
           && JSON.parse(localStorage.getItem(foodDetail)).length + 1 !== isIngredient.length
         }
-        data-testid={`${!isRecipeStarted && 'start-recipe-btn'}`}
+        data-testid="start-recipe-btn"
         type="button"
         onClick={() => (!isFinish
           ? insertLocalStorage(isRecipeStarted, setIsRecipeStarted, foodDetail, setIsFinish)
