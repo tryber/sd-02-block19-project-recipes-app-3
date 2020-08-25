@@ -23,7 +23,7 @@ const insertLocalStorage = (isRecipeStarted, setIsRecipeStarted, foodDetail, set
   setIsFinish(true);
 };
 
-const redirectAndDone = (setIsRedirect, foodObject, foodDetail) => {
+const redirectAndDone = (setIsRedirect, foodObject, foodDetail, setPageName) => {
   localStorage.removeItem(foodDetail);
   localStorage.setItem('in-progress', JSON.stringify(JSON.parse(localStorage.getItem('in-progress')).filter((item) => item !== foodDetail)));
   const doneRecipes = JSON.parse(localStorage.getItem('done-recipes'));
@@ -34,15 +34,16 @@ const redirectAndDone = (setIsRedirect, foodObject, foodDetail) => {
     doneDate: new Date(),
   };
   localStorage.setItem('done-recipes', doneRecipes
-    ? JSON.stringify([...doneRecipes, done])
-    : JSON.stringify([done]),
+  ? JSON.stringify([...doneRecipes, done])
+  : JSON.stringify([done]),
   );
+  setPageName('Receitas Feitas');
   return setIsRedirect(true);
 };
 
 const StartRecipe = () => {
   const {
-    isRecipeStarted, setIsRecipeStarted, foodDetail, foodObject,
+    isRecipeStarted, setIsRecipeStarted, foodDetail, foodObject, setPageName,
   } = useContext(RecipesContext);
   const [isFinish, setIsFinish] = useState(false);
   const [isRedirect, setIsRedirect] = useState(false);
@@ -65,7 +66,7 @@ const StartRecipe = () => {
         type="button"
         onClick={() => (!isFinish
           ? insertLocalStorage(isRecipeStarted, setIsRecipeStarted, foodDetail, setIsFinish)
-          : redirectAndDone(setIsRedirect, foodObject, foodDetail))}
+          : redirectAndDone(setIsRedirect, foodObject, foodDetail,setPageName))}
       >{!isFinish ? startOrEnd : 'Finalizar Receita'}</button>}
     </div >
   );

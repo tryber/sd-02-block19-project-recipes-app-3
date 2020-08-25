@@ -69,7 +69,7 @@ const ReceitasFeitas = () => {
   const [copyDone, setCopyDone] = useState([]);
   const { setFoodDetail } = useContext(RecipesContext);
   useEffect(() => {
-    const done = JSON.parse(localStorage.getItem('done-recipes'));
+    const done = JSON.parse(localStorage.getItem('done-recipes')) || [];
     setDoneRecipes(done);
     setCopyDone(done);
   }, []);

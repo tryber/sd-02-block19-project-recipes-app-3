@@ -9,7 +9,7 @@ const ReceitasFavoritas = () => {
   const [copyFav, setCopyFav] = useState([]);
   const { setFoodDetail } = useContext(RecipesContext);
   useEffect(() => {
-    const done = JSON.parse(localStorage.getItem('favorite-recipes'));
+    const done = JSON.parse(localStorage.getItem('favorite-recipes')) || [];
     setFavoriteRecipes(done);
     setCopyFav(done);
   }, []);
